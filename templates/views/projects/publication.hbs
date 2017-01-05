@@ -41,6 +41,14 @@
 				{{#if publication.date}}
 					<p><b>Published: </b> {{date}}</p>
 				{{/if}}
+				{{#if publication.downloadUrls}}
+					<h4>Download</h4>
+					<ul class="list-icons">
+					{{#each publication.downloadUrls}}
+						<li><a href="{{this}}"> {{this}}</a></li>
+					{{/each}}
+					</ul>
+				{{/if}}
 				{{#if publication.urls}}
 					<h4>Purchase</h4>
 					<ul class="list-icons">

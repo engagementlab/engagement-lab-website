@@ -55,8 +55,8 @@ exports = module.exports = function(req, res) {
                         return pub.category == category;
                     });
                     
-                    if(category === 'Articles and Chapter') {
-                        // Sort articles by date
+                    if(category === 'Articles and Chapters') {
+                        // Sort articles by reverse chronological date
                         filteredPubs = filteredPubs.sort(function(a, b) {
                             return new Date(b.date) - new Date(a.date);
                         });

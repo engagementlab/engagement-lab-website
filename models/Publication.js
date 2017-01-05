@@ -50,6 +50,11 @@ Publication.add({
 		label: 'Links to purchase book',
 		note: 'Must be in format "http://www.something.org"'
 	},
+	downloadUrls: {
+		type: Types.TextArray,
+		label: 'Link(s) to downlad book',
+		note: 'Must be in format "http://www.something.org"'
+	},
 	file: {
 		type: Types.AzureFile,
 		label: 'File',
@@ -84,13 +89,6 @@ Publication.add({
  * =============
  */
 Publication.schema.pre('save', function(next) {
-  
-  /* if (this.category === 'Journal Article') {
-    if (this.blurb !== undefined && this.blurb.length === 0) {
-      var err = new Error('You must define a blurb for journal articles.');
-      next(err);
-    }
-  } */
   
   // Save state for post hook
   this.wasNew = this.isNew;
