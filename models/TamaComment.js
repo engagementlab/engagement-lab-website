@@ -23,7 +23,6 @@ var TamaComment = new keystone.List('TamaComment',
         hidden: true,
         // nocreate: true,
         // nodelete: true
-        track: true
     });
 
 /**

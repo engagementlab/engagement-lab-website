@@ -22,7 +22,7 @@ var Academics = new keystone.List('Academics',
 	{
 		label: 'Academics Page',
 		singular: 'Academics Page',
-		track: true,
+		//track: true,
 		nodelete: true,
 		nocreate: true
 	});

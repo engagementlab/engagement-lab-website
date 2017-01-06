@@ -22,7 +22,7 @@ var slack = keystone.get('slack');
 var Publication = new keystone.List('Publication', 
 	{
 		sortable: true,
-		track: true,
+		//track: true,
 		map: { name: 'title' },
 		autokey: { path: 'key', from: 'title', unique: true }
 	});
@@ -32,6 +32,15 @@ var Publication = new keystone.List('Publication',
 	*/
 var docIsNew;
 var docIsModified;
+
+// Storage adapter for Azure
+var azureFile = new keystone.Storage({
+  adapter: require('keystone-storage-adapter-azure'),
+  azure: {
+    container: 'elabpublication',
+    generateFilename: keystone.Storage.originalFilename
+  },
+});
 
 /**
  * Model Fields
@@ -56,14 +65,9 @@ Publication.add({
 		note: 'Must be in format "http://www.something.org"'
 	},
 	file: {
-		type: Types.AzureFile,
+		type: Types.File,
 		label: 'File',
-		filenameFormatter: function(item, filename) {
-			return item.key + require('path').extname(filename);
-		},
-		containerFormatter: function(item, filename) {
-			return 'elabpublication';
-		}
+		storage: azureFile
 	},
 
 	// This field is required in the save hook below instead of here as keystone dependsOn workaround

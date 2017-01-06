@@ -22,7 +22,7 @@ var slack = keystone.get('slack');
 var Listing = new keystone.List('Listing', {
     hidden: true,
     sortable: true,
-    track: true,
+    //track: true,
     autokey: {
         path: 'key',
         from: 'name',

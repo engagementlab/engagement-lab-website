@@ -26,7 +26,7 @@ var slack = keystone.get('slack');
 var Program = new keystone.List('Program', 
 	{	
 		hidden: false,
-        track: true,
+        //track: true,
         sortable: true,
 		inherits: Listing
 	});

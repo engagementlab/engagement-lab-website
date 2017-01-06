@@ -23,7 +23,7 @@ var Job = new keystone.List('Job',
 	{
 		label: 'Jobs',
 		singular: 'Job',
-		track: true,
+		//track: true,
 		autokey: { from: 'title', path: 'key', unique: true }
 	});
 

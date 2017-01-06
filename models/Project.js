@@ -23,7 +23,7 @@ var slack = keystone.get('slack');
  */
 var Project = new keystone.List('Project', {
     inherits: Listing,
-    track: true,
+    //track: true,
     hidden: false
 });
 

@@ -23,7 +23,7 @@ var About = new keystone.List('About',
 	{
 		label: 'About Page',
 		singular: 'About Page',
-		track: true,
+		//track: true,
 		// nodelete: true,
 		nocreate: true
 	});

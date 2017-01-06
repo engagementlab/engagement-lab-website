@@ -20,8 +20,16 @@ var slack = keystone.get('slack');
  * See: http://keystonejs.com/docs/database/#lists-options
  */
 var Resource = new keystone.List('Resource', {
-	autokey: { from: 'name', path: 'key', unique: true },
-  track: true
+	autokey: { from: 'name', path: 'key', unique: true }
+});
+
+// Storage adapter for Azure
+var azureFile = new keystone.Storage({
+  adapter: require('keystone-storage-adapter-azure'),
+  azure: {
+    container: 'resources',
+    generateFilename: keystone.Storage.originalFilename
+  },
 });
 
 /**
@@ -43,15 +51,10 @@ Resource.add({
 		dependsOn: { type: ['article', 'blog post'] } },
 
 	file: {
-		type: Types.AzureFile,
+		type: Types.File,
 		dependsOn: { type: 'file' },
 		label: 'File',
-		filenameFormatter: function(item, filename) {
-			return item.key + require('path').extname(filename);
-		},
-		containerFormatter: function(item, filename) {
-			return 'resources';
-		}
+		storage: azureFile
 	},
 	fileSummary: { type: Types.Markdown, label: 'File Summary',
 		dependsOn: { type: ['file'] } },
