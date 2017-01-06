@@ -58,6 +58,6 @@ exports = module.exports = function(req, res, next) {
     });
 
     // Render the view
-    res.render('index');
+    view.render('index');
 
 };

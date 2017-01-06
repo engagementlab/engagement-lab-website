@@ -17,45 +17,51 @@ var routes = {
 
 // Setup Route Bindings
 
-    // Views
-    router.get('/', routes.views.index);
+// Views
 
-    router.get('/unlockinghealth', routes.views.html.unlockinghealth);
-    router.get('/riskhorizon', routes.views.html.riskhorizon);
+// CommunityPlanIt redirect (boston.communityplanit.org)
+router.all('/climatesmartboston', function(req, res, next) {
+    res.redirect('https://www.communityplanit.org/bostonclimate/');
+});
+router.all('/api/cpi/register', keystone.middleware.api, routes.api.communityplanit.create);
 
-    router.get('/about', routes.views.about);
-    router.get('/jobs', routes.views.jobs);
-    router.get('/people', routes.views.people);
-    router.get('/people/:person', routes.views.person);
+// /keystone redirect
+router.all('/admin', function(req, res, next) {
+    res.redirect('/keystone');
+});
 
-    router.get('/publications', routes.views.projects.publications);
-    router.get('/publications/:publication_key', routes.views.projects.publication);
-    router.get('/projects/:subdirectory/:project_key', routes.views.projects.project);
+router.get('/', routes.views.index);
 
-    router.get('/cmap', routes.views.cmap);
-    router.get('/programs/cmap', routes.views.cmap);
+router.get('/unlockinghealth', routes.views.html.unlockinghealth);
+router.get('/riskhorizon', routes.views.html.riskhorizon);
 
-    router.get('/news', routes.views.news);
-    router.get('/press', routes.views.press);
+router.get('/about', routes.views.about);
+router.get('/jobs', routes.views.jobs);
+router.get('/people', routes.views.people);
+router.get('/people/:person', routes.views.person);
 
-    router.all('/tamagagement', routes.views.tamagagement);
+router.get('/publications', routes.views.projects.publications);
+router.get('/publications/:publication_key', routes.views.projects.publication);
+router.get('/projects/:subdirectory/:project_key', routes.views.projects.project);
 
-    // CommunityPlanIt redirect (boston.communityplanit.org)
-    router.all('/climatesmartboston', function(req, res, next) {
-        res.redirect('https://www.communityplanit.org/bostonclimate/');
-    });
-    router.all('/api/cpi/register', keystone.middleware.api, routes.api.communityplanit.create);
-    
-    // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
-    // router.get('/protected', middleware.requireUser, routes.views.protected);
+router.get('/cmap', routes.views.cmap);
+router.get('/programs/cmap', routes.views.cmap);
 
-    // Redirect projects to /all
-    router.get('/projects/', function(req, res, next) {
-        res.redirect('/projects/all');
-    });
+router.get('/news', routes.views.news);
+router.get('/press', routes.views.press);
 
-    // Dynamic directory routes
-    router.get('/:directory', routes.views.directory);
-    router.get('/:directory/:subdirectory', routes.views.subdirectory);
+router.all('/tamagagement', routes.views.tamagagement);
+
+// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
+// router.get('/protected', middleware.requireUser, routes.views.protected);
+
+// Redirect projects to /all
+router.get('/projects/', function(req, res, next) {
+    res.redirect('/projects/all');
+});
+
+// Dynamic directory routes
+router.get('/:directory', routes.views.directory);
+router.get('/:directory/:subdirectory', routes.views.subdirectory);
 
 module.exports = router;
