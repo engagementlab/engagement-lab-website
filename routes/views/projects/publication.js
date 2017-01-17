@@ -43,7 +43,7 @@ exports = module.exports = function(req, res) {
                 return res.notfound('Cannot find publication', 'Sorry, but it looks like the publication you were looking for does not exist! Try <a href="http://elab.emerson.edu/research/publications">going back</a> to the directory.');
             }
 
-            locals.date = moment(result.date).format();
+            locals.date = result._.date.format('MMMM Do YYYY');
             locals.publication = result;
 
             next(err);

@@ -38,8 +38,8 @@
 			<div class="col-sm-6 col-md-4">
 				<h3>Additional Information</h3>
 				<p><b>Author(s): </b> {{publication.author}}</p>
-				{{#if publication.date}}
-					<p><b>Published: </b> {{date}}</p>
+				{{#if this.date}}
+					<p><b>Published: </b> {{this.date}}</p>
 				{{/if}}
 				{{#if publication.downloadUrls}}
 					<h4>Download</h4>
