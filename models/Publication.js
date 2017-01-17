@@ -52,7 +52,7 @@ Publication.add({
 	},
 	downloadUrls: {
 		type: Types.TextArray,
-		label: 'Link(s) to downlad book',
+		label: 'Link(s) to download book',
 		note: 'Must be in format "http://www.something.org"'
 	},
 	file: {
