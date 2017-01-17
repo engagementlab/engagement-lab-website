@@ -10,14 +10,28 @@
     }
   }],
   "deploy" : {
+
+    "sdk-production" : {
+      "user": "node",
+      "host": "199.94.80.32",
+      "repo": "git@github.com:engagementgamelab/el-web-sdk.git",
+      "ref": "origin/master",
+      "path": "/srv/website",
+      "pre-deploy-local" : "echo 'Cloning and running npm install. Be patient.';",
+      "post-deploy" : "npm i",
+      "env": {
+        "NODE_ENV": "staging"
+      }
+    },
+
     "production" : {
       "user": "node",
       "host": "199.94.80.32",
       "repo": "git@github.com:engagementgamelab/engagement-lab-website.git",
       "ref": "origin/production",
       "path": "/srv/engagement-lab-website",
-      "pre-deploy-local" : "echo 'Cloning and running npm install. Be patient.'",
-      "post-deploy" : "npm i ; cd /srv/website/current/ ; npm link /srv/engagement-lab-website/current ; grunt compile --sites=engagement-lab-website ; pm2 restart 'server' --env production",
+      "pre-deploy-local" : "grunt deploy --sites=engagement-lab-website --target=sdk-production ; echo 'Cloning and running npm install. Be patient.'",
+      "post-deploy" : "cd /srv/engagement-lab-website/source ; npm i ; cd /srv/website/current/ ; npm link /srv/engagement-lab-website/current ; grunt compile --sites=engagement-lab-website ; pm2 restart 'server' --env production",
       "env": {
         "NODE_ENV": "production"
       }
