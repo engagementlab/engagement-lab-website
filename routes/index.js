@@ -61,7 +61,7 @@ exports = module.exports = function(app) {
     app.get('/projects/:subdirectory/:project_key', routes.views.projects.project);
 
     app.get('/cmap', routes.views.cmap);
-    app.get('/programs/cmap', routes.views.cmap);
+    // app.get('/programs/cmap', routes.views.cmap);
 
     app.get('/news', routes.views.news);
     app.get('/press', routes.views.press);
