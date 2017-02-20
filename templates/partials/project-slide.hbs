@@ -1,0 +1,45 @@
+{{!< default}}
+{{!-- 
+/**
+ * Engagement Lab Website
+ * Developed by Engagement Lab, 2016
+ * ==============
+ * 
+ * Person Bio partial
+ * - Use {{jsonPrint project}} to print entire json...DEBUG ONLY
+ * ==========
+ */
+--}}
+
+<div class="col-sm-6 col-md-4 text-center project-left" data-category="{{project.subdirectory.name}}" data-key="{{project.key}}">
+	<img id="{{project.name}}" src="{{{cloudinaryUrl project.image width=192 height=192}}}" alt="{{project.name}}" class="photo">
+
+	<div class="col-md-12">
+		<div class="footer-content">
+			<h3 class="title">Project Information</h3>
+			<div class="separator-5"></div>
+
+			<ul class="list-icons">
+			{{#if project.externalLinkUrl}}
+				<li><a href="{{project.externalLinkUrl}}">Project Website<i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+			{{/if}}
+			{{#if project.githubUrl}}
+				<li><a href="{{project.githubUrl}}">GitHub Repository<i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+			{{/if}}
+				<li><b>Principal Investigator:</b> {{project.investigatorPerson}}</li>
+				{{#if project.managerPerson}}<li><b>Project Manager:</b> {{project.managerPerson}}</li>{{/if}}
+				<li><b>Project Dates:</b> {{projectDates}}</li>
+				<li><b>Contact:</b> <i class="text-default fa fa-envelope-o pl-10 pr-5"></i>info at elab.emerson.edu</li>
+			</ul>
+		</div>
+	</div> <!-- .col-md-4 -->
+
+</div>
+
+<div class="col-sm-6 col-md-7 project-right">
+	<h1>About <i>{{project.name}}</i></h1>
+	<p>{{project.title}}</p>
+	<div class="lead">
+		{{{project.overview.html}}}
+	</div>
+</div>
