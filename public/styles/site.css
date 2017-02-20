@@ -6093,6 +6093,13 @@ body {
   font-weight: 700;
   color: #0c9ec7; }
 
+.cmap .quote {
+  font-size: 24px; }
+  .cmap .quote img, .cmap .quote p {
+    display: inline; }
+  .cmap .quote .quote-author {
+    padding: 20px 0px; }
+
 .cmap #apply {
   background-color: #f2f2f2; }
 
