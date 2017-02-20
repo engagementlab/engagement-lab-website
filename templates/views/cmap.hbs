@@ -125,6 +125,8 @@
 			</div>
 		</div>
 	</section>
+	
+	{{#if faculty}}
 	<section class="section" id="faculty">
 		<div class="container">
 			<div class="row">
@@ -132,49 +134,36 @@
 					<h3 class="section-header mb-40">Faculty</h3>
 				</div>
 			</div>
-			{{#if faculty}}
+			
 				<div class="row grid-space-10">
 				{{!-- Show leadership --}}
 					{{#each faculty}}
 						{{> people/person person=this}}
 					{{/each}}
 				</div>
-			{{else}}
-				<div class="row">
-					<div class="col-md-12">
-						<p class="lead">No people have been marked for this page. Please go to the Keystone dashboard and mark people as "Show on CMAP page." Thanks!</p>
-						<p class="lead">Love,</p>
-						<p class="lead">Jay</p>
-					</div>
-				</div>
-			{{/if}}
 		</div>
 	</section>
-	<section class="section" id="faculty">
+	{{/if}}
+
+	{{#if students}}
+	<section class="section" id="students">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<h3 class="section-header mb-40">Students</h3>
 				</div>
 			</div>
-			{{#if students}}
+			
 				<div class="row grid-space-10">
 				{{!-- Show leadership --}}
 					{{#each students}}
 						{{> people/person person=this}}
 					{{/each}}
 				</div>
-			{{else}}
-				<div class="row">
-					<div class="col-md-12">
-						<p class="lead">No people have been marked for this page. Please go to the Keystone dashboard and mark people as "Show on CMAP page." Thanks!</p>
-						<p class="lead">Love,</p>
-						<p class="lead">Jay</p>
-					</div>
-				</div>
-			{{/if}}
+			
 		</div>
 	</section>
+	{{/if}}
 
 	{{#if projects}}
 	<section class="section" id="projects">
