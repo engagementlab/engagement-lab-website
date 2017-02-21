@@ -79,9 +79,9 @@ exports.initLocals = function(req, res, next) {
             key: 'people',
             href: '/people'
         }, {
-            label: 'Programs',
-            key: 'programs',
-            href: '/programs'
+            label: 'CMAP',
+            key: 'cmap',
+            href: '/cmap'
         }, {
             label: 'News',
             key: 'news',

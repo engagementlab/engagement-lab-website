@@ -56,12 +56,18 @@ exports = module.exports = function(app) {
     app.get('/people', routes.views.people);
     app.get('/people/:person', routes.views.person);
 
+    app.get('/project-slider/:key', routes.views.projects.projectslider);
+    // Redirect project-slider to /all
+    // app.get('/project-slider/', function(req, res, next) {
+    //     res.redirect('/project-slider/');
+    // });
+
     app.get('/publications', routes.views.projects.publications);
     app.get('/publications/:publication_key', routes.views.projects.publication);
     app.get('/projects/:subdirectory/:project_key', routes.views.projects.project);
 
     app.get('/cmap', routes.views.cmap);
-    app.get('/programs/cmap', routes.views.cmap);
+    // app.get('/programs/cmap', routes.views.cmap);
 
     app.get('/news', routes.views.news);
     app.get('/press', routes.views.press);

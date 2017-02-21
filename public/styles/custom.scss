@@ -363,6 +363,20 @@ html, body, .container {
   }
 }
 
+// PROJECT GLIDER
+.project-left {
+  margin-top: 40px;
+}
+.project-right {
+  .lead {
+    font-size: 16px;
+  }
+}
+
+.glide__arrows.project{
+  top: 15%;
+}
+
 /* PROJECT PAGE */
 #project_description {
   background: #f4f4f4;
