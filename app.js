@@ -16,9 +16,7 @@ module.exports = function(frameworkDir, shared) {
 	var tamabehavior = require('./tamabehavior');	
 
 	// Added web sdk dependencies 
-	require('app-module-path').addPath(frameworkDir + '/node_modules'); 
-	
-	var keystoneInst = require('keystone');	
+	require('app-module-path').addPath(frameworkDir + '/node_modules');
 
 	// lolz
 	keystoneInst.set('tamabehavior', tamabehavior);	
