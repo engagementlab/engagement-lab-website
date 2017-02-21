@@ -9,14 +9,26 @@
 		color: $base-color-hover;
 	}
 
+	.column {
+		height: 100%;
+	}
+
+	#student-quotes {
+		margin-bottom: 40px;
+	}
+
 	.quote {
 		
-		font-size: 24px;
+		font-size: 20px;
+		margin-top:40px;
+
 		img, p {
 			display: inline;
 		}
 		.quote-author{
 			padding: 20px 0px;
+			color: #51d0b1;
+			float: right;
 		}
 	}
 

@@ -68,6 +68,8 @@
 
 		{{/ifeq}}
 
+
+
 		{{!-- ABOUT Template Script --}}
 		{{#ifeq section 'about'}}
 
@@ -176,6 +178,37 @@
 			
 			});
 		
+		{{/ifeq}}
+
+		{{!-- ABOUT Template Script --}}
+		{{#ifeq section 'cmap'}}
+
+			columnResize();
+
+			$(window).resize(function() {
+        columnResize();
+	    });
+
+			function columnResize() {
+				console.log("resizing");
+				var elementHeights = $('.column').map(function() {
+					$(this).height('100%');
+			    return $(this).height();
+			  }).get();
+
+			  var maxHeight = Math.max.apply(null, elementHeights);
+
+			  $('.column').height(maxHeight);
+			}
+			
+			$('#student-quotes').isotope({
+		    itemSelector: '.quote', 
+		    percentPosition: true,
+			  masonry: {
+			    columnWidth: '.quote'
+			  }
+		  });
+
 		{{/ifeq}}
 
 		{{!-- SYLLABI Template Script --}}

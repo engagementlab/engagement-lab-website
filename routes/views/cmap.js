@@ -26,7 +26,7 @@ exports = module.exports = function(req, res) {
         locals = res.locals;
 
     // Init locals
-    locals.section = 'programs';
+    locals.section = 'cmap';
 
     // CMAP query
     view.on('init', function(next) {
