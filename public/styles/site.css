@@ -6093,12 +6093,21 @@ body {
   font-weight: 700;
   color: #0c9ec7; }
 
+.cmap .column {
+  height: 100%; }
+
+.cmap #student-quotes {
+  margin-bottom: 40px; }
+
 .cmap .quote {
-  font-size: 24px; }
+  font-size: 20px;
+  margin-top: 40px; }
   .cmap .quote img, .cmap .quote p {
     display: inline; }
   .cmap .quote .quote-author {
-    padding: 20px 0px; }
+    padding: 20px 0px;
+    color: #51d0b1;
+    float: right; }
 
 .cmap #apply {
   background-color: #f2f2f2; }
