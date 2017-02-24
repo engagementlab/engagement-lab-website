@@ -17,6 +17,7 @@ var Academics = keystone.list('Academics');
 var Person = keystone.list('Person');
 var Project = keystone.list('Project');
 var Cmap = keystone.list('Cmap');
+var Quote = keystone.list('Quote');
 var _ = require('underscore');
 
 exports = module.exports = function(req, res) {
@@ -25,14 +26,17 @@ exports = module.exports = function(req, res) {
         locals = res.locals;
 
     // Init locals
-    locals.section = 'programs';
+    locals.section = 'cmap';
 
     // CMAP query
     view.on('init', function(next) {
 
+        
+
         var cmapQuery = Cmap.model.findOne({}, {}, {
             sort: { 'createdAt': -1 }
         });
+
 
         cmapQuery.exec(function(err, result) {
 
@@ -47,7 +51,19 @@ exports = module.exports = function(req, res) {
                 });
             }
 
-            next(err);
+            var cmapQuotes = Quote.model.find({ 'cmapQuote': true }, {}, {
+                sort: { 'createdAt': -1 }
+            })
+            .populate('person');
+
+            cmapQuotes.exec(function(err, result) {
+
+                locals.cmapQuotes = result;
+
+                next(err);
+            });
+
+            
         });
 
     });
@@ -55,15 +71,40 @@ exports = module.exports = function(req, res) {
     view.on('init', function(next) {
 
         // Get faculty
-        Person.model.find({ 'cmapPerson': true })
+        Person.model.find({ 
+            'cmapPerson': true, 
+            $or: [
+                {'category': 'faculty fellows'},
+                {'category': 'faculty leadership'}
+            ]
+        })
         .sort([
             ['sortOrder', 'ascending']
         ])
         .exec(function(err, result) {
-            locals.people = result;
+            locals.faculty = result;
 
-            next(err);
+            console.log(locals.faculty);
+
+            // Get students
+            Person.model.find({ 
+                'cmapPerson': true, 
+                'category': 'CMAP'
+            })
+            .sort([
+                ['sortOrder', 'ascending']
+            ])
+            .exec(function(err, result) {
+                locals.students = result;
+
+                console.log(locals.faculty);
+
+                next(err);
+            });
+
         });
+
+        
 
     });
 

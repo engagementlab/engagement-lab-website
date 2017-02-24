@@ -48,6 +48,7 @@
 			</div>
 		</div>
 	</section>
+
 	<section class="section" id="elements">
 		<div class="container">
 			<div class="row">
@@ -57,7 +58,7 @@
 			</div>
 			<div class="row dark" id="columns">
 				{{#each elements}}
-					<div class="col-sm-6 col-md-3 text-center pv-20" id="element-{{@index}}">
+					<div class="col-sm-6 col-md-3 text-center column pv-20" id="element-{{@index}}">
 						<h3 class="ph-20">{{header}}</h3>
 						<h4 class="pv-20">{{subheader}}</h4>
 						<p>{{element}}</p>
@@ -66,6 +67,33 @@
 			</div>
 		</div>
 	</section>
+
+{{!-- Quotes Section -- To Add In Later --}}
+{{#if cmapQuotes}}
+	<section class="section" id="student-quotes">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="section-header mb-40">Quotes</h3>
+					<div class="row">
+						{{#each cmapQuotes}}
+							<div class="col-lg-6 col-sm-6 col-xs-12 quote">
+								<img src="https://res.cloudinary.com/engagement-lab-home/image/upload/v1487613850/topquote_vrbnid.png" height='25px' width='25px'>
+								{{{this.quote.html}}}
+								<img src="https://res.cloudinary.com/engagement-lab-home/image/upload/v1487613858/bottomquote_bxq6vh.png" height='25px' width='25px'>
+
+								<div class="quote-author">- {{this.person.name.last}}, {{this.person.name.first}}</div>
+							</div>
+							
+						{{/each}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{{/if}}
+
 	<section class="section dark" id="curriculum">
 		<div class="container">
 			<div class="row">
@@ -76,6 +104,7 @@
 			</div>
 		</div>
 	</section>
+
 	<section class="section dark" id="structure">
 		<div class="container">
 			<div class="row">
@@ -96,37 +125,52 @@
 			</div>
 		</div>
 	</section>
+	
+	{{#if faculty}}
 	<section class="section" id="faculty">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h3 class="section-header">Faculty</h3>
+					<h3 class="section-header mb-40">Faculty</h3>
 				</div>
 			</div>
-			{{#if people}}
+			
 				<div class="row grid-space-10">
 				{{!-- Show leadership --}}
-					{{#each people}}
+					{{#each faculty}}
 						{{> people/person person=this}}
 					{{/each}}
 				</div>
-			{{else}}
-				<div class="row">
-					<div class="col-md-12">
-						<p class="lead">No people have been marked for this page. Please go to the Keystone dashboard and mark people as "Show on CMAP page." Thanks!</p>
-						<p class="lead">Love,</p>
-						<p class="lead">Jay</p>
-					</div>
-				</div>
-			{{/if}}
 		</div>
 	</section>
+	{{/if}}
+
+	{{#if students}}
+	<section class="section" id="students">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="section-header mb-40">Students</h3>
+				</div>
+			</div>
+			
+				<div class="row grid-space-10">
+				{{!-- Show leadership --}}
+					{{#each students}}
+						{{> people/person person=this}}
+					{{/each}}
+				</div>
+			
+		</div>
+	</section>
+	{{/if}}
+
 	{{#if projects}}
 	<section class="section" id="projects">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h3 class="section-header">Projects</h3>
+					<h3 class="section-header">Student Projects</h3>
 				</div>
 			</div>
 			<div class="row">

@@ -6,7 +6,7 @@
 	"admin_nav": { 
 									"projects": ["projects", "publications"],
 									"programs": ["programs", "Cmap"],
-									"shared": ["resources"],
+									"shared": ["resources", "Quote"],
 									"about": ["About", "partners", "Academics", "people", "jobs"],
 									"structure": ["directories", "subdirectories", "users"],
 									"Community PlanIt": ["CPIContent", "CPIPartner", "CPIRegistration"]

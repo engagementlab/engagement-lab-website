@@ -68,6 +68,8 @@
 
 		{{/ifeq}}
 
+
+
 		{{!-- ABOUT Template Script --}}
 		{{#ifeq section 'about'}}
 
@@ -178,57 +180,35 @@
 		
 		{{/ifeq}}
 
-		{{#ifeq section 'project-slider'}}
+		{{!-- ABOUT Template Script --}}
+		{{#ifeq section 'cmap'}}
 
-		console.log("project");
+			columnResize();
 
-			var gliderDom = $("#project_glider");
-	    var gliderApi;
+			$(window).resize(function() {
+        columnResize();
+	    });
 
-			imageLoaded(gliderDom, function() {
+			function columnResize() {
+				console.log("resizing");
+				var elementHeights = $('.column').map(function() {
+					$(this).height('100%');
+			    return $(this).height();
+			  }).get();
 
-				// Initialize people carousel
-				var gliderObj = gliderDom.glide({
-		        type: "carousel",
-		        autoplay: false,
-		        autoheight: false,
-		        startAt: $(gliderDom).data('starting-index')+1,
-		        afterInit: function(evt) {
-		        	// The people list is invisible by default, show it, but only after a delay to allow page to load
-		        	setTimeout(function() {
-			        	$(evt.current[0]).fadeTo(500, 1);
-		        	} , 500);
-		        },
-		        beforeTransition: function(evt) {
-		        	$(evt.current[0]).fadeTo(100, 0);
-		        },
-		        afterTransition: function(evt) {
-		         	// Show corresponding category
-		        	updateCategory();
+			  var maxHeight = Math.max.apply(null, elementHeights);
 
-		        	// Update URL with the person's key
-							var personKey = $(".glide__slide.active .project-left").data('key');
-							window.history.pushState(null, null, personKey);
+			  $('.column').height(maxHeight);
+			}
+			
+			$('#student-quotes').isotope({
+		    itemSelector: '.quote', 
+		    percentPosition: true,
+			  masonry: {
+			    columnWidth: '.quote'
+			  }
+		  });
 
-		        	$(evt.current[0]).fadeTo(100, 1);
-						}
-		    });
-		    gliderApi = gliderObj.data('glide_api');
-
-		    // Updated people category header
-		    function updateCategory() {
-		    	
-		    	var project = $(".glide__slide.active .project-left");
-					var cat = project.data('category');
-					
-					$('#project_category').text(cat);
-
-		    }
-
-		    updateCategory();
-
-			});
-		
 		{{/ifeq}}
 
 		{{!-- SYLLABI Template Script --}}
