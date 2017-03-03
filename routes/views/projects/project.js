@@ -86,7 +86,6 @@ exports = module.exports = function(req, res) {
             _.each(result.projectImageCaptions, function(str, i) {
                 locals.projectImageObjects.push( {caption: str, img: result.projectImages[i]} );
             });
-            console.log(locals.projectImageObjects)
 
             // Determine project tabs to be active by default (images are first if defined)
             if(result.projectImages.length === 0) {

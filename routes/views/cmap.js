@@ -84,8 +84,6 @@ exports = module.exports = function(req, res) {
         .exec(function(err, result) {
             locals.faculty = result;
 
-            console.log(locals.faculty);
-
             // Get students
             Person.model.find({ 
                 'cmapPerson': true, 
@@ -96,8 +94,6 @@ exports = module.exports = function(req, res) {
             ])
             .exec(function(err, result) {
                 locals.students = result;
-
-                console.log(locals.faculty);
 
                 next(err);
             });

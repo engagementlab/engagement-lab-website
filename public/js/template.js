@@ -23,7 +23,6 @@
 		if ((platform.indexOf('win') == 0 || platform.indexOf('linux') == 0) && !Modernizr.touch) {
 			if ($.browser.webkit) {
 				$.webkitSmoothScroll();
-				console.log("hello webkit");
 			}
 		};
 		//Show dropdown on hover only for desktop devices
