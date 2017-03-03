@@ -11,9 +11,8 @@
 * ==========
 */
 --}}
+
 {{!-- NEWS START --}}
-{{!-- banner start --}}
-{{!-- ================ --}}
 <div class="clearfix dark light-gray-bg banner" style="background-image:url('{{featured.image}}');">
 	<div class="container-fluid">
 		<div class="row">
@@ -35,50 +34,52 @@
 		</div>
 	</div>
 </div>
-{{!-- banner end --}}
-{{!-- main-container start --}}
-{{!-- ================ --}}
+
 <section class="news-container">
 	<div class="container-fluid no-gutter">
-		{{!-- blog start --}}
+
 		<div class="col-md-8 ph-30 blog-feed">
 			<h1 class="page-title mb-10">Blog Feed</h1>
 			<div class="separator-5"></div>
 			<div class="clearfix mb-10"></div>
 			{{#each news}}
-			{{!-- blogpost start --}}
-			<article class="blogpost">
-				<div class="row grid-space-10">
-					<div class="col-sm-4 col-md-4">
-						<div class="overlay-container">
-							<a href="{{url}}"><img src="{{image}}" alt=""></a>
-						</div>
-					</div>
-					<div class="col-sm-8 col-md-8">
-						<header>
-							<h3><a href="{{url}}">{{title}}</a></h3>
-							<div class="post-info">
-								<span class="post-date">
-									<i class="icon-calendar"></i>
-									<span class="month">{{date published format='MM-DD-YYYY'}}</span>
-								</span>
-								<span class="submitted"><i class="icon-user-1"></i> by {{author}}</span>
+				<article class="blogpost">
+					<div class="row grid-space-10">
+						<div class="col-sm-4 col-md-4">
+							<div class="overlay-container">
+								<a href="{{url}}">
+								{{#if image}}
+									<img src="{{image}}" alt="">
+								{{else}}
+									{{{cloudinaryUrl "v1455896685/site/about/logo_color.png" width=231}}}
+								{{/if}}
+								</a>
 							</div>
-						</header>
-						<div class="blogpost-content">
-							<p>{{{content}}}...</p>
+						</div>
+						<div class="col-sm-8 col-md-8">
+							<header>
+								<h3><a href="{{url}}">{{title}}</a></h3>
+								<div class="post-info">
+									<span class="post-date">
+										<i class="icon-calendar"></i>
+										<span class="month">{{date published format='MM-DD-YYYY'}}</span>
+									</span>
+									<span class="submitted"><i class="icon-user-1"></i> by {{author}}</span>
+								</div>
+							</header>
+							<div class="blogpost-content">
+								<p>{{{content}}}...</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<footer class="clearfix">
-					{{!-- <div class="tags pull-left"><i class="icon-tags"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div> --}}
-					<div class="link pull-right"><i class="icon-link"></i><a href="{{url}}">Read More</a></div>
-				</footer>
-			</article>
+					<footer class="clearfix">
+						{{!-- <div class="tags pull-left"><i class="icon-tags"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div> --}}
+						<div class="link pull-right"><i class="icon-link"></i><a href="{{url}}">Read More</a></div>
+					</footer>
+				</article>
 			{{/each}}
 		</div>
-		{{!-- blog end --}}
-		{{!-- events start --}}
+
 		<div class="col-md-4 ph-30 news-sidebar" >
 			<div class="affix-section">
 				<div id="event-section">
