@@ -51,7 +51,8 @@ exports = module.exports = function(req, res) {
         store.load('newsContent', function(err, newsData) {
 
             // err if JSON parsing failed
-            if(err) throw err;
+            if(err)
+                return res.notfound('No news!', 'Sorry, but it seems like we can\'t load the news right now! Please <a href="http://elab.emerson.edu/">go back</a> home.');
 
             locals.news = newsData.news;
             _.each(locals.news, function(post){
