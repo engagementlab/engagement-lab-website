@@ -150,14 +150,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h3 class="section-header mb-40">Students</h3>
+					<h3 class="section-header mb-40">Student Projects</h3>
 				</div>
 			</div>
 			
 				<div class="row grid-space-10">
 				{{!-- Show leadership --}}
 					{{#each students}}
-						{{> people/person person=this}}
+						{{> people/CMAPperson person=this}}
 					{{/each}}
 				</div>
 			
@@ -165,21 +165,4 @@
 	</section>
 	{{/if}}
 
-	{{#if projects}}
-	<section class="section" id="projects">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h3 class="section-header">Student Projects</h3>
-				</div>
-			</div>
-			<div class="row">
-				{{!-- Show projects --}}
-				{{#each projects}}
-					{{> sublisting listing=this}}
-				{{/each}}
-			</div>
-		</div>
-	</section>
-	{{/if}}
 </section>

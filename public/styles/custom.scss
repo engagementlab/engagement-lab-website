@@ -483,8 +483,42 @@ ul.resources {
   a:hover {
     color: $base-color;
   }
+
+  &.team-cmap {
+    height: 100%;
+    @include scaleXY(1.00, 1.00);
+    @include transition(all 0.5s ease);
+    &:hover {
+        @include scaleXY(1.04, 1.04);
+        @include transition(all 0.5s ease);
+        // img {
+        //   @include scaleXY(1.00, 1.00);
+        //   @include transition(all 0.5s ease);
+        // }
+      }
+      a:hover {
+        color: $gray-dark;
+      }
+    img {
+      border-radius: 50%;
+      height: 192px;
+      width: 192px;
+      @include center-block;
+    }
+
+    .image-box {
+      padding: 5px;
+      
+      // img {
+      //   @include scaleXY(1.00, 1.00);
+      //   @include transition(all 0.5s ease);
+      // }
+
+      
+    }
+  }
 }
-.team-member img {
+.team-member:not(.team-cmap) img {
   @include transition(all 0.33s ease);
   @include center-block;
   border-radius: 50%;
