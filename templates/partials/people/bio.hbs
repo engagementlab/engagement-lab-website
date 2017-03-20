@@ -48,8 +48,18 @@
 
 <div class="col-sm-6 col-md-7 person-bio-right">
 	<h1>About <i>{{person.name.first}} {{person.name.last}}</i></h1>
+	{{#ifeq person.category 'CMAP'}}
+	<p>{{person.cohort}}</p>
+	{{else}}
 	<p>{{person.title}}</p>
+	{{/ifeq}}
 	<div class="lead">
 		{{{person.bio.html}}}
+
+		{{#ifeq person.category 'CMAP'}}
+		<h2>Project Description</h2>
+		{{{person.project.html}}}
+
+		{{/ifeq}}
 	</div>
 </div>

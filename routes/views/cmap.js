@@ -104,37 +104,6 @@ exports = module.exports = function(req, res) {
 
     });
 
-    view.on('init', function(next) {
-
-        // Get projects flagged for CMAP
-        Project.model.find({
-            'enabled': true,
-            'cmapProject': true
-        })
-        .sort([
-            ['sortOrder', 'ascending']
-        ])
-        .populate('subdirectory')
-        .exec(function(err, resultProject) {
-            _.map(resultProject, function(proj) {
-
-                // Create link
-                proj.href = '/projects' +
-                '/' + proj.subdirectory.key + 
-                '/' + proj.key;
-                proj.description = proj.description;
-
-                return proj;
-
-            });
-
-            locals.projects = resultProject;
-            next(err);
-
-        });
-    
-    });
-
     // Render the view
     view.render('cmap');
 

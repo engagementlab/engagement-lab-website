@@ -5655,6 +5655,15 @@ html, body, .container {
   .collaborator-icon {
     display: none; } }
 
+.project-left {
+  margin-top: 40px; }
+
+.project-right .lead {
+  font-size: 16px; }
+
+.glide__arrows.project {
+  top: 15%; }
+
 /* PROJECT PAGE */
 #project_description {
   background: #f4f4f4;
@@ -5734,8 +5743,36 @@ ul.resources {
     text-decoration: none; }
   .team-member a:hover {
     color: #78cbd1; }
+  .team-member.team-cmap {
+    height: 100%;
+    -webkit-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1);
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+    .team-member.team-cmap:hover {
+      -webkit-transform: scale(1.04, 1.04);
+      -ms-transform: scale(1.04, 1.04);
+      -o-transform: scale(1.04, 1.04);
+      transform: scale(1.04, 1.04);
+      -webkit-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease; }
+    .team-member.team-cmap a:hover {
+      color: #7d7d7d; }
+    .team-member.team-cmap img {
+      border-radius: 50%;
+      height: 192px;
+      width: 192px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto; }
+    .team-member.team-cmap .image-box {
+      padding: 5px; }
 
-.team-member img {
+.team-member:not(.team-cmap) img {
   -webkit-transition: all 0.33s ease;
   -o-transition: all 0.33s ease;
   transition: all 0.33s ease;
@@ -5745,7 +5782,7 @@ ul.resources {
   border-radius: 50%;
   height: 192px;
   width: 192px; }
-  .team-member img:hover {
+  .team-member:not(.team-cmap) img:hover {
     -webkit-filter: grayscale(50%);
     -moz-filter: grayscale(50%);
     -ms-filter: grayscale(50%);
@@ -6109,6 +6146,20 @@ body {
     color: #51d0b1;
     float: right; }
 
+.cmap .team-member.team-cmap {
+  height: 100%; }
+  .cmap .team-member.team-cmap .image-box {
+    background-color: white;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto; }
+
+.cmap .team-member .cmap-proj {
+  text-align: left;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 15px; }
+
 .cmap #apply {
   background-color: #f2f2f2; }
 
@@ -6134,7 +6185,7 @@ body {
   .cmap #elements #columns {
     display: flex; }
 
-.cmap #projects {
+.cmap #students {
   background-color: #f2f2f2; }
 
 .cmap .dark {
@@ -6257,7 +6308,7 @@ body {
   transform: translateY(-50%); }
 
 .glide--horizontal .glide__arrow.prev {
-  left: 0; }
+  left: 20px; }
   .glide--horizontal .glide__arrow.prev:after {
     display: inline-block;
     content: "\f104"; }

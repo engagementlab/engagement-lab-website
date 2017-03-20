@@ -32,6 +32,27 @@
 		}
 	}
 
+	.team-member {
+
+		&.team-cmap {
+			height: 100%;
+			.image-box {
+				background-color:white;
+				width: 90%;
+				height: 100%;
+				margin: 0 auto;
+			}
+		}
+		.cmap-proj {
+			text-align: left;
+			width: 90%;
+			margin: 0 auto;
+			padding-top: 15px;
+			// padding-bottom: 20px;
+		}
+
+	}
+
 	#apply { background-color: #f2f2f2; }
 	#curriculum { background-color: #17839c; }
 	#structure { background-color: #2898b3; }
@@ -44,7 +65,9 @@
 		#element-3 { background-color: #fcb75c; }
 		#columns { display: flex; }
 	}
-	#projects { background-color: #f2f2f2; }
+	// #projects { background-color: #f2f2f2; }
+
+	#students { background-color: #f2f2f2; }
 
 	.dark { color: $white; }
 
