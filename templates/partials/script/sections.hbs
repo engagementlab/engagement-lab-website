@@ -183,21 +183,24 @@
 		{{!-- ABOUT Template Script --}}
 		{{#ifeq section 'cmap'}}
 
-			columnResize();
+			columnResize('.column');
+      columnResize('.team-cmap');
 
 			$(window).resize(function() {
-        columnResize();
+        columnResize('.column');
+        columnResize('.team-cmap');
 	    });
 
-			function columnResize() {
-				var elementHeights = $('.column').map(function() {
+			function columnResize(element) {
+				console.log(element);
+				var elementHeights = $(element).map(function() {
 					$(this).height('100%');
 			    return $(this).height();
 			  }).get();
 
 			  var maxHeight = Math.max.apply(null, elementHeights);
 
-			  $('.column').height(maxHeight);
+			  $(element).height(maxHeight);
 			}
 			
 			$('#student-quotes').isotope({
