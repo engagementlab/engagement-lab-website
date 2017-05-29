@@ -85,7 +85,7 @@ exports.initLocals = function(req, res, next) {
         }, {
             label: 'News',
             key: 'news',
-            href: '/news'
+            href: 'https://medium.com/engagement-lab-emerson-college'
         }];
 
         locals.user = req.user;

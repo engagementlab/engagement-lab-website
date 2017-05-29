@@ -35,24 +35,23 @@ var Cmap = new keystone.List('Cmap',
 Cmap.add({
 		name: { type: String, default: "CMAP Page", hidden: true, required: true },
 		
-		logo: { type: Types.CloudinaryImage, label: "CMAP logo", folder: "site/cmap", autoCleanup: true },
+		logo: { type: Types.CloudinaryImage, label: "CMAP logo", folder: "site/cmap", autoCleanup: true, note: 'This image appears at the top left next to the header text' },
 
-		programDescription: { type: Types.Markdown, label: "Lead" },
-		apply1: { type: Types.Markdown, label: "Is CMAP the right program for you? (Paragraph 1)" },
-		apply2: { type: Types.Markdown, label: "Is CMAP the right program for you? (After Paragraph 1)" },
+		programDescription: { type: Types.Markdown, label: "Lead", note: 'This is the header text. Follows \'The MA in Civic Media, Art & Practice\'...'},
+		apply1: { type: Types.Markdown, label: "Is CMAP the right program for you? (First Text)", note: 'This is the first paragraph(s) in the apply section' },
+		apply2: { type: Types.Markdown, label: "Is CMAP the right program for you? (Second Text)", note: 'This is the second paragraph(s) in the apply section'},
 		
-		curriculum: { type: String, label: "Curriculum" },
-		
-		structure: { type: Types.Markdown, label: "The Structure" },
-		courses: { type: Types.Markdown, label: "Core Courses" },
+		curriculum: { type: String, label: "Curriculum", note: 'This is the text in the \'Curriculum\' section' },
+		structure: { type: Types.Markdown, label: "The Structure", note: 'This is the text in the \'The Structure\' section'  },
+		courses: { type: Types.Markdown, label: "Core Courses", note: 'This is the text in the \'Core Courses\' section' },
 		
 		createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
 	},
 	
 	'Core Elements of the CMAP Experience', {
-		headers: { type: Types.TextArray, label: "Heading", note: "Please add 4" },
-		subheaders: { type: Types.TextArray, label: "Subheaders", note: "Please! add 4" },
-		elements: { type: Types.TextArray, label: "Element descriptions", note: "Please for the love of all things add 4" }
+		headers: { type: Types.TextArray, label: "Element Heading", note: "There should be FOUR headers, one for each core element of the CMAP experience" },
+		subheaders: { type: Types.TextArray, label: "Element Subheaders", note: "Each header should have a subheader, so there should be FOUR" },
+		elements: { type: Types.TextArray, label: "Element descriptions", note: "Each core element has a description (and a unique color), so there should be FOUR" }
 	});
 
 /**

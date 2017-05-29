@@ -61,7 +61,8 @@ Listing.add({
         type: Types.CloudinaryImage,
         label: 'Thumbnail Image',
         folder: 'site/listings',
-        autoCleanup: true
+        autoCleanup: true, 
+        note: 'This displays as the grid listing image/thumbnail on its respective page.'
     },
 
     createdAt: {
