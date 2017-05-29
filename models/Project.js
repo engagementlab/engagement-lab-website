@@ -171,7 +171,7 @@ Project.add({
         filters: {
             type: 'video'
         },
-        many: true
+        many: true,
         note: 'Will appear in \'Videos\' tab on individual project page.'
 
     },
@@ -183,7 +183,7 @@ Project.add({
         filters: {
             type: 'file'
         },
-        many: true
+        many: true,
         note: 'Will appear in \'Resources\' tab on individual project page.'
 
     },
@@ -195,7 +195,7 @@ Project.add({
         filters: {
             type: 'article'
         },
-        many: true
+        many: true,
         note: 'Will appear in \'News\' section on individual project page.'
 
     },
@@ -207,7 +207,7 @@ Project.add({
         filters: {
             type: 'blog post'
         },
-        many: true
+        many: true,
         note: 'Will appear in \'News\' section on individual project page.'
 
     }

@@ -23,6 +23,25 @@
 			</div>
 		</div>
 	</div>
+
+	{{!-- <div class="row filters">
+		<div class="btn-group clearfix">
+			<button id="author-{{key}}" class="syllabi-options btn btn-default dropdown-toggle" type="button" data-filter-group="{{label}}" data-toggle="dropdown">
+			<div class="button-text">{{label}} <span class="{{key}}-number filter-counter"> </span><span class="bigCaret"></span></div>
+			</button>
+			<ul class="dropdown-menu scrollable" role="menu">
+				<li><a id="authors-all" data-filter=""  href="#" data-filter-value="" data-filter-group="{{key}}" class="all-options option-authors">All Authors</a></li>
+				{{#each authors}}
+				<li><a id="{{../key}}" value="#" href="#" data-filter-value=".{{key}}" data-filter-group="{{../key}}" class="option-{{../key}}">{{name}}</a></li>
+				{{/each}}
+			</ul>
+		</div>
+		{{/each}}
+		<div class="btn-group clearfix">
+			<button class="syllabi-options clear-all btn btn-default dropdown-toggle" type="button" data-filter-value="">Reset</button>
+		</div>
+	</div> --}}
+
 	{{#if publications}}
 		<div class="container">
 			{{#each publications}}

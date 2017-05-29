@@ -46,7 +46,19 @@ exports = module.exports = function(req, res) {
             subcategories.exec(function(err, resultPubs) {
 
                 locals.publications = {};
+                locals.authors = [];
                 locals.category = resultPubs;
+
+                var filteredAuthors = _.map(resultPubs, function(pub) {
+                    return pub.author;
+                });
+
+                _.each(filteredAuthors, function(author) {
+                    locals.authors.push(author);
+                    console.log(locals.authors);
+                });
+
+                locals.authors = _.uniq(locals.authors);
 
                 _.each(categories, function(category) {
 
@@ -54,7 +66,7 @@ exports = module.exports = function(req, res) {
                     var filteredPubs = resultPubs.filter(function(pub) {
                         return pub.category == category;
                     });
-                    
+
                     if(category === 'Articles and Chapters') {
                         // Sort articles by reverse chronological date
                         filteredPubs = filteredPubs.sort(function(a, b) {
