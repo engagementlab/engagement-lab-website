@@ -57,29 +57,120 @@
 					</div>
 				</section>
 			{{/if}}
-			{{#if featured_projects}}
-				<section class="featured-projects">
 
-					{{!-- Glider.js structure --}}
-					<div id="featured_glider" class="glide">
+			
+			<section class="news-container">
+				<div class="container-fluid no-gutter">
 
-					    <div class="glide__arrows">
-					        <button class="glide__arrow prev" data-glide-dir="<"></button>
-					        <button class="glide__arrow next" data-glide-dir=">"></button>
-					    </div>
-
-					    <div class="glide__wrapper">
-					        <ul class="glide__track" style="margin-left:-40px">
-								{{#each featured_projects}}
-									<li class="glide__slide">{{> index/featured_project project=this}}</li>
-								{{/each}}
-					        </ul>
-					    </div>
-
+					<div class="col-md-8 ph-30 blog-feed">
+						<h1 class="page-title mb-10">Blog Feed</h1>
+						<div class="separator-5"></div>
+						<div class="clearfix mb-10"></div>
+						{{#each news}}
+							<article class="blogpost">
+								<div class="row grid-space-10">
+									<div class="col-sm-4 col-md-4">
+										<div class="overlay-container">
+											<a href="{{url}}">
+											{{#if image}}
+												<img src="{{image}}" alt="">
+											{{else}}
+												{{{cloudinaryUrl "v1455896685/site/about/logo_color.png" width=231}}}
+											{{/if}}
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-8 col-md-8">
+										<header>
+											<h3><a href="{{url}}">{{title}}</a></h3>
+											<div class="post-info">
+												<span class="post-date">
+													<i class="icon-calendar"></i>
+													<span class="month">{{date published format='MM-DD-YYYY'}}</span>
+												</span>
+												<span class="submitted"><i class="icon-user-1"></i> by {{author}}</span>
+											</div>
+										</header>
+										<div class="blogpost-content">
+											<p>{{{content}}}...</p>
+										</div>
+									</div>
+								</div>
+								<footer class="clearfix">
+									{{!-- <div class="tags pull-left"><i class="icon-tags"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div> --}}
+									<div class="link pull-right"><i class="icon-link"></i><a href="{{url}}">Read More</a></div>
+								</footer>
+							</article>
+						{{/each}}
 					</div>
-					
-				</section>
-			{{/if}}
+
+					<div class="col-md-4 ph-30 news-sidebar" >
+						<div class="affix-section">
+							<div id="event-section">
+								{{#if twitter.tweets}}
+									<h1 class="page-title mb-10">@{{twitter.user}}</h1>
+									<div class="separator-5"></div>
+									<div class="clearfix mb-10"></div>
+									<ul class="twitter-feed">
+									{{#each twitter.tweets}}
+										<li class="tweet"><p class="small">{{{this.text}}}</p></li>
+									{{/each}}
+										<li class="tweet"><a href="https://twitter.com/{{twitter.user}}">More from @{{twitter.user}} <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+									</ul>
+								{{/if}}
+								<h1 class="page-title mb-10">Events</h1>
+								<div class="separator-5"></div>
+								<div class="clearfix mb-10"></div>
+								{{#if events}}
+									{{#each events}}
+										{{!-- event start --}}
+										<div class="row grid-space-10">
+											<div class="col-sm-5 col-md-5">
+												<div class="overlay-container">
+													<a href="{{url}}"><img class="media-object" src="{{logo.url}}" alt="{{name.text}}">
+													</a>
+												</div>
+											</div>
+											<div class="col-sm-5 col-md-5">
+
+												<h6 class="media-heading"><a href="{{url}}">{{name.text}}</a></h6>
+												<p class="small margin-clear"><i class="fa fa-calendar pr-10"></i>{{date start.local format='MM/DD/YYYY'}}</p>									
+											
+											</div>
+										</div>
+										{{!-- event end --}}
+									{{/each}}
+									<a href="http://www.eventbrite.com/o/engagement-lab-6103617323">More events <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+								{{else}}
+									<div class="row grid-space-10 no-events">
+										No upcoming events. Check back soon!
+									</div>
+								{{/if}}
+								{{!-- events end --}}
+							</div>
+							{{!-- features --}}
+							<h3 class="page-title">Featured Press and Announcements</h3>
+							<div class="separator-5 mb-20"></div>
+							
+							{{!-- featured start --}}
+							{{#if articles}}
+								{{#each articles}}
+									<div class="media margin-clear">
+										<div class="media-body">
+											<h6 class="media-heading"><a href="{{url}}">{{name}}</a></h6>
+											<p class="small margin-clear">{{summary}}</p>
+										</div>
+									</div>
+									<br>
+								{{/each}}
+								<p><a href="/press">More press and announcements <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>
+							{{/if}}
+							{{!-- featured end --}}
+						</div>
+					</div>
+
+				</div>
+			</section>
 		</div> <!-- .main -->
 	</div> <!-- .row -->
 </div> <!-- .container-fluid -->
