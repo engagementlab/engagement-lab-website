@@ -48,6 +48,7 @@ NewsBox.add({
 	name: { type: String, label: 'Header', required: true, initial: true, index: true },
 	type: { type: Types.Select, label: 'Type', options: 'blog, press, event', default: 'blog', required: true, initial: true },
 	text: { type: String, label: 'Text', required: true, initial: true },
+	image: { type: Types.CloudinaryImage, label: 'Image' },
 	url: {
 		type: Types.Url,
 		label: 'URL',

@@ -32,6 +32,16 @@ exports = module.exports = function(req, res) {
 
         var querySub = Subdirectory.model.findOne({key: 'publications'});
 
+        var filters = [];
+
+        var filtersPopulate = [
+                                {path:'institution', select:'key'},
+                                {path:'discipline', select:'key'},
+                                {path:'keyword', select:'key'},
+                                {path:'faculty', select:'key'},
+                                {path:'partnerOrg', select:'key'}
+                              ];
+
         querySub.exec(function(err, resultSub) {
 
             if (resultSub === null)

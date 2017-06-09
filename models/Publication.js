@@ -39,13 +39,9 @@ var docIsModified;
  */
 Publication.add({
 	title: { type: String, label: 'Title', required: true, initial: true, index: true, note: 'This is the link text for article/chapter urls, and the link text to individual pages for books and guides.' },
-	author: { type: String, label: 'Author Name(s)', required: true, initial: true, note: 'This appears below the title.' },
-
-	category: { type: Types.Select, options: 'Book, Guide, Articles and Chapters', required: true, initial: true, note: 'This determines the type of publication, and where it will display respectively.' },
 	
-	url: { type: String, label: 'URL',
-		dependsOn: { category: 'Articles and Chapters' }, initial: true, note: 'This is the url link to the article or chapter on the publications listing page.' },
-	urls: {
+	articleUrl: { type: String, label: 'Article URL', initial: true, note: 'This is the url link to the article or chapter on the publications listing page.' },
+	purchaseUrls: {
 		type: Types.TextArray,
 		label: 'Links to purchase book',
 		note: 'Must be in format "http://www.something.org"'
@@ -69,6 +65,43 @@ Publication.add({
 			return 'elabpublication';
 		}
 	},
+	
+  topic: {
+      type: Types.Relationship,
+      filters: {
+          category: 'Topic'
+      },
+      ref: 'Filter',
+      label: 'Topic(s)',
+      note: 'What is this publication about? Pick from here or add a new Topic Filter.',
+      required: true,
+      many: true,
+      initial: true
+  },
+  person: {
+      type: Types.Relationship,
+      filters: {
+          category: 'Person'
+      },
+      ref: 'Filter',
+      label: 'Author(s)',
+      note: 'Who wrote this publication? Pick from here or add a new Person Filter.',
+      required: true,
+      many: true,
+      initial: true
+  },
+  type: {
+      type: Types.Relationship,
+      filters: {
+          category: 'Type'
+      },
+      ref: 'Filter',
+      label: 'Type(s)',
+      note: 'What kind of publication is this? A book? An article? Pick from here or add a new Type Filter.',
+      required: true,
+      many: true,
+      initial: true
+  },
 
 	// This field is required in the save hook below instead of here as keystone dependsOn workaround
 	blurb: { type: Types.Textarea, label: 'Blurb Text', 

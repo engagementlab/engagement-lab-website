@@ -26,6 +26,24 @@
 				{{> page/name name=about.missionStatement}}
 				{{> about/first_paragraph text=about.process}}
 			</div>
+			{{!-- features --}}
+			<h3 class="page-title">Featured Press and Announcements</h3>
+			<div class="separator-5 mb-20"></div>
+			
+			{{!-- featured start --}}
+			{{#if articles}}
+				{{#each articles}}
+					<div class="media margin-clear">
+						<div class="media-body">
+							<h6 class="media-heading"><a href="{{url}}">{{name}}</a></h6>
+							<p class="small margin-clear">{{summary}}</p>
+						</div>
+					</div>
+					<br>
+				{{/each}}
+				<p><a href="/press">More press and announcements <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>
+			{{/if}}
+			{{!-- featured end --}}
 		</div>
 	</div>
 </section>
