@@ -49,13 +49,34 @@ var urlValidator = {
  */
 Project.add({
 
-    subdirectory: {
+    format: {
         type: Types.Relationship,
-        ref: 'Subdirectory',
-        required: true,
-        initial: true,
-        label: 'Subdirectory', 
-        note: 'This is the Project subdirectory in which this project will be grouped.'
+        ref: 'Filter',
+        filters: {
+            type: 'Format',
+            appears: 'Project'
+        },
+        label: 'Type/Format of Project', 
+        note: 'What kind of project is this? Choose from below or add a Format Filter and choose \'Project\' as its destination.'
+    },
+    keyword: {
+        type: Types.Relationship,
+        ref: 'Filter',
+        filters: {
+            type: 'Keyword',
+            appears: 'Project'
+        },
+        label: 'Project Keywords', 
+        note: 'What kind of project is this? Choose from below or add a Keyword Filter and choose \'Project\' as its destination.'
+    },
+    person: {
+        type: Types.Relationship,
+        ref: 'Filter',
+        filters: {
+            type: 'Person'
+        },
+        label: 'Project People Filters', 
+        note: 'Who is on this project? Choose from below or add a Person Filter.'
     },
     enabled: {
         type: Types.Boolean,
@@ -111,8 +132,12 @@ Project.add({
 
     },
 
-    investigatorPerson: {
-        type: String,
+    principalInvestigator: {
+        type: Types.Relationship,
+        ref: 'Filter',
+        filters: {
+            type: 'Person'
+        },
         label: 'Principal Investigator', 
         note: 'Appears on the individual project page.'
 

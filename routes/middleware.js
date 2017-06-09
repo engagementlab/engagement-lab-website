@@ -83,8 +83,8 @@ exports.initLocals = function(req, res, next) {
             key: 'cmap',
             href: '/cmap'
         }, {
-            label: 'News',
-            key: 'news',
+            label: 'Blog',
+            key: 'blog',
             href: 'https://medium.com/engagement-lab-emerson-college'
         }];
 

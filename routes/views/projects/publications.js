@@ -30,84 +30,46 @@ exports = module.exports = function(req, res) {
     // Load publications categories and sort them
     view.on('init', function(next) {
 
-        var querySub = Subdirectory.model.findOne({key: 'publications'});
+        var publications = Publication.model.find({}).sort('-date').populate('format person keyword');
 
-        var filters = [];
+        publications.exec(function(err, resultPubs) {
 
-        var filtersPopulate = [
-                                {path:'institution', select:'key'},
-                                {path:'discipline', select:'key'},
-                                {path:'keyword', select:'key'},
-                                {path:'faculty', select:'key'},
-                                {path:'partnerOrg', select:'key'}
-                              ];
+            console.log(resultPubs)
 
-        querySub.exec(function(err, resultSub) {
+            var filters = [];
+            for(i = 0; i < resultPubs.length; i ++) {
+                console.log(resultPubs[i])
+                if (resultPubs[i].format !== null && resultPubs[i].format !== undefined)
+                    filters.push(resultPubs[i].format);
 
-            if (resultSub === null)
-                return res.notfound('Cannot find directory', 'Sorry, but it looks like something went awry! Try <a href="http://elab.emerson.edu/research">going back</a> to research.');
+                if (resultPubs[i].keyword !== null && resultPubs[i].keyword !== undefined)
+                    filters.push(resultPubs[i].keyword);
 
-            locals.name = resultSub.name;
-            locals.lead = resultSub.description;
+                if (resultPubs[i].person !== null && resultPubs[i].person !== undefined)
+                    filters.push(resultPubs[i].person);
+            };
+            
+            locals.publications = resultPubs;
 
-            var categories = Publication.schema.paths.category.enumValues;
-            var subcategories = Publication.model.find({}).populate('subCategory');
-
-            subcategories.exec(function(err, resultPubs) {
-
-                locals.publications = {};
-                locals.authors = [];
-                locals.category = resultPubs;
-
-                var filteredAuthors = _.map(resultPubs, function(pub) {
-                    return pub.author;
-                });
-
-                _.each(filteredAuthors, function(author) {
-                    locals.authors.push(author);
-                    console.log(locals.authors);
-                });
-
-                locals.authors = _.uniq(locals.authors);
-
-                _.each(categories, function(category) {
-
-                    // Filter publication by their category
-                    var filteredPubs = resultPubs.filter(function(pub) {
-                        return pub.category == category;
-                    });
-
-                    if(category === 'Articles and Chapters') {
-                        // Sort articles by reverse chronological date
-                        filteredPubs = filteredPubs.sort(function(a, b) {
-                            return new Date(b.date) - new Date(a.date);
-                        });
-                    }
-
-                    _.map(filteredPubs, function(pub) {
-                        pub.href = '/publications/' + pub.key;
-                        return pub;
-                    });
-
-                    // Get any sub-sections
-                    var subSections = _.pluck(filteredPubs, 'subCategory');
-
-                    // Assemble publications along with applicable sections
-                    locals.publications[category] = {
-                        records: filteredPubs,
-                        isArticle: (category === 'Articles and Chapters')
+            locals.filters =
+                _
+                .chain(filters)
+                .groupBy('category')
+                .map(function(group, name) {
+                    return {
+                        key: name.toLowerCase().replace(' ', '-'),
+                        label: name,
+                        values: filter
+                                .map(function(category, catKey) { 
+                                    var key = category.key;
+                                    var name = category.name; 
+                                    return { "key": key,  "name": name }; 
+                                })
                     };
-                    
+                })
+                .value();
 
-                    // Assign subsections, if any
-                    if (subSections[0] !== null && subSections.length > 0)
-                        locals.publications[category].sub_sections =
-                            _.uniq(subSections);
-
-                });
-
-                next(err);
-            });
+            next(err);
         });
     });
 
