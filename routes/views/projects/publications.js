@@ -34,40 +34,43 @@ exports = module.exports = function(req, res) {
 
         publications.exec(function(err, resultPubs) {
 
-            console.log(resultPubs)
+            // console.log(resultPubs)
 
             var filters = [];
-            for(i = 0; i < resultPubs.length; i ++) {
-                console.log(resultPubs[i])
-                if (resultPubs[i].format !== null && resultPubs[i].format !== undefined)
-                    filters.push(resultPubs[i].format);
+            for(i = 0; i < resultPubs.length; i++) {
+                if (resultPubs[i].format !== null && resultPubs[i].format !== undefined){
+                    _.each(resultPubs[i].format, function(format) {
+                        filters.push(format);
+                    });
+                }
 
-                if (resultPubs[i].keyword !== null && resultPubs[i].keyword !== undefined)
-                    filters.push(resultPubs[i].keyword);
+                if (resultPubs[i].keyword !== null && resultPubs[i].keyword !== undefined){
+                    _.each(resultPubs[i].keyword, function(keyword) {
+                        filters.push(keyword);
+                    });
+                }
 
-                if (resultPubs[i].person !== null && resultPubs[i].person !== undefined)
-                    filters.push(resultPubs[i].person);
+                if (resultPubs[i].person !== null && resultPubs[i].person !== undefined) {
+                    _.each(resultPubs[i].person, function(person) {
+                        filters.push(person);
+                    });
+                }
             };
             
             locals.publications = resultPubs;
 
             locals.filters =
-                _
-                .chain(filters)
-                .groupBy('category')
-                .map(function(group, name) {
-                    return {
-                        key: name.toLowerCase().replace(' ', '-'),
-                        label: name,
-                        values: filter
-                                .map(function(category, catKey) { 
-                                    var key = category.key;
-                                    var name = category.name; 
-                                    return { "key": key,  "name": name }; 
-                                })
-                    };
-                })
-                .value();
+            _
+            .groupBy(filters, 'category');
+            locals.filters = 
+            _.map(locals.filters, function(group, filter) {
+                console.log(group, filter);
+                var grouping = {};
+                grouping[filter] = group;
+                console.log(grouping);
+                return grouping;
+            })
+            .value();
 
             next(err);
         });

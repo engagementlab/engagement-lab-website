@@ -23,7 +23,6 @@ var TamaComment = new keystone.List('TamaComment',
         hidden: true,
         // nocreate: true,
         // nodelete: true
-        track: true
     });
 
 /**
@@ -32,8 +31,7 @@ var TamaComment = new keystone.List('TamaComment',
  */
 TamaComment.add({
     author: { type: String, hidden: true, default: 50 },
-    content: { type: String, hidden: true, default: 100 },
-    createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
+    content: { type: String, hidden: true, default: 100 }
 });
 
 /**

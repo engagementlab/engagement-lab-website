@@ -24,7 +24,6 @@ var Person = new keystone.List('Person',
 		label: 'People',
 		singular: 'Team Member',
 		sortable: true,
-		track: true,
 		autokey: { path: 'key', from: 'name', unique: true }
 	});
 
@@ -56,10 +55,8 @@ Person.add({
 	websiteURL: { type: Types.Url, label: 'Website', note: 'This will display on the person\'s individual page' },	
 
 	email: { type: String, label: 'Email', note: 'This will display on the person\'s individual page' },
-	phone: { type: String, label: 'Phone', note: 'This will display on the person\'s individual page' },
+	phone: { type: String, label: 'Phone', note: 'This will display on the person\'s individual page' }
 	
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
-
 });
 
 /**

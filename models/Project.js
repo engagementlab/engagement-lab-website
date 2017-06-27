@@ -23,7 +23,6 @@ var slack = keystone.get('slack');
  */
 var Project = new keystone.List('Project', {
     inherits: Listing,
-    track: true,
     hidden: false
 });
 
@@ -42,6 +41,15 @@ var urlValidator = {
     },
     msg: 'Invalid link URL (e.g. needs http:// and .org/)'
 };
+
+// Storage adapter for Azure
+var azureFile = new keystone.Storage({
+  adapter: require('keystone-storage-adapter-azure'),
+  azure: {
+    container: 'elabproject',
+    generateFilename: keystone.Storage.originalFilename
+  }
+});
 
 /**
  * Model Fields

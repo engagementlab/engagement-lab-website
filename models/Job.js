@@ -23,7 +23,6 @@ var Job = new keystone.List('Job',
 	{
 		label: 'Jobs',
 		singular: 'Job',
-		track: true,
 		autokey: { from: 'title', path: 'key', unique: true }
 	});
 
@@ -33,8 +32,7 @@ var Job = new keystone.List('Job',
  */
 Job.add({
 	title: { type: String, label: "Title", required: true, initial: true, note: 'Will appear before the job description'},
-	description: { type: Types.Markdown, label: "Description", required: true, initial: true, note: 'This is the full description, including any and all relevant information about the job or its requirements'},
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
+	description: { type: Types.Markdown, label: "Description", required: true, initial: true, note: 'This is the full description, including any and all relevant information about the job or its requirements'}
 });
 
 /**

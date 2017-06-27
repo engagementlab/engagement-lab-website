@@ -23,7 +23,6 @@ var About = new keystone.List('About',
 	{
 		label: 'About Page',
 		singular: 'About Page',
-		track: true,
 		// nodelete: true,
 		nocreate: true
 	});
@@ -51,9 +50,8 @@ About.add({
 	collaborate: { type: Types.Textarea, label: "Collaborate With Us", required: true, note: 'The \'Collaborate With Us\' section begins with this text' },
 	studentsResearchers: { type: Types.Textarea, label: "Students and Researchers", required: true, note: 'First collaboration section text' },
 	// clientsConsulting: { type: Types.Textarea, label: "Clients and Consulting", required: true, note: 'Currently not appearing'},
-	partnerships: { type: Types.Textarea, label: "Community Based Partnerships", required: true, note: 'Second collaboration section text' },
+	partnerships: { type: Types.Textarea, label: "Community Based Partnerships", required: true, note: 'Second collaboration section text' }
 	
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
 });
 
 /**

@@ -24,7 +24,6 @@ var Quote = new keystone.List('Quote',
 		label: 'Quotes',
 		singular: 'Quote',
 		sortable: true,
-		track: true,
 		autokey: { path: 'key', from: 'name', unique: true }
 	});
 
@@ -42,10 +41,8 @@ Quote.add({
 		type: Types.Relationship, 
 		label: 'Author', 
 		ref: 'Person'
-	},
+	}
 	
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
-
 });
 
 /**

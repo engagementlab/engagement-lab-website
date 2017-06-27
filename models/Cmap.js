@@ -23,7 +23,6 @@ var Cmap = new keystone.List('Cmap',
 	{
 		label: 'CMAP Page',
 		singular: 'CMAP Page',
-		track: true,
 		nodelete: true,
 		nocreate: true
 	});
@@ -43,9 +42,8 @@ Cmap.add({
 		
 		curriculum: { type: String, label: "Curriculum", note: 'This is the text in the \'Curriculum\' section' },
 		structure: { type: Types.Markdown, label: "The Structure", note: 'This is the text in the \'The Structure\' section'  },
-		courses: { type: Types.Markdown, label: "Core Courses", note: 'This is the text in the \'Core Courses\' section' },
+		courses: { type: Types.Markdown, label: "Core Courses", note: 'This is the text in the \'Core Courses\' section' }
 		
-		createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
 	},
 	
 	'Core Elements of the CMAP Experience', {

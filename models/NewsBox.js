@@ -20,7 +20,6 @@ var validator = require('validator');
  * See: http://keystonejs.com/docs/database/#lists-options
  */
 var NewsBox = new keystone.List('NewsBox', {
-	track: true,
 	sortable: true
 });
 

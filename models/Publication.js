@@ -22,10 +22,18 @@ var slack = keystone.get('slack');
 var Publication = new keystone.List('Publication', 
 	{
 		sortable: true,
-		track: true,
 		map: { name: 'title' },
 		autokey: { path: 'key', from: 'title', unique: true }
 	});
+
+// Storage adapter for Azure
+var azureFile = new keystone.Storage({
+  adapter: require('keystone-storage-adapter-azure'),
+  azure: {
+    container: 'elabpublication',
+    generateFilename: keystone.Storage.originalFilename
+  }
+});
 
 /** 
 	* Caching fields for 'post' save hook
@@ -109,19 +117,11 @@ Publication.add({
 		// dependsOn: { category: ['Book', 'Guide'] }
 	},
 	file: {
-		type: Types.AzureFile,
+		type: Types.File,
 		label: 'File',
 		note: 'If uploaded, a downloadable link to the book or guide will be appear on the publication\'s individual page.',
-		// dependsOn: { category: ['Book', 'Guide'] }
-		filenameFormatter: function(item, filename) {
-			return item.key + require('path').extname(filename);
-		},
-		containerFormatter: function(item, filename) {
-			return 'elabpublication';
-		}
-	},
-
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
+		storage: azureFile
+	}
 });
 
 /**
@@ -138,18 +138,18 @@ Publication.schema.pre('save', function(next) {
 
 });
 
-Publication.schema.post('save', function(next) {
+// Publication.schema.post('save', function(next) {
 
-  var publication = this;
+//   var publication = this;
 
-  // Make a post to slack when this Publication is updated    
-  slack.Post(
-  	Publication.model, this, true, 
-  	function() { return publication.title; }
-  );
+//   // Make a post to slack when this Publication is updated    
+//   slack.Post(
+//   	Publication.model, this, true, 
+//   	function() { return publication.title; }
+//   );
 
 
-});
+// });
 
 /**
  * Model Registration
