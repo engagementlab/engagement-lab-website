@@ -72,6 +72,18 @@ Filters.schema.pre('remove', function(next) {
 
 });
 
+Filters.schema.statics.findFilter = function(resourceId, callback) {
+
+	console.log(resourceId);
+
+	Filters.model.findById(resourceId, function(err, result) {
+		console.log(result)
+
+		callback(err, result);
+	});
+
+};
+
 /**
  * Model Registration
  * =============

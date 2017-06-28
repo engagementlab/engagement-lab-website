@@ -38,11 +38,11 @@
 						
 			{{> footer}}
 
-			{{#ifeq env "development"}}
+			{{!-- {{#ifeq env "development"}} --}}
 				{{> script/development section=section subSection=sub_section}}
-			{{else}}
+			{{!-- {{else}}
 				{{> script/production section=section}}
-			{{/ifeq}}
+			{{/ifeq}} --}}
 
 			{{{isAdminEditorJS user}}}
 		</div>

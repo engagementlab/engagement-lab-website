@@ -13,6 +13,7 @@
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
 var slack = keystone.get('slack');
+var filter = keystone.list('Filter');
 
 /**
  * @module publication
@@ -73,7 +74,7 @@ Publication.add({
       many: true,
       initial: true
   },
-  format: {
+  form: {
       type: Types.Relationship,
       filters: {
           category: 'Format',
@@ -83,7 +84,7 @@ Publication.add({
       label: 'Format(s)',
       note: 'What kind of publication is this? A book? An article? Pick from here or add a new Format Filter and choose \'Publication\' for the destination.',
       required: true,
-      many: true,
+      many: false,
       initial: true
   }
 }, 'Publication Information', {
@@ -134,7 +135,18 @@ Publication.schema.pre('save', function(next) {
   this.wasNew = this.isNew;
   this.wasModified = this.isModified();
 
-  next();
+  console.log(this.form);
+
+  filter.model.findFilter(this.form, function(err, result) {
+    console.log(result);
+
+    if (result.name == 'Article')
+      this.isArticle = true;
+
+    console.log(this)
+
+    next();
+  });
 
 });
 

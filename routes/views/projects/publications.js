@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Engagement Lab Website
  * Developed by Engagement Lab, 2015
@@ -30,47 +31,41 @@ exports = module.exports = function(req, res) {
     // Load publications categories and sort them
     view.on('init', function(next) {
 
-        var publications = Publication.model.find({}).sort('-date').populate('format person keyword');
+        var pubQuery = Publication.model.find({}).sort('-date').populate('form person keyword');
 
-        publications.exec(function(err, resultPubs) {
+        pubQuery.exec(function(err, resultPubs) {
 
-            // console.log(resultPubs)
+            var publications = resultPubs;
 
             var filters = [];
-            for(i = 0; i < resultPubs.length; i++) {
-                if (resultPubs[i].format !== null && resultPubs[i].format !== undefined){
-                    _.each(resultPubs[i].format, function(format) {
-                        filters.push(format);
-                    });
+            for(var i = 0; i < publications.length; i++) {
+                if (publications[i].form !== null && publications[i].form !== undefined){
+                    filters.push(publications[i].form);
                 }
 
-                if (resultPubs[i].keyword !== null && resultPubs[i].keyword !== undefined){
-                    _.each(resultPubs[i].keyword, function(keyword) {
+                if (publications[i].keyword !== null && publications[i].keyword !== undefined){
+                    _.each(publications[i].keyword, function(keyword) {
                         filters.push(keyword);
                     });
                 }
 
-                if (resultPubs[i].person !== null && resultPubs[i].person !== undefined) {
-                    _.each(resultPubs[i].person, function(person) {
+                if (publications[i].person !== null && publications[i].person !== undefined) {
+                    _.each(publications[i].person, function(person) {
                         filters.push(person);
                     });
                 }
             };
             
-            locals.publications = resultPubs;
+            locals.publications = publications;
 
-            locals.filters =
-            _
-            .groupBy(filters, 'category');
-            locals.filters = 
-            _.map(locals.filters, function(group, filter) {
-                console.log(group, filter);
-                var grouping = {};
-                grouping[filter] = group;
-                console.log(grouping);
-                return grouping;
-            })
-            .value();
+            locals.filters = _.groupBy(filters, 'category');
+
+            locals.filters =  _.map(locals.filters, function(group, filter) {
+                                    group = _.uniq(group);
+                                    var grouping = {};
+                                    grouping[filter] = group;
+                                    return grouping;
+                                });
 
             next(err);
         });

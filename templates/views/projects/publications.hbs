@@ -26,17 +26,19 @@
 
 	<div class="row filters">
 		{{#each filters}}
-		<div class="btn-group clearfix">
-			<button id="author-{{key}}" class="syllabi-options btn btn-default dropdown-toggle" type="button" data-filter-group="{{label}}" data-toggle="dropdown">
-			<div class="button-text">{{label}} <span class="{{key}}-number filter-counter"> </span><span class="bigCaret"></span></div>
-			</button>
-			<ul class="dropdown-menu scrollable" role="menu">
-				<li><a id="authors-all" data-filter=""  href="#" data-filter-value="" data-filter-group="{{key}}" class="all-options option-authors">All Authors</a></li>
-				{{#each values}}
-				<li><a id="{{../key}}" value="#" href="#" data-filter-value=".{{key}}" data-filter-group="{{../key}}" class="option-{{../key}}">{{name}}</a></li>
-				{{/each}}
-			</ul>
-		</div>
+			{{#each this}}
+				<div class="btn-group clearfix">
+				<button id="button-group-{{@key}}" class="publication-options btn btn-default dropdown-toggle" type="button" data-filter-group="{{@key}}" data-toggle="dropdown">
+				<div class="button-text">{{@key}} <span class="{{@key}}-number filter-counter"> </span><span class="bigCaret"></span></div>
+				</button>
+				<ul class="dropdown-menu scrollable" role="menu">
+					<li><a id="{{@key}}:all" data-filter=""  href="#" data-filter-value="" data-filter-group="{{key}}" class="all-options option-authors">All {{@key}}</a></li>
+					{{#each this}}
+					<li><a id="{{category}}:{{key}}" value="#" href="#" data-filter-value=".{{key}}" data-filter-group="{{category}}" class="option-{{category}}">{{name}}</a></li>
+					{{/each}}
+				</ul>
+			</div>
+			{{/each}}
 		{{/each}}
 		<div class="btn-group clearfix">
 			<button class="syllabi-options clear-all btn btn-default dropdown-toggle" type="button" data-filter-value="">Reset</button>
@@ -46,10 +48,11 @@
 	{{#if publications}}
 		<div class="container">
 			{{#each publications}}
-				// <a id="{{trimPluralize @key}}" name="{{trimPluralize @key}}">&nbsp;</a>
+			{{{jsonPrint this}}}
+				<a id="{{@key}}" name="{{@key}}">&nbsp;</a>
 				<div class="row">
 					<div class="col-md-12">
-						// <h3>{{pluralize @key}}</h3>
+						<h3>{{@key}}</h3>
 						<div class="separator-5"></div>
 					</div>
 				</div>
@@ -60,9 +63,9 @@
 								<div class="col-md-12">
 									<div class="filters mb-40">
 										<ul class="nav nav-pills">
-											<li class="active"><a href="#" data-filter=".{{trim @key}}, .none">All</a></li>
+											<li class="active"><a href="#" data-filter=".{{@key}}, .none">All</a></li>
 											{{#each this.sub_sections}}
-											<li><a href="#" data-filter=".{{trim @key}}.{{key}}, .none">{{name}}</a></li>
+											<li><a href="#" data-filter=".{{@key}}.{{key}}, .none">{{name}}</a></li>
 											{{/each}}
 										</ul>
 									</div>
@@ -73,12 +76,14 @@
 				{{!-- filters end --}}
 						
 				{{#if this.isArticle}}
+				Article: {{this.isArticle}}
 				<div class="row">
 					{{#each records}}
 						{{> publications/list_item listing=this}}
 					{{/each}}
 				</div>
 				{{else}}
+				Not Article: {{this.isArticle}}
 				<div class="row">
 					{{#each records}}
 						{{> publications/grid_item listing=this}}
