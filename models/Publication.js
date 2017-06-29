@@ -122,7 +122,9 @@ Publication.add({
 		label: 'File',
 		note: 'If uploaded, a downloadable link to the book or guide will be appear on the publication\'s individual page.',
 		storage: azureFile
-	}
+	}, 
+
+  isArticle: { type: Boolean, hidden: true, noedit: true, default: false }
 });
 
 /**
@@ -137,13 +139,15 @@ Publication.schema.pre('save', function(next) {
 
   console.log(this.form);
 
+  var pub = this;
+  console.log(pub, " before change")
+
   filter.model.findFilter(this.form, function(err, result) {
-    console.log(result);
 
     if (result.name == 'Article')
-      this.isArticle = true;
+      pub.isArticle = true;
 
-    console.log(this)
+    console.log(pub, " after change")
 
     next();
   });

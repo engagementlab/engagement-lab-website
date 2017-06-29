@@ -31,6 +31,12 @@ exports = module.exports = function(req, res) {
     // Load publications categories and sort them
     view.on('init', function(next) {
 
+        var categorize = function(val, opt) {
+            return val.filter(function(item) {
+                return opt.indexOf(item.form.key) >= 0;
+            });
+        };
+
         var pubQuery = Publication.model.find({}).sort('-date').populate('form person keyword');
 
         pubQuery.exec(function(err, resultPubs) {
@@ -56,7 +62,14 @@ exports = module.exports = function(req, res) {
                 }
             };
             
-            locals.publications = publications;
+            var books = categorize(publications, ['book']);
+            var guides = categorize(publications, ['guide']);
+            var articles = categorize(publications, ['article', 'chapter']);
+
+            locals.publications = {};
+            locals.publications['Books'] = books;
+            locals.publications['Guides'] = guides;
+            locals.publications['Articles and Chapters'] = articles;
 
             locals.filters = _.groupBy(filters, 'category');
 

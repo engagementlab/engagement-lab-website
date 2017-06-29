@@ -28,7 +28,7 @@
 		{{#each filters}}
 			{{#each this}}
 				<div class="btn-group clearfix">
-				<button id="button-group-{{@key}}" class="publication-options btn btn-default dropdown-toggle" type="button" data-filter-group="{{@key}}" data-toggle="dropdown">
+				<button id="button-group-{{@key}}" class="filter-options btn btn-default dropdown-toggle" type="button" data-filter-group="{{@key}}" data-toggle="dropdown">
 				<div class="button-text">{{@key}} <span class="{{@key}}-number filter-counter"> </span><span class="bigCaret"></span></div>
 				</button>
 				<ul class="dropdown-menu scrollable" role="menu">
@@ -48,7 +48,6 @@
 	{{#if publications}}
 		<div class="container">
 			{{#each publications}}
-			{{{jsonPrint this}}}
 				<a id="{{@key}}" name="{{@key}}">&nbsp;</a>
 				<div class="row">
 					<div class="col-md-12">
@@ -56,40 +55,16 @@
 						<div class="separator-5"></div>
 					</div>
 				</div>
-				{{!-- filters start --}}
-					{{!-- 				
-						{{#if this.sub_sections}}
-							<div class="row">
-								<div class="col-md-12">
-									<div class="filters mb-40">
-										<ul class="nav nav-pills">
-											<li class="active"><a href="#" data-filter=".{{@key}}, .none">All</a></li>
-											{{#each this.sub_sections}}
-											<li><a href="#" data-filter=".{{@key}}.{{key}}, .none">{{name}}</a></li>
-											{{/each}}
-										</ul>
-									</div>
-								</div>
-							</div>
-						{{/if}} 
-					--}}
-				{{!-- filters end --}}
-						
-				{{#if this.isArticle}}
-				Article: {{this.isArticle}}
-				<div class="row">
-					{{#each records}}
-						{{> publications/list_item listing=this}}
-					{{/each}}
-				</div>
-				{{else}}
-				Not Article: {{this.isArticle}}
-				<div class="row">
-					{{#each records}}
-						{{> publications/grid_item listing=this}}
-					{{/each}}
-				</div>
-				{{/if}}
+				{{#each this}}
+					{{#ifeq this.isArticle true}}
+					<div class="row">
+							{{> publications/list_item listing=this}}
+					</div>
+					{{else}}
+							{{> publications/grid_item listing=this}}
+					{{/ifeq}}
+
+				{{/each}}
 
 			{{/each}}
 		</div>
