@@ -214,16 +214,39 @@
 
 		{{!-- SYLLABI Template Script --}}
 		{{#ifeq section 'publications'}}
-			
-			var formats = $('.dropdown-menu li .option-format').size();
-			var people = $('.dropdown-menu li .option-person').size();
-			var keywords = $('.dropdown-menu li .option-keyword').size();
 
-			$('span.format-number').html("(" + formats + ")");
-			$('span.person-number').text("(" + people + ")");
-			$('span.keyword-number').text("(" + keywords + ")");
+			var pubContainer = $('#publication-content');
+
+			setup();
+
+			function setup() {
+				var formats = $('.dropdown-menu li .option-format').size();
+				var people = $('.dropdown-menu li .option-person').size();
+				var keywords = $('.dropdown-menu li .option-keyword').size();
+
+				$('span.format-number').html("(" + formats + ")");
+				$('span.person-number').text("(" + people + ")");
+				$('span.keyword-number').text("(" + keywords + ")");
+
+				$('.listing').addClass('publication-item');
+
+				pubContainer.isotope({
+				    itemSelector: '.publication-item',
+				    isFitHeight: true,
+				    layoutMode: 'masonry'
+				});
+				// $('.isotopeContent').isotope('reloadItems').isotope();
+
+			}
+
+			
 
 			var filters = {};
+
+			$('.dropdown-menu li').click( function() {
+				console.log('clicked');
+			});
+
 			$('.dropdown-menu li').delegate('a','click', function() {
 				
 				$('.is-checked').removeClass('is-checked');
@@ -233,14 +256,6 @@
 				displayChecked(this);
 				checkFiltered ();
 			});
-
-			var pubContainer = $('#publication-content');
-			pubContainer.isotope({
-			    itemSelector: '.publication-item',
-			    isFitHeight: true,
-			    layoutMode: 'masonry'
-			});
-			$('.isotopeContent').isotope('reloadItems').isotope();
 
 			function displayChecked (elem) {
 
@@ -255,7 +270,7 @@
 			function checkFiltered () {
 				
 				var pubContainer = $('#publication-content');
-				if ( pubContainer.data('isotope').filteredItems.length === 0 )
+				if ( pubContainer.isotope('getFilteredItemElements').length === 0 )
 				  $('.no-publications-visible').show();
 				else
 					$('.no-publications-visible').hide();
@@ -277,13 +292,13 @@
 		    }
 		    			    
 		    var filterStr = isoFilters.join('');
-		    syllabiContainer.isotope({ filter: filterStr });
+		    pubContainer.isotope({ filter: filterStr });
 		  }
 
 			$(".clear-all").on('click', function(){
 				
 				filters = {};
-		    syllabiContainer.isotope({
+		    pubContainer.isotope({
 		        filter: '*'
 		    });
 					

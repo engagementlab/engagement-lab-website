@@ -22,6 +22,11 @@ body .scrollable {
   }
 }
 
+
+.dropdown-backdrop {
+  z-index: 0;
+}
+
 .filter-counter {
   font-weight: bold;
 }
@@ -80,7 +85,7 @@ body .filters {
 }
 
 body .dropdown-menu {
-  width:150px;
+  width:400px;
 
   li a {
     color: $gray-dark;

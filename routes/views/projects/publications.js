@@ -33,7 +33,8 @@ exports = module.exports = function(req, res) {
 
         var categorize = function(val, opt) {
             return val.filter(function(item) {
-                return opt.indexOf(item.form.key) >= 0;
+                if (item.form !== null && item.form !== undefined)
+                    return opt.indexOf(item.form.key) >= 0;
             });
         };
 
