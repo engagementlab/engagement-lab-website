@@ -227,10 +227,6 @@
 
 			var filters = {};
 
-			$('.dropdown-menu li').click( function() {
-				console.log('clicked');
-			});
-
 			$('.dropdown-menu li').delegate('a','click', function() {
 				
 				$('.is-checked').removeClass('is-checked');
@@ -255,15 +251,14 @@
 				var selector = $(elem);
 				var label = selector.attr('id');
 				var option = selector.html();
-				$(label).html (option + '<span class="bigCaret"></span>');
+				$('#' + label).html (option + '<span class="bigCaret"></span>');
 
 			}
 
 			function checkFiltered (container) {
-				
-				var filtered = 0;
-				filtered += container.items.length;
 
+				var filtered = $('.listing:visible').length;
+				
 				if ( filtered === 0 )
 				  $('.no-publications-visible').show();
 				else
@@ -283,15 +278,17 @@
 		    // convert object into array
 		    var isoFilters = [];
 		    for ( var prop in filters ) {
-		      isoFilters.push( filters[ prop ] )
+		      isoFilters.push( filters[ prop ] );
 		    }
 		    			    
 		    var filterStr = isoFilters.join('');
+		    
 		    _.each(pubContainer, function(container){
 					container.isotope({ filter: filterStr });
 					var $filtered = container.isotope({ filter: filterStr });
-					checkFiltered ($filtered.data('isotope'));
 				});
+
+		    checkFiltered ();
 
 		  }
 
