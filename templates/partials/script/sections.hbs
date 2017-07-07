@@ -215,31 +215,15 @@
 		{{!-- SYLLABI Template Script --}}
 		{{#ifeq section 'publications'}}
 
-			var pubContainer = $('#publication-content');
+			var pubContainer = [$('#books-content'), $('#guide-content'), $('#articles-and-chapters-content')];
 
-			setup();
+			var formats = $('.dropdown-menu li .option-format').size();
+			var people = $('.dropdown-menu li .option-person').size();
+			var keywords = $('.dropdown-menu li .option-keyword').size();
 
-			function setup() {
-				var formats = $('.dropdown-menu li .option-format').size();
-				var people = $('.dropdown-menu li .option-person').size();
-				var keywords = $('.dropdown-menu li .option-keyword').size();
-
-				$('span.format-number').html("(" + formats + ")");
-				$('span.person-number').text("(" + people + ")");
-				$('span.keyword-number').text("(" + keywords + ")");
-
-				$('.listing').addClass('publication-item');
-
-				pubContainer.isotope({
-				    itemSelector: '.publication-item',
-				    isFitHeight: true,
-				    layoutMode: 'masonry'
-				});
-				// $('.isotopeContent').isotope('reloadItems').isotope();
-
-			}
-
-			
+			$('span.format-number').html("(" + formats + ")");
+			$('span.person-number').text("(" + people + ")");
+			$('span.keyword-number').text("(" + keywords + ")");
 
 			var filters = {};
 
@@ -254,23 +238,33 @@
 
 				applyFilter(this);
 				displayChecked(this);
-				checkFiltered ();
 			});
+
+			_.each(pubContainer, function(container){
+				container.isotope({
+			    itemSelector: '.publication-item',
+			    isFitHeight: true,
+			    layoutMode: 'masonry', 
+			    filter: '*'
+				});
+			})
+			
 
 			function displayChecked (elem) {
 
 				var selector = $(elem);
 				var label = selector.attr('id');
-				var id = '#publication-' + label;
 				var option = selector.html();
-				$(id).html (option + '<span class="bigCaret"></span>');
+				$(label).html (option + '<span class="bigCaret"></span>');
 
 			}
 
-			function checkFiltered () {
+			function checkFiltered (container) {
 				
-				var pubContainer = $('#publication-content');
-				if ( pubContainer.isotope('getFilteredItemElements').length === 0 )
+				var filtered = 0;
+				filtered += container.items.length;
+
+				if ( filtered === 0 )
 				  $('.no-publications-visible').show();
 				else
 					$('.no-publications-visible').hide();
@@ -278,6 +272,7 @@
 			}
 		    
 	    function applyFilter(elem) {
+	    	var pubContainer = [$('#books-content'), $('#guides-content'), $('#articles-and-chapters-content')];
 				
 		    var selector = $(elem);
 		    
@@ -292,15 +287,22 @@
 		    }
 		    			    
 		    var filterStr = isoFilters.join('');
-		    pubContainer.isotope({ filter: filterStr });
+		    _.each(pubContainer, function(container){
+					container.isotope({ filter: filterStr });
+					var $filtered = container.isotope({ filter: filterStr });
+					checkFiltered ($filtered.data('isotope'));
+				});
+
 		  }
 
 			$(".clear-all").on('click', function(){
 				
 				filters = {};
-		    pubContainer.isotope({
-		        filter: '*'
-		    });
+		    _.each(pubContainer, function(container){
+					container.isotope({
+			        filter: '*'
+			    });
+				});
 					
 				$('.is-checked').removeClass('is-checked');
 				$('.all-options').addClass('is-checked');
