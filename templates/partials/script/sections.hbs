@@ -213,9 +213,102 @@
 		{{/ifeq}}
 
 		{{!-- SYLLABI Template Script --}}
-		{{#ifeq section 'syllabi'}}
+		{{#ifeq section 'publications'}}
+
+			var pubContainer = [$('#books-content'), $('#guide-content'), $('#articles-and-chapters-content')];
+
+			var formats = $('.dropdown-menu li .option-format').size();
+			var people = $('.dropdown-menu li .option-person').size();
+			var keywords = $('.dropdown-menu li .option-keyword').size();
+
+			$('span.format-number').html("(" + formats + ")");
+			$('span.person-number').text("(" + people + ")");
+			$('span.keyword-number').text("(" + keywords + ")");
+
+			var filters = {};
+
+			$('.dropdown-menu li').delegate('a','click', function() {
+				
+				$('.is-checked').removeClass('is-checked');
+				$(this).addClass('is-checked');
+
+				applyFilter(this);
+				displayChecked(this);
+			});
+
+			_.each(pubContainer, function(container){
+				container.isotope({
+			    itemSelector: '.publication-item',
+			    isFitHeight: true,
+			    layoutMode: 'masonry', 
+			    filter: '*'
+				});
+			})
 			
 
+			function displayChecked (elem) {
+
+				var selector = $(elem);
+				var label = selector.attr('id');
+				var option = selector.html();
+				$('#' + label).html (option + '<span class="bigCaret"></span>');
+
+			}
+
+			function checkFiltered (container) {
+
+				var filtered = $('.listing:visible').length;
+				
+				if ( filtered === 0 )
+				  $('.no-publications-visible').show();
+				else
+					$('.no-publications-visible').hide();
+
+			}
+		    
+	    function applyFilter(elem) {
+	    	var pubContainer = [$('#books-content'), $('#guides-content'), $('#articles-and-chapters-content')];
+				
+		    var selector = $(elem);
+		    
+		    // store filter value in object
+		    var group = selector.attr('data-filter-group');
+		    filters[group] = selector.attr('data-filter-value');
+		    
+		    // convert object into array
+		    var isoFilters = [];
+		    for ( var prop in filters ) {
+		      isoFilters.push( filters[ prop ] );
+		    }
+		    			    
+		    var filterStr = isoFilters.join('');
+		    
+		    _.each(pubContainer, function(container){
+					container.isotope({ filter: filterStr });
+					var $filtered = container.isotope({ filter: filterStr });
+				});
+
+		    checkFiltered ();
+
+		  }
+
+			$(".clear-all").on('click', function(){
+				
+				filters = {};
+		    _.each(pubContainer, function(container){
+					container.isotope({
+			        filter: '*'
+			    });
+				});
+					
+				$('.is-checked').removeClass('is-checked');
+				$('.all-options').addClass('is-checked');
+				$('.all-options').each(function(i, obj){
+					applyFilter(this);
+					displayChecked(this);
+				});
+
+			});
 		
 		{{/ifeq}}
 

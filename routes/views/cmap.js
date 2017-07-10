@@ -13,7 +13,6 @@
  * ==========
  */
 var keystone = require('keystone');
-var Academics = keystone.list('Academics');
 var Person = keystone.list('Person');
 var Project = keystone.list('Project');
 var Cmap = keystone.list('Cmap');
@@ -86,7 +85,6 @@ exports = module.exports = function(req, res) {
 
             // Get students
             Person.model.find({ 
-                'cmapPerson': true, 
                 'category': 'CMAP'
             })
             .sort([

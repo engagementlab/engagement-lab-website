@@ -5,6 +5,105 @@ html, body, .container {
   height: 100%;
 }
 
+body .scrollable {
+  max-height: 200px;
+  height: auto;
+  overflow-y:scroll;
+  // overflow-x:hidden;
+
+  &.dropdown-menu {
+    width: auto;
+  } 
+  li {
+    width: 100%;
+    a {
+      white-space: nowrap;
+    }
+  }
+}
+
+
+.dropdown-backdrop {
+  z-index: 0;
+}
+
+.filter-counter {
+  font-weight: bold;
+}
+
+button.filter-options {
+  width: auto;
+
+  .button-text {
+    width: 100%;
+    white-space: nowrap;
+
+  }
+
+}
+
+body .filters {
+  .btn-group {
+    margin-right: .5%;
+  }
+  .btn-group.open > btn.filter-options:active,
+  .btn-group.open > btn.filter-options:visited{
+    background-color: white;
+    border: 3px solid #85bbb2;
+    color: $gray-light;
+    box-shadow:none;
+  }
+
+  .filter-options{
+    background-color: white;
+    color: $gray-dark;
+    font-weight: bold;
+    border: 3px solid #85bbb2;
+  }
+
+  .btn.filter-options:hover,
+  .btn.filter-options:active,
+  .btn.filter-options:focus {
+    background-color: white;
+    border: 3px solid #85bbb2;
+    color: $gray-light;
+    box-shadow:none;
+  }
+
+  .btn.filter-options:selected {
+    color: $gray-dark;
+    background-color: white;
+    border: 3px solid #85bbb2;
+
+  }
+  .btn.filter-options:focus {
+    background-color: white;
+    border: 3px solid #85bbb2;
+    color: $gray-light;
+  }
+
+}
+
+// .no-publications-visible {
+//   display: none;
+//   min-height: 500px;
+  
+// }
+
+
+body .dropdown-menu {
+  width:400px;
+
+  li a {
+    color: $gray-dark;
+    background-color: #85bbb2;
+  }
+  li a:hover {
+    color: $gray-dark;
+    background-color: white;
+  }
+}
+
 // Vimeo embed
 .embed-container {
   position: relative;

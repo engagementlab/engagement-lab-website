@@ -15,6 +15,7 @@ var keystone = require('keystone');
 var About = keystone.list('About');
 var Partner = keystone.list('Partner');
 var _ = require('underscore');
+var Resource = keystone.list('Resource');
 
 exports = module.exports = function(req, res) {
 
@@ -53,7 +54,15 @@ exports = module.exports = function(req, res) {
 
             queryPartners.exec(function(err, resultPartners) {
                 locals.partners = resultPartners;
-                next(err);
+                
+                // Show the 3 most recently added articles
+                Resource.model.find({ type: 'article' }, {}, {
+                    sort: { date: -1 }
+                }).limit(3).exec(function(err, articleResult){
+                    if (err) throw err;
+                    locals.articles = articleResult;
+                    next(err);
+                });
             });
         });
     });

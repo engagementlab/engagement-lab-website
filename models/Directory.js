@@ -32,9 +32,8 @@ var Directory = new keystone.List('Directory',
  * @main Listing
  */
 Directory.add({
-	name: { type: String, label: 'Directory Name', required: true, initial: true, index: true },
-	lead: { type: String, label: 'Description', required: false, initial: true },
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
+	name: { type: String, label: 'Directory Name', required: true, initial: true, index: true, note: 'This is the name or title of the directory'},
+	lead: { type: String, label: 'Description', required: false, initial: true, note: 'This displays below the name/title' }
 });
 
 /**

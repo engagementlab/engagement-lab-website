@@ -23,7 +23,6 @@ var slack = keystone.get('slack');
  */
 var Project = new keystone.List('Project', {
     inherits: Listing,
-    track: true,
     hidden: false
 });
 
@@ -43,172 +42,228 @@ var urlValidator = {
     msg: 'Invalid link URL (e.g. needs http:// and .org/)'
 };
 
+// Storage adapter for Azure
+var azureFile = new keystone.Storage({
+  adapter: require('keystone-storage-adapter-azure'),
+  azure: {
+    container: 'elabproject',
+    generateFilename: keystone.Storage.originalFilename
+  }
+});
+
 /**
  * Model Fields
  * @main Project
  */
 Project.add({
 
-        subdirectory: {
-            type: Types.Relationship,
-            ref: 'Subdirectory',
-            required: true,
-            initial: true,
-            label: 'Subdirectory'
+    format: {
+        type: Types.Relationship,
+        ref: 'Filter',
+        filters: {
+            type: 'Format',
+            appears: 'Project'
         },
-        enabled: {
-            type: Types.Boolean,
-            label: 'Enabled'
-        },
-        featured: {
-            type: Types.Boolean,
-            label: 'Featured'
-        },
-        cmapProject: {
-            type: Types.Boolean,
-            label: "CMAP Project"
-        },
-        overview: {
-            type: Types.Markdown,
-            label: 'Project Narrative',
-            initial: true,
-            required: true
-        },
-        headerImage: {
-            type: Types.CloudinaryImage,
-            label: 'Header Image (large)',
-            folder: 'site/research/projects',
-            autoCleanup: true
-        },
-        sideImage: {
-            type: Types.CloudinaryImage,
-            label: 'Side Column Image (small)',
-            folder: 'site/research/projects',
-            autoCleanup: true,
-            note: 'Dimensions should be 360x360.'
-        }
+        label: 'Type/Format of Project', 
+        note: 'What kind of project is this? Choose from below or add a Format Filter and choose \'Project\' as its destination.'
     },
+    keyword: {
+        type: Types.Relationship,
+        ref: 'Filter',
+        filters: {
+            type: 'Keyword',
+            appears: 'Project'
+        },
+        label: 'Project Keywords', 
+        note: 'What kind of project is this? Choose from below or add a Keyword Filter and choose \'Project\' as its destination.'
+    },
+    person: {
+        type: Types.Relationship,
+        ref: 'Filter',
+        filters: {
+            type: 'Person'
+        },
+        label: 'Project People Filters', 
+        note: 'Who is on this project? Choose from below or add a Person Filter.'
+    },
+    enabled: {
+        type: Types.Boolean,
+        label: 'Enabled', 
+        note: 'Determines if this project appears on the live site.'
+    },
+    featured: {
+        type: Types.Boolean,
+        label: 'Featured', 
+        note: 'Determines if this project appears on the home page in the featured project slider.'
+    },
+    cmapProject: {
+        type: Types.Boolean,
+        label: "CMAP Project", 
+        note: 'Determines if this project appears on the CMAP page.'
+    },
+    overview: {
+        type: Types.Markdown,
+        label: 'Project Narrative',
+        initial: true,
+        required: true, 
+        note: 'Appears on the individual project page under \'About\''
+    },
+    headerImage: {
+        type: Types.CloudinaryImage,
+        label: 'Header Image (large)',
+        folder: 'site/research/projects',
+        autoCleanup: true, 
+        note: 'Appears at the top of the individual project page, behind the project name.'
+    },
+    sideImage: {
+        type: Types.CloudinaryImage,
+        label: 'Side Column Image (small)',
+        folder: 'site/research/projects',
+        autoCleanup: true,
+        note: 'Dimensions should be 360x360. Appears next to the project narrative on the individual project page. '
+    }
+},
 
-    'Project Information', {
+'Project Information', {
 
-        startDate: {
-            type: Date,
-            label: 'Project Start Date',
-            initial: true,
-            required: true
-        },
-        endDate: {
-            type: Date,
-            label: 'Project End Date'
-        },
-
-        investigatorPerson: {
-            type: String,
-            label: 'Principal Investigator'
-        },
-
-        managerPerson: {
-            type: String,
-            label: 'Project Manager'
-        },
-        
-        externalLinkUrl: {
-            type: Types.Url,
-            label: 'Project Website URL',
-            validate: urlValidator,
-            note: 'Must be in format "http://www.something.org"'
-        },
-        githubUrl: {
-            type: Types.Url,
-            label: 'Github URL',
-            validate: urlValidator,
-            note: 'Must be in format "http://www.something.org"'
-        }
-        /*executiveSummaryFile: {
-            type: Types.AzureFile,
-            label: 'Executive Summary Report',
-            filenameFormatter: function(item, filename) {
-                return item.key + require('path').extname(filename);
-            },
-            containerFormatter: function(item, filename) {
-                return 'resources';
-            }
-        }*/
+    startDate: {
+        type: Date,
+        label: 'Project Start Date',
+        initial: true,
+        required: true, 
+        note: 'Appears on the individual project page.'
+    },
+    endDate: {
+        type: Date,
+        label: 'Project End Date', 
+        note: 'Appears on the individual project page.'
 
     },
 
-    'Project Media', {
-        projectImages: {
-            type: Types.CloudinaryImages,
-            label: 'Project Images',
-            folder: 'site/research/projects',
-            autoCleanup: true
+    principalInvestigator: {
+        type: Types.Relationship,
+        ref: 'Filter',
+        filters: {
+            type: 'Person'
         },
-        projectImageCaptions: {
-            type: Types.TextArray,
-            label: 'Project Image Captions',
-            note: 'Each image specified above must have a caption'
-        },
-        // Resource model reference for videos
-        videos: {
-            type: Types.Relationship,
-            ref: 'Resource',
-            label: 'Project Videos',
-            filters: {
-                type: 'video'
-            },
-            many: true
-        },
-        // Resource model reference for files
-        files: {
-            type: Types.Relationship,
-            ref: 'Resource',
-            label: 'Project Files',
-            filters: {
-                type: 'file'
-            },
-            many: true
-        },
-        // Resource model reference for articles
-        articles: {
-            type: Types.Relationship,
-            ref: 'Resource',
-            label: 'External Articles',
-            filters: {
-                type: 'article'
-            },
-            many: true
-        },
-        // Resource model reference for articles
-        blogs: {
-            type: Types.Relationship,
-            ref: 'Resource',
-            label: 'Blog Posts',
-            filters: {
-                type: 'blog post'
-            },
-            many: true
-        }
+        label: 'Principal Investigator', 
+        note: 'Appears on the individual project page.'
+
     },
 
-    'Custom Project Tabs', {
-        customTabs: {
-            type: Types.Markdown,
-            label: 'Custom Tabs',
-            note: 'Each tab heading is designated by an <span class="btn-default btn-sm btn"><span></span>H1</span>, with body text below it'
+    managerPerson: {
+        type: String,
+        label: 'Project Manager',
+        note: 'Appears on the individual project page.'
+
+    },
+    
+    externalLinkUrl: {
+        type: Types.Url,
+        label: 'Project Website URL',
+        validate: urlValidator,
+        note: 'Must be in format "http://www.something.org" <br> Appears on the individual project page.'
+    },
+    githubUrl: {
+        type: Types.Url,
+        label: 'Github URL',
+        validate: urlValidator,
+        note: 'Must be in format "http://www.something.org" <br> Appears on the individual project page.'
+    }
+    /*executiveSummaryFile: {
+        type: Types.AzureFile,
+        label: 'Executive Summary Report',
+        filenameFormatter: function(item, filename) {
+            return item.key + require('path').extname(filename);
         },
-        tabHeadings: {
-            type: Types.TextArray,
-            label: 'Custom Tab Heading',
-            note: 'Please ensure each tab you add has corresponding text',
-            hidden: true
-        },
-        tabText: {
-            type: Types.TextArray,
-            label: 'Custom Tab Text',
-            hidden: true
+        containerFormatter: function(item, filename) {
+            return 'resources';
         }
-    });
+    }*/
+
+},
+
+'Project Media', {
+    projectImages: {
+        type: Types.CloudinaryImages,
+        label: 'Project Images',
+        folder: 'site/research/projects',
+        autoCleanup: true, 
+        note: 'Will appear in \'Images\' tab on individual project page.'
+    },
+    projectImageCaptions: {
+        type: Types.TextArray,
+        label: 'Project Image Captions',
+        note: 'Each image specified above must have a caption'
+    },
+    // Resource model reference for videos
+    videos: {
+        type: Types.Relationship,
+        ref: 'Resource',
+        label: 'Project Videos',
+        filters: {
+            type: 'video'
+        },
+        many: true,
+        note: 'Will appear in \'Videos\' tab on individual project page.'
+
+    },
+    // Resource model reference for files
+    files: {
+        type: Types.Relationship,
+        ref: 'Resource',
+        label: 'Project Files',
+        filters: {
+            type: 'file'
+        },
+        many: true,
+        note: 'Will appear in \'Resources\' tab on individual project page.'
+
+    },
+    // Resource model reference for articles
+    articles: {
+        type: Types.Relationship,
+        ref: 'Resource',
+        label: 'External Articles',
+        filters: {
+            type: 'article'
+        },
+        many: true,
+        note: 'Will appear in \'News\' section on individual project page.'
+
+    },
+    // Resource model reference for articles
+    blogs: {
+        type: Types.Relationship,
+        ref: 'Resource',
+        label: 'Blog Posts',
+        filters: {
+            type: 'blog post'
+        },
+        many: true,
+        note: 'Will appear in \'News\' section on individual project page.'
+
+    }
+},
+
+'Custom Project Tabs', {
+    customTabs: {
+        type: Types.Markdown,
+        label: 'Custom Tabs',
+        note: 'Each tab heading is designated by an <span class="btn-default btn-sm btn"><span></span>H1</span>, with body text below it'
+    },
+    tabHeadings: {
+        type: Types.TextArray,
+        label: 'Custom Tab Heading',
+        note: 'Please ensure each tab you add has corresponding text',
+        hidden: true
+    },
+    tabText: {
+        type: Types.TextArray,
+        label: 'Custom Tab Text',
+        hidden: true
+    }
+});
 
 /**
  * Methods

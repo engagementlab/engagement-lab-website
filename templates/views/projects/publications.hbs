@@ -23,48 +23,55 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="row filters">
+		{{#each filters}}
+			{{#each this}}
+				<div class="btn-group clearfix">
+				<button id="button-group-{{combine @key}}" class="filter-options btn btn-default dropdown-toggle" type="button" data-filter-group="{{combine @key}}" data-toggle="dropdown">
+				<div class="button-text">{{@key}} <span class="{{combine @key}}-number filter-counter"> </span><span class="bigCaret"></span></div>
+				</button>
+				<ul class="dropdown-menu scrollable" role="menu">
+					<li><a id="{{combine @key}}:all" data-filter=""  href="#" data-filter-value="" data-filter-group="{{combine @key}}" class="all-options option-authors">All {{@key}}</a></li>
+					{{#each this}}
+					<li><a id="{{combine category}}:{{combine key}}" value="#" href="#" data-filter-value=".{{key}}" data-filter-group="{{combine category}}" class="option-{{combine category}}">{{name}}</a></li>
+					{{/each}}
+				</ul>
+			</div>
+			{{/each}}
+		{{/each}}
+		<div class="btn-group clearfix">
+			<button class="filter-options clear-all btn btn-default dropdown-toggle" type="button" data-filter-value="">Reset</button>
+		</div>
+	</div>
+
+	<div class="no-publications-visible">
+		<h2>No Publications match those categories!</h2>
+	</div>
+
 	{{#if publications}}
 		<div class="container">
 			{{#each publications}}
-				<a id="{{trimPluralize @key}}" name="{{trimPluralize @key}}">&nbsp;</a>
+				<a id="{{{combine @key}}}" name="{{@key}}">&nbsp;</a>
 				<div class="row">
 					<div class="col-md-12">
-						<h3>{{pluralize @key}}</h3>
+						<h3>{{@key}}</h3>
 						<div class="separator-5"></div>
 					</div>
 				</div>
-				{{!-- filters start --}}
-					{{!-- 				
-						{{#if this.sub_sections}}
-							<div class="row">
-								<div class="col-md-12">
-									<div class="filters mb-40">
-										<ul class="nav nav-pills">
-											<li class="active"><a href="#" data-filter=".{{trim @key}}, .none">All</a></li>
-											{{#each this.sub_sections}}
-											<li><a href="#" data-filter=".{{trim @key}}.{{key}}, .none">{{name}}</a></li>
-											{{/each}}
-										</ul>
-									</div>
-								</div>
-							</div>
-						{{/if}} 
-					--}}
-				{{!-- filters end --}}
-						
-				{{#if this.isArticle}}
-				<div class="row">
-					{{#each records}}
-						{{> publications/list_item listing=this}}
-					{{/each}}
+
+				<div id="{{combine @key}}-content" class="isotopeContent">
+				{{#each this}}
+					{{#ifeq this.isArticle true}}
+					<div class="row">
+							{{> publications/list_item listing=this}}
+					</div>
+					{{else}}
+							{{> publications/grid_item listing=this}}
+					{{/ifeq}}
+
+				{{/each}}
 				</div>
-				{{else}}
-				<div class="row">
-					{{#each records}}
-						{{> publications/grid_item listing=this}}
-					{{/each}}
-				</div>
-				{{/if}}
 
 			{{/each}}
 		</div>

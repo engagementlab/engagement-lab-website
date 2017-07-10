@@ -22,7 +22,6 @@ var Academics = new keystone.List('Academics',
 	{
 		label: 'Academics Page',
 		singular: 'Academics Page',
-		track: true,
 		nodelete: true,
 		nocreate: true
 	});
@@ -33,9 +32,8 @@ var Academics = new keystone.List('Academics',
  */
 Academics.add({
 	intro: { type: Types.Textarea, label: 'Intro Text', required: true, initial: true, index: true },
-	logo: { type: Types.CloudinaryImage, label: 'Image', folder: 'site/academics' },	
+	logo: { type: Types.CloudinaryImage, label: 'Image', folder: 'site/academics' }
 	
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
 });
 
 /**

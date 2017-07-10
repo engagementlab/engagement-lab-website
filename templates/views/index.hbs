@@ -57,29 +57,38 @@
 					</div>
 				</section>
 			{{/if}}
-			{{#if featured_projects}}
-				<section class="featured-projects">
 
-					{{!-- Glider.js structure --}}
-					<div id="featured_glider" class="glide">
+			
+			<section class="news-container">
+				<div class="container-fluid no-gutter">
 
-					    <div class="glide__arrows">
-					        <button class="glide__arrow prev" data-glide-dir="<"></button>
-					        <button class="glide__arrow next" data-glide-dir=">"></button>
-					    </div>
-
-					    <div class="glide__wrapper">
-					        <ul class="glide__track" style="margin-left:-40px">
-								{{#each featured_projects}}
-									<li class="glide__slide">{{> index/featured_project project=this}}</li>
-								{{/each}}
-					        </ul>
-					    </div>
-
+					<div class="col-md-8 ph-30 blog-feed">
+						<h1 class="page-title mb-10">Newsletter</h1>
+						<div class="separator-5"></div>
+						<div class="clearfix mb-10"></div>
+						Sign up!
 					</div>
-					
-				</section>
-			{{/if}}
+
+					<div class="col-md-4 ph-30 news-sidebar" >
+						<div class="affix-section">
+							<div id="event-section">
+								{{#if twitter.tweets}}
+									<h1 class="page-title mb-10">@{{twitter.user}}</h1>
+									<div class="separator-5"></div>
+									<div class="clearfix mb-10"></div>
+									<ul class="twitter-feed">
+									{{#each twitter.tweets}}
+										<li class="tweet"><p class="small">{{{this.text}}}</p></li>
+									{{/each}}
+										<li class="tweet"><a href="https://twitter.com/{{twitter.user}}">More from @{{twitter.user}} <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+									</ul>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
 		</div> <!-- .main -->
 	</div> <!-- .row -->
 </div> <!-- .container-fluid -->

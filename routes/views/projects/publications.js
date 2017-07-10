@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Engagement Lab Website
  * Developed by Engagement Lab, 2015
@@ -30,62 +31,57 @@ exports = module.exports = function(req, res) {
     // Load publications categories and sort them
     view.on('init', function(next) {
 
-        var querySub = Subdirectory.model.findOne({key: 'publications'});
-
-        querySub.exec(function(err, resultSub) {
-
-            if (resultSub === null)
-                return res.notfound('Cannot find directory', 'Sorry, but it looks like something went awry! Try <a href="http://elab.emerson.edu/research">going back</a> to research.');
-
-            locals.name = resultSub.name;
-            locals.lead = resultSub.description;
-
-            var categories = Publication.schema.paths.category.enumValues;
-            var subcategories = Publication.model.find({}).populate('subCategory');
-
-            subcategories.exec(function(err, resultPubs) {
-
-                locals.publications = {};
-                locals.category = resultPubs;
-
-                _.each(categories, function(category) {
-
-                    // Filter publication by their category
-                    var filteredPubs = resultPubs.filter(function(pub) {
-                        return pub.category == category;
-                    });
-                    
-                    if(category === 'Articles and Chapters') {
-                        // Sort articles by reverse chronological date
-                        filteredPubs = filteredPubs.sort(function(a, b) {
-                            return new Date(b.date) - new Date(a.date);
-                        });
-                    }
-
-                    _.map(filteredPubs, function(pub) {
-                        pub.href = '/publications/' + pub.key;
-                        return pub;
-                    });
-
-                    // Get any sub-sections
-                    var subSections = _.pluck(filteredPubs, 'subCategory');
-
-                    // Assemble publications along with applicable sections
-                    locals.publications[category] = {
-                        records: filteredPubs,
-                        isArticle: (category === 'Articles and Chapters')
-                    };
-                    
-
-                    // Assign subsections, if any
-                    if (subSections[0] !== null && subSections.length > 0)
-                        locals.publications[category].sub_sections =
-                            _.uniq(subSections);
-
-                });
-
-                next(err);
+        var categorize = function(val, opt) {
+            return val.filter(function(item) {
+                if (item.form !== null && item.form !== undefined)
+                    return opt.indexOf(item.form.key) >= 0;
             });
+        };
+
+        var pubQuery = Publication.model.find({}).sort('-date').populate('form person keyword');
+
+        pubQuery.exec(function(err, resultPubs) {
+
+            var publications = resultPubs;
+
+            var filters = [];
+            for(var i = 0; i < publications.length; i++) {
+                if (publications[i].form !== null && publications[i].form !== undefined){
+                    filters.push(publications[i].form);
+                }
+
+                if (publications[i].keyword !== null && publications[i].keyword !== undefined){
+                    _.each(publications[i].keyword, function(keyword) {
+                        filters.push(keyword);
+                    });
+                }
+
+                if (publications[i].person !== null && publications[i].person !== undefined) {
+                    _.each(publications[i].person, function(person) {
+                        filters.push(person);
+                    });
+                }
+            };
+            
+            var books = categorize(publications, ['book']);
+            var guides = categorize(publications, ['guide']);
+            var articles = categorize(publications, ['article', 'chapter']);
+
+            locals.publications = {};
+            locals.publications['Books'] = books;
+            locals.publications['Guides'] = guides;
+            locals.publications['Articles and Chapters'] = articles;
+
+            locals.filters = _.groupBy(filters, 'category');
+
+            locals.filters =  _.map(locals.filters, function(group, filter) {
+                                    group = _.uniq(group);
+                                    var grouping = {};
+                                    grouping[filter] = group;
+                                    return grouping;
+                                });
+
+            next(err);
         });
     });
 

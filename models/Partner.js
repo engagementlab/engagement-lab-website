@@ -24,7 +24,6 @@ var Partner = new keystone.List('Partner',
 	{
 		sortable: true,
 		hidden: false,
-	    track: true,
 		inherits: Listing
 	});
 

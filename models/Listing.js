@@ -22,7 +22,6 @@ var slack = keystone.get('slack');
 var Listing = new keystone.List('Listing', {
     hidden: true,
     sortable: true,
-    track: true,
     autokey: {
         path: 'key',
         from: 'name',
@@ -61,14 +60,8 @@ Listing.add({
         type: Types.CloudinaryImage,
         label: 'Thumbnail Image',
         folder: 'site/listings',
-        autoCleanup: true
-    },
-
-    createdAt: {
-        type: Date,
-        default: Date.now,
-        noedit: true,
-        hidden: true
+        autoCleanup: true, 
+        note: 'This displays as the grid listing image/thumbnail on its respective page.'
     }
 });
 

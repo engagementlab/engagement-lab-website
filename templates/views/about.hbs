@@ -26,6 +26,24 @@
 				{{> page/name name=about.missionStatement}}
 				{{> about/first_paragraph text=about.process}}
 			</div>
+			{{!-- features --}}
+			<h3 class="page-title">Featured Press and Announcements</h3>
+			<div class="separator-5 mb-20"></div>
+			
+			{{!-- featured start --}}
+			{{#if articles}}
+				{{#each articles}}
+					<div class="media margin-clear">
+						<div class="media-body">
+							<h6 class="media-heading"><a href="{{url}}">{{name}}</a></h6>
+							<p class="small margin-clear">{{summary}}</p>
+						</div>
+					</div>
+					<br>
+				{{/each}}
+				<p><a href="/press">More press and announcements <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>
+			{{/if}}
+			{{!-- featured end --}}
 		</div>
 	</div>
 </section>
@@ -72,9 +90,17 @@
 		<div class="row">
 			<div class="col-sm-8 col-md-6">
 			<div class="collaborators">
-				{{> about/collaborator title="Students and Researchers" text="The Engagement Lab is always looking for exemplary students. Emerson undergraduates can work on directed studies with lab faculty, or apply for lab assistantships. We are accepting applications for our 1-year MA program in Civic Media Art and Practice (CMAP), which is housed in the lab and offers the opportunity to work on projects with faculty and staff." icon="arrows"}}
+				{{> about/collaborator 
+					title="Students and Researchers" 
+					text=about.studentsResearchers
+					icon="arrows"
+				}}
 				{{!-- {{> about/collaborator title="Clients and Consulting" text="With full time faculty fellows and a new graduate program, there are plenty of educational opportunities" icon="bullhorn"}} --}}
-				{{> about/collaborator title="Community Based Partnerships" text="The Engagement Lab is dedicated to fostering meaningful and mutual relationships with organizations or individuals committed to positive social impact. Partnership opportunities include: graduate studio courses, specific design or research projects, workshops or organizational capacity building." icon="briefcase"}}
+				{{> about/collaborator 
+					title="Community Based Partnerships" 
+					text=about.partnerships
+					icon="briefcase"
+				}}
 				</div>
 			</div>
 			<div class="col-sm-4 col-md-6">
