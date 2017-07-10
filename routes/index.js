@@ -79,9 +79,11 @@ exports = module.exports = function(app) {
         res.redirect('https://www.communityplanit.org/bostonclimate/');
     });
     app.all('/api/cpi/register', keystone.middleware.api, routes.api.communityplanit.create);
-    
-    // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
-    // app.get('/protected', middleware.requireUser, routes.views.protected);
+
+    // Participatory Pokémon Go redirect
+    app.all('/pokemon', function(req, res, next) {
+        res.redirect('https://elab.us.launchpad6.com/');
+    });
 
     // Redirect projects to /all
     app.get('/projects/', function(req, res, next) {
