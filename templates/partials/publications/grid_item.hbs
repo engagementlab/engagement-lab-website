@@ -9,7 +9,7 @@
 * ==========
 */
 --}}
-<div class="col-sm-6 col-lg-4 listing publication-item {{#each listing.person}}{{listing.person.key}} {{/each}}{{#each listing.keyword}}{{listing.keyword.key}} {{/each}} {{listing.form.key}}">
+<div class="col-sm-6 col-lg-4 listing publication-item {{#each listing.person}}{{this.key}} {{/each}}{{#each listing.keyword}}{{this.key}} {{/each}} {{listing.form.key}}">
 	<a href="{{listing.href}}">
 		<div class="image-box style-2 mb-20 book-box">
 			<div class="overlay-container overlay-visible">

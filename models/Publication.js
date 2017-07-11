@@ -69,7 +69,7 @@ Publication.add({
       },
       ref: 'Filter',
       label: 'Author(s)',
-      note: 'Who wrote this publication? Pick from here or add a new Person Filter.',
+      note: 'Is there a faculty member associated with this publication? Pick them from this list or add as a \'Person\' filter',
       required: true,
       many: true,
       initial: true
@@ -146,10 +146,12 @@ Publication.schema.pre('save', function(next) {
 
     if (result.name == 'Article')
       pub.isArticle = true;
+    else 
+      pub.isArticle = false;
 
     console.log(pub, " after change")
 
-    next();
+    next(err);
   });
 
 });

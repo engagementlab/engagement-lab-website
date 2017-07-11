@@ -52,11 +52,13 @@
 	{{#if publications}}
 		<div class="container">
 			{{#each publications}}
-				<a id="{{{combine @key}}}" name="{{@key}}">&nbsp;</a>
-				<div class="row">
-					<div class="col-md-12">
-						<h3>{{@key}}</h3>
-						<div class="separator-5"></div>
+				<div id="{{{combine @key}}}">
+					<a name="{{@key}}">&nbsp;</a>
+					<div class="row">
+						<div class="col-md-12">
+							<h3>{{@key}}</h3>
+							<div class="separator-5"></div>
+						</div>
 					</div>
 				</div>
 

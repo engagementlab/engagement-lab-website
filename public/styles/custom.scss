@@ -43,6 +43,7 @@ button.filter-options {
 }
 
 body .filters {
+  padding: 0px 60px;
   .btn-group {
     margin-right: .5%;
   }
@@ -84,11 +85,11 @@ body .filters {
 
 }
 
-// .no-publications-visible {
-//   display: none;
-//   min-height: 500px;
+.no-publications-visible {
+  display: none;
+  min-height: 500px;
   
-// }
+}
 
 
 body .dropdown-menu {
@@ -678,7 +679,6 @@ section.publications .subSection {
 }
 
 .listing {
-  width: 80%;
   float: left;
 }
 

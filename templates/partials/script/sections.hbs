@@ -216,6 +216,7 @@
 		{{#ifeq section 'publications'}}
 
 			var pubContainer = [$('#books-content'), $('#guide-content'), $('#articles-and-chapters-content')];
+			var filtered = 0;
 
 			var formats = $('.dropdown-menu li .option-format').size();
 			var people = $('.dropdown-menu li .option-person').size();
@@ -255,18 +256,30 @@
 
 			}
 
-			function checkFiltered (container) {
+			function checkFiltered (num, container) {
 
-				var filtered = $('.listing:visible').length;
+				if (num === 0) {
+					container = container.attr('id').replace('-content', '');
+					$('#' + container).hide();
+				} else {
+					container = container.attr('id').replace('-content', '');
+					$('#' + container).show();
+				}
+
+				filtered += num;
 				
-				if ( filtered === 0 )
+				if ( filtered === 0 ) {
 				  $('.no-publications-visible').show();
-				else
+				} else {
 					$('.no-publications-visible').hide();
+				}
 
 			}
 		    
 	    function applyFilter(elem) {
+
+	    	filtered = 0;
+
 	    	var pubContainer = [$('#books-content'), $('#guides-content'), $('#articles-and-chapters-content')];
 				
 		    var selector = $(elem);
@@ -284,11 +297,11 @@
 		    var filterStr = isoFilters.join('');
 		    
 		    _.each(pubContainer, function(container){
-					container.isotope({ filter: filterStr });
 					var $filtered = container.isotope({ filter: filterStr });
+					// container.isotope({ filter: filterStr });
+					var num = $filtered.isotope('getFilteredItemElements').length;
+					checkFiltered(num, container);   
 				});
-
-		    checkFiltered ();
 
 		  }
 

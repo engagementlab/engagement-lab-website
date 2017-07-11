@@ -33,8 +33,8 @@ var About = new keystone.List('About',
  */
 About.add({
 	name: { type: String, default: "About Page", hidden: true, required: true, initial: true },
-	missionStatement: { type: Types.Textarea, label: "Mission Statement", required: true, note: 'This will appear as the first line of large text on the About page.' },
-	process: { type: Types.Textarea, label: "Process and Approach", required: true, note: 'This will appear directly below the mission statement' },
+	aboutUs: { type: Types.Markdown, label: "About Us Section", required: true, note: 'This will appear directly below the About page video.' },
+	ourWork: { type: Types.Markdown, label: "Our Work Section", required: true, note: 'This will appear directly below the mission statement.' },
 
 	history1: { type: Types.Textarea, label: "History Paragraph 1", required: true, note: 'First (required) paragraph -- The FIRST 3 History images will appear below this text'},
 	history2: { type: Types.Textarea, label: "History Paragraph 2", required: true, note: 'Second (required) paragraph -- The LAST 3 History images will appear below this text' },

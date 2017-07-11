@@ -23,14 +23,17 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				{{> page/name name=about.missionStatement}}
-				{{> about/first_paragraph text=about.process}}
+				{{> page/name name='About Us'}}
+				{{> about/first_paragraph text=about.aboutUs.html}}
 			</div>
-			{{!-- features --}}
-			<h3 class="page-title">Featured Press and Announcements</h3>
+			<div class="col-md-12">
+				{{> page/name name='Our Work'}}
+				{{> about/first_paragraph text=about.ourWork.html}}
+			</div>
+		{{!-- features --}}
+			{{!-- 	<h3 class="page-title">Featured Press and Announcements</h3>
 			<div class="separator-5 mb-20"></div>
 			
-			{{!-- featured start --}}
 			{{#if articles}}
 				{{#each articles}}
 					<div class="media margin-clear">
@@ -42,8 +45,7 @@
 					<br>
 				{{/each}}
 				<p><a href="/press">More press and announcements <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>
-			{{/if}}
-			{{!-- featured end --}}
+			{{/if}} --}}
 		</div>
 	</div>
 </section>
