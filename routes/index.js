@@ -80,13 +80,16 @@ router.get('/press', routes.views.press);
 router.all('/tamagagement', routes.views.tamagagement);
 
 // CommunityPlanIt redirect (boston.communityplanit.org)
-router.all('/climatesmartboston', function(req, res, next) {
+app.all('/climatesmartboston', function(req, res, next) {
     res.redirect('https://www.communityplanit.org/bostonclimate/');
 });
-router.all('/api/cpi/register', keystone.middleware.api, routes.api.communityplanit.create);
+app.all('/api/cpi/register', keystone.middleware.api, routes.api.communityplanit.create);
 
-// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
-// router.get('/protected', middleware.requireUser, routes.views.protected);
+// Participatory Pokémon Go redirect
+app.all('/pokemon', function(req, res, next) {
+    res.redirect('https://elab.us.launchpad6.com/');
+});
+
 
 // Redirect projects to /all
 router.get('/projects/', function(req, res, next) {
