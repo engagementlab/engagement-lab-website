@@ -58,6 +58,29 @@
 				</section>
 			{{/if}}
 
+			{{#if featured_projects}}
+				<section class="featured-projects">
+
+					{{!-- Glider.js structure --}}
+					<div id="featured_glider" class="glide">
+
+						<div class="glide__arrows">
+				        <button class="glide__arrow prev" data-glide-dir="<"></button>
+				        <button class="glide__arrow next" data-glide-dir=">"></button>
+				    </div>
+
+				    <div class="glide__wrapper">
+				        <ul class="glide__track" style="margin-left:-40px">
+							{{#each featured_projects}}
+								<li class="glide__slide">{{> index/featured_project project=this}}</li>
+							{{/each}}
+				        </ul>
+				    </div>
+
+				</section>
+			{{/if}}
+
+{{!-- 
 			
 			<section class="news-container">
 				<div class="container-fluid no-gutter">
@@ -88,7 +111,7 @@
 					</div>
 
 				</div>
-			</section>
+			</section> --}}
 		</div> <!-- .main -->
 	</div> <!-- .row -->
 </div> <!-- .container-fluid -->
