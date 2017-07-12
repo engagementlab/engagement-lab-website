@@ -38,8 +38,18 @@ Person.add({
 
 	title: { type: String, label: 'Title',
 		dependsOn: { category: ['faculty leadership', 'staff', 'faculty fellows', 'lab assistants'] }, initial: true, note: 'This appears below the name.' },
-	cohort: { type: String, label: 'Year(s)',
-		dependsOn: { category: ['CMAP', 'advisory board'] }, initial: true, note: 'This field is for students and board members, and will display below the title.'},
+	cohortYear: { 
+		type: Types.Relationship, 
+		label: 'Year(s)',
+		dependsOn: { category: ['CMAP', 'advisory board'] },
+		ref: 'Filter',
+		filters: {
+      category: 'Cohort'
+    }, 
+    initial: true, 
+    required: true,
+    note: 'This field is for students and board members, and will display below the title.'
+  },
 	project: { type: Types.Markdown, label: 'Project Description', 
 		dependsOn: { category: ['CMAP', 'advisory board'] }, note: 'This field is for students and board members, and will display beneath the regular bio text on the person\'s individual page.'},
 	
@@ -76,12 +86,12 @@ Person.schema.pre('save', function(next) {
 Person.schema.post('save', function(next) {
 
     // Make a post to slack when this Person is updated
-    var person = this;
+    // var person = this;
     
-    slack.Post(
-    	Person.model, this, true, 
-    	function() { return person.name.first + ' ' + person.name.last; }
-    );
+    // slack.Post(
+    // 	Person.model, this, true, 
+    // 	function() { return person.name.first + ' ' + person.name.last; }
+    // );
 
 });
 

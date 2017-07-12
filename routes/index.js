@@ -80,13 +80,13 @@ router.get('/press', routes.views.press);
 router.all('/tamagagement', routes.views.tamagagement);
 
 // CommunityPlanIt redirect (boston.communityplanit.org)
-app.all('/climatesmartboston', function(req, res, next) {
+router.all('/climatesmartboston', function(req, res, next) {
     res.redirect('https://www.communityplanit.org/bostonclimate/');
 });
-app.all('/api/cpi/register', keystone.middleware.api, routes.api.communityplanit.create);
+router.all('/api/cpi/register', keystone.middleware.api, routes.api.communityplanit.create);
 
 // Participatory Pokémon Go redirect
-app.all('/pokemon', function(req, res, next) {
+router.all('/pokemon', function(req, res, next) {
     res.redirect('https://elab.us.launchpad6.com/');
 });
 

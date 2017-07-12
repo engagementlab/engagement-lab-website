@@ -156,18 +156,6 @@ Publication.schema.pre('save', function(next) {
 
 });
 
-// Publication.schema.post('save', function(next) {
-
-//   var publication = this;
-
-//   // Make a post to slack when this Publication is updated    
-//   slack.Post(
-//   	Publication.model, this, true, 
-//   	function() { return publication.title; }
-//   );
-
-
-// });
 
 /**
  * Model Registration

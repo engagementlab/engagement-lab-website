@@ -27,13 +27,23 @@ exports = module.exports = function(req, res) {
 
         var q = Person.model.find({}).sort([
             ['sortOrder', 'ascending']
-        ]);
+        ]).populate('cohortYear');
+
         var categorize = function(val, cat) {
             return val.filter(function(item) {
                 return item.category == cat;
             });
         };
-
+        var cohort = function(val, cat) {
+            return val.filter(function(item) {
+                console.log(item.cohortYear[cat])
+                if (!item.cohortYear[cat])
+                    return;
+                else 
+                    return item.cohortYear[cat] == true;
+            });
+        };
+        
         // Setup the locals to be used inside view
         q.exec(function(err, result) {
 
@@ -44,6 +54,15 @@ exports = module.exports = function(req, res) {
             locals.labassistants = categorize(result, 'lab assistants');
             locals.cmap = categorize(result, 'CMAP');
             locals.alumni = categorize(result, 'alumni');
+
+            locals.currentCohort = cohort(locals.cmap, 'current');
+            locals.prevCohort = cohort(locals.cmap, 'previous');
+
+            if (locals.currentCohort.length > 0)
+                locals.currentYear = locals.currentCohort[1].cohortYear.name;
+
+            if (locals.prevCohort.length > 0)
+                locals.prevYear = locals.prevCohort[1].cohortYear.name;
 
             next(err);
         });

@@ -34,13 +34,19 @@ var Filters = new keystone.List('Filter',
  */
 Filters.add({
     name: { type: String, label: 'Name', required: true, initial: true, index: true },
-    category: { type: Types.Select, label: 'Category of Filter', options: 'Person, Format, Keyword', required: true, initial: true },
+    category: { type: Types.Select, label: 'Category of Filter', options: 'Person, Format, Keyword, Cohort', required: true, initial: true },
 
 	  appears: { type: Types.Select, label: 'Destination', note: 'Where will this filter apply?', options: 'Project, Publication', 
 	  dependsOn: { category: ['Format', 'Keyword'] } },
 
 	  contactEmail: { type: Types.Email, label: 'Email', required: false, 
-	  dependsOn: { category: 'Person' } }
+	  dependsOn: { category: 'Person' } }, 
+
+	  current: { type: Boolean, label: 'Is this the current cohort?', note: 'Cohort will appear on the people page as \'Current\'', required: false, 
+	  dependsOn: { category: 'Cohort' } }, 
+
+	  previous: { type: Boolean, label: 'Is this the most recent but not current cohort?', note: 'Cohort will appear on the people page as \'Most Recent\'', required: false, 
+	  dependsOn: { category: 'Cohort' } }
 });
 
 
