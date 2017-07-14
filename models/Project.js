@@ -86,6 +86,14 @@ Project.add({
         label: 'Project People Filters', 
         note: 'Who is on this project? Choose from below or add a Person Filter.'
     },
+    subdirectory: {
+        type: Types.Relationship,
+        ref: 'Subdirectory',
+        required: true,
+        initial: true,
+        label: 'Subdirectory', 
+        note: 'This is the Project subdirectory in which this project will be grouped.'
+    },
     enabled: {
         type: Types.Boolean,
         label: 'Enabled', 
