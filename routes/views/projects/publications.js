@@ -27,6 +27,8 @@ exports = module.exports = function(req, res) {
     // locals.section is used to set the currently selected
     // item in the header navigation.
     locals.section = 'publications';
+    locals.section_type = 'filter';
+
 
     // Load publications categories and sort them
     view.on('init', function(next) {

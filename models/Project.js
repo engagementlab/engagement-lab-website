@@ -61,7 +61,7 @@ Project.add({
         type: Types.Relationship,
         ref: 'Filter',
         filters: {
-            type: 'Format',
+            category: 'Format',
             appears: 'Project'
         },
         label: 'Type/Format of Project', 
@@ -71,19 +71,21 @@ Project.add({
         type: Types.Relationship,
         ref: 'Filter',
         filters: {
-            type: 'Keyword',
+            category: 'Keyword',
             appears: 'Project'
         },
         label: 'Project Keywords', 
+        many: true,
         note: 'What kind of project is this? Choose from below or add a Keyword Filter and choose \'Project\' as its destination.'
     },
     person: {
         type: Types.Relationship,
         ref: 'Filter',
         filters: {
-            type: 'Person'
+            category: 'Person'
         },
         label: 'Project People Filters', 
+        many: true,
         note: 'Who is on this project? Choose from below or add a Person Filter.'
     },
     subdirectory: {
