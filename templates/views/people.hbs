@@ -71,12 +71,12 @@
 					<div class="row grid-space-10 team-row5">
 
 						{{!-- Show cmap students --}}
-						<h3>{{currentYear}}</h3>
+						<h3 class="cohort">{{currentYear}}</h3>
 						{{#each currentCohort}}
 								{{> people/person person=this }}
 						{{/each}}
 
-						<h3>{{prevYear}}</h3>
+						<h3 class="cohort">{{prevYear}}</h3>
 						{{#each prevCohort}}
 								{{> people/person person=this }}
 						{{/each}}
