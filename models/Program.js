@@ -16,7 +16,6 @@ var keystone = require('keystone');
 var validator = require('validator');
 var Listing = require('./Listing');
 var Types = keystone.Field.Types;
-var slack = keystone.get('slack');
 
 /**
  * @module program
@@ -77,7 +76,7 @@ Program.schema.pre('save', function(next) {
 Program.schema.post('save', function(next) {
 
     // Make a post to slack when this Program is updated
-    slack.Post(Program.schema, this, true);
+    keystone.get('slack').Post(Program.schema, this, true);
 
 });
 

@@ -12,7 +12,6 @@
 
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
-var slack = keystone.get('slack');
 var filter = keystone.list('Filter');
 
 /**
@@ -137,19 +136,13 @@ Publication.schema.pre('save', function(next) {
   this.wasNew = this.isNew;
   this.wasModified = this.isModified();
 
-  console.log(this.form);
-
   var pub = this;
-  console.log(pub, " before change")
-
   filter.model.findFilter(this.form, function(err, result) {
 
     if (result.name == 'Article')
       pub.isArticle = true;
     else 
       pub.isArticle = false;
-
-    console.log(pub, " after change")
 
     next(err);
   });
