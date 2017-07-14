@@ -12,7 +12,6 @@
 
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
-var slack = keystone.get('slack');
 
 /**
  * @module team
@@ -86,12 +85,12 @@ Person.schema.pre('save', function(next) {
 Person.schema.post('save', function(next) {
 
     // Make a post to slack when this Person is updated
-    // var person = this;
+    var person = this;
     
-    // slack.Post(
-    // 	Person.model, this, true, 
-    // 	function() { return person.name.first + ' ' + person.name.last; }
-    // );
+    keystone.get('slack').Post(
+    	Person.model, this, true, 
+    	function() { return person.name.first + ' ' + person.name.last; }
+    );
 
 });
 
