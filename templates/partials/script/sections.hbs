@@ -213,10 +213,31 @@
 		{{/ifeq}}
 
 		{{!-- SYLLABI Template Script --}}
-		{{#ifeq section 'publications'}}
+		{{#ifeq section_type 'filter'}}
 
-			var pubContainer = [$('#books-content'), $('#guide-content'), $('#articles-and-chapters-content')];
+			{{#ifeq section 'publications'}}
+
+			var filterContainer = [$('#books-content'), $('#guides-content'), $('#articles-and-chapters-content')];
+			var filterElem = '.publication-item';
+
+			{{/ifeq}}
+
+			{{#ifeq section 'projects'}}
+
+			var filterContainer = [$('#projects-isotope')];
+			var filterElem = '.project-item';
+
+			{{/ifeq}}
+
+			{{#ifeq section 'alumni'}}
+
+			var filterContainer = [$('#alumni-isotope')];
+			var filterElem = '.alumni-item';
+
+			{{/ifeq}}
+
 			var filtered = 0;
+			var filters = {};
 
 			var formats = $('.dropdown-menu li .option-format').size();
 			var people = $('.dropdown-menu li .option-person').size();
@@ -226,7 +247,6 @@
 			$('span.person-number').text("(" + people + ")");
 			$('span.keyword-number').text("(" + keywords + ")");
 
-			var filters = {};
 
 			$('.dropdown-menu li').delegate('a','click', function() {
 				
@@ -237,14 +257,19 @@
 				displayChecked(this);
 			});
 
-			_.each(pubContainer, function(container){
-				container.isotope({
-			    itemSelector: '.publication-item',
+			_.each(filterContainer, function(container){
+
+				var $filtered = container.isotope({
+			    itemSelector: filterElem,
 			    isFitHeight: true,
 			    layoutMode: 'masonry', 
 			    filter: '*'
 				});
-			})
+
+				var num = $filtered.isotope('getFilteredItemElements').length;
+				checkFiltered(num, container); 
+
+			});
 			
 
 			function displayChecked (elem) {
@@ -269,9 +294,9 @@
 				filtered += num;
 				
 				if ( filtered === 0 ) {
-				  $('.no-publications-visible').show();
+				  $('.no-filtered-visible').show();
 				} else {
-					$('.no-publications-visible').hide();
+					$('.no-filtered-visible').hide();
 				}
 
 			}
@@ -279,8 +304,6 @@
 	    function applyFilter(elem) {
 
 	    	filtered = 0;
-
-	    	var pubContainer = [$('#books-content'), $('#guides-content'), $('#articles-and-chapters-content')];
 				
 		    var selector = $(elem);
 		    
@@ -296,9 +319,8 @@
 		    			    
 		    var filterStr = isoFilters.join('');
 		    
-		    _.each(pubContainer, function(container){
+		    _.each(filterContainer, function(container){
 					var $filtered = container.isotope({ filter: filterStr });
-					// container.isotope({ filter: filterStr });
 					var num = $filtered.isotope('getFilteredItemElements').length;
 					checkFiltered(num, container);   
 				});
@@ -308,7 +330,7 @@
 			$(".clear-all").on('click', function(){
 				
 				filters = {};
-		    _.each(pubContainer, function(container){
+		    _.each(filterContainer, function(container){
 					container.isotope({
 			        filter: '*'
 			    });

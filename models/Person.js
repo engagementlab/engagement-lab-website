@@ -49,6 +49,14 @@ Person.add({
     required: true,
     note: 'This field is for students and board members, and will display below the title.'
   },
+  keywords: { 
+		type: Types.Relationship, 
+		label: 'Keywords and Other Filters',
+		dependsOn: { category: 'CMAP' },
+		ref: 'Filter',
+    many: true,
+    note: 'This field will allow for CMAP filtering by project theme/format/etc on the CMAP alumni page.'
+  },
 	project: { type: Types.Markdown, label: 'Project Description', 
 		dependsOn: { category: ['CMAP', 'advisory board'] }, note: 'This field is for students and board members, and will display beneath the regular bio text on the person\'s individual page.'},
 	

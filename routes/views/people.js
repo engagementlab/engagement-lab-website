@@ -53,7 +53,6 @@ exports = module.exports = function(req, res) {
             locals.board = categorize(result, 'advisory board');
             locals.labassistants = categorize(result, 'lab assistants');
             locals.cmap = categorize(result, 'CMAP');
-            locals.alumni = categorize(result, 'alumni');
 
             locals.currentCohort = cohort(locals.cmap, 'current');
             locals.prevCohort = cohort(locals.cmap, 'previous');

@@ -72,6 +72,7 @@ router.get('/publications/:publication_key', routes.views.projects.publication);
 router.get('/projects/:subdirectory/:project_key', routes.views.projects.project);
 
 router.get('/cmap', routes.views.cmap);
+router.get('/cmap/alumni', routes.views.alumni);
 // router.get('/programs/cmap', routes.views.cmap);
 
 router.get('/news', routes.views.news);

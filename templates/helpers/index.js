@@ -7,6 +7,22 @@ module.exports = function() {
     	return s.toLowerCase();
     }
 
+    _helpers.ifeqor = function(a, arr, options) {
+        var or = false;
+        _.each(arr, function(b){
+            if (a == b) {
+                or = true;
+            }
+        });
+
+        if (or == true) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+        
+    };
+
 
     return _helpers;
 };
