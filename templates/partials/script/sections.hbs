@@ -231,7 +231,7 @@
 
 			{{#ifeq section 'alumni'}}
 
-			var filterContainer = [$('#alumni-isotope')];
+			var filterContainer = $('#alumni-isotope .isotope');
 			var filterElem = '.alumni-item';
 
 			{{/ifeq}}
@@ -258,6 +258,12 @@
 			});
 
 			_.each(filterContainer, function(container){
+
+				console.log(container);
+
+				console.log($('' + container.id + ''))
+				
+				container = $('#' + container.id + '');
 
 				var $filtered = container.isotope({
 			    itemSelector: filterElem,

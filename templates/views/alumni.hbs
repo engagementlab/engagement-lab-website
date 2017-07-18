@@ -48,10 +48,10 @@
 
 	<section class="section">
 		<div class="container">
-			
 				<div class="row" id="alumni-isotope">
+
 					{{#each alumni}}
-					<div id="{{{combine @key}}}">
+					<div id="{{{combine @key}}}" class="isotope">
 						<a name="{{@key}}">&nbsp;</a>
 						<div class="row">
 							<div class="col-md-12">
@@ -59,13 +59,12 @@
 								<div class="separator-5"></div>
 							</div>
 						</div>
-					</div>
 						{{#each this}}
 							{{> people/CMAPperson person=this}}
 						{{/each}}
-					{{/each}}
-				</div>
-			
+					</div>
+					{{/each}}		
+				</div>	
 		</div>
 	</section>
 
