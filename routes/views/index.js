@@ -15,8 +15,7 @@
 var keystone = require('keystone');
 var Project = keystone.list('Project');
 var NewsBox = keystone.list('NewsBox');
-var Resource = keystone.list('Resource');
-// var Syllabi = keystone.list('Syllabi');
+var twitter = keystone.get('twitter');
 var _ = require('underscore');
 
 // News data propagated by ./jobs/news
@@ -37,51 +36,66 @@ exports = module.exports = function(req, res) {
 
         locals.featured_content = [];
 
-        // This query gets all featured projects
-        var projectQuery = Project.model.find({
-            'enabled': true,
-            'featured': true
-        })
-        .populate('subdirectory');
-
         // Setup the locals to be used inside view
-        projectQuery.exec(function(err, result) {
-            if (err) throw err;
-            locals.featured_projects = result;
+        NewsBox.model.find({}).exec(function(err, result) {
+            locals.featured_content = result;
+            
+            // This query gets all featured projects
+            var projectQuery = Project.model.find({
+                'enabled': true,
+                'featured': true
+            })
+            .populate('subdirectory');
 
-            NewsBox.model.find({}).exec(function(err, result) {
-                locals.featured_content = result;
+            // Setup the locals to be used inside view
+            projectQuery.exec(function(err, result) {
+                if (err) throw err;
+                locals.featured_projects = result;
                 next(err);
             });
+
+            // Commented out for later implementation/release
+            // locals.twitter = {};
+
+            // twitter.get('statuses/user_timeline.json?count=3', function(err, tweets, response) {
+                
+            //     if (err) throw error;
+
+            //     locals.twitter.user = tweets[0].user.screen_name;
+            //     locals.twitter.tweets = [];
+
+            //     for (var i = 0; i < tweets.length; i++) {
+                    
+            //         var tweet = tweets[i];
+            //         var html = tweet.text;
+            //         var entities = _.union(
+            //             tweet.entities.hashtags, 
+            //             tweet.entities.user_mentions, 
+            //             tweet.entities.urls);
+
+            //         entities = _.sortBy(entities, function(n) { return n.indices[0]; }).reverse();
+
+            //         for (var j = 0; j < entities.length; j++) {
+            //             var e = entities[j];
+            //             html = html.splice(e.indices[1], 0, "</a>");
+            //             if (e.text) {
+            //                 // hashtag
+            //                 html = html.splice(e.indices[0], 0, "<a href='https://twitter.com/hashtag/" + e.text + "/'>");
+            //             } else if (e.url) {
+            //                 // link
+            //                 html = html.splice(e.indices[0], 0, "<a href='" + e.url + "'>")
+            //             } else if (e.screen_name) {
+            //                 // mention
+            //                 html = html.splice(e.indices[0], 0, "<a href='https://twitter.com/" + e.screen_name + "/'>")
+            //             }
+            //         };
+            //         locals.twitter.tweets.push({ text: html });
+            //     }
+            //     next(err);
+            // });
         });
 
     });
-
-    // Boston Civic Media homepage
-    /*view.on('init', function(next) {
-         //locals.featured_content = [];
-        locals.featured_syllabi = [];
-
-        // EXAMPLE OF QUERY TO GET FEATURED STUFF
-        // This query gets all featured projects
-        var syllabiQuery = Syllabi.model.find({
-            'enabled': true,
-            'featured': true
-        })
-        .populate('subdirectory');
-
-        // Setup the locals to be used inside view
-        syllabiQuery.exec(function(err, result) {
-            if (err) throw err;
-            locals.featured_syllabi = result;
-            console.log(result);
-
-            // NewsBox.model.find({}).exec(function(err, result) {
-            //     locals.featured_content = result;
-            //     next();
-            // });
-    });
-    next();*/
 
 
     // Render the view

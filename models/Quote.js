@@ -24,7 +24,6 @@ var Quote = new keystone.List('Quote',
 		label: 'Quotes',
 		singular: 'Quote',
 		sortable: true,
-		track: true,
 		autokey: { path: 'key', from: 'name', unique: true }
 	});
 
@@ -36,16 +35,14 @@ Quote.add({
 
 	name: { type: String, label: 'name', required: true, initial: true, index: true },
 
-	quote: { type: Types.Markdown, label: 'Bio', required: true, initial: true },
-	cmapQuote: { type: Types.Boolean, label: 'Show on CMAP page' },	
+	quote: { type: Types.Markdown, label: 'Quote', required: true, initial: true, note: 'This is the body of the quote' },
+	cmapQuote: { type: Types.Boolean, label: 'Show on CMAP page', note: 'All quotes with this enabled will appear on the CMAP page in the quotes section' },	
 	person: { 
 		type: Types.Relationship, 
-		label: 'Author of quote', 
+		label: 'Author', 
 		ref: 'Person'
-	},
+	}
 	
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
-
 });
 
 /**

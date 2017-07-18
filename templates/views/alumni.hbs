@@ -1,0 +1,72 @@
+{{!< default}}
+{{!-- 
+/**
+ * Engagement Lab Website
+ * Developed by Engagement Lab, 2015
+ * ==============
+ * 
+ * CMAP Page Template 
+ * - See Cmap model for fields
+ * - Use {{jsonPrint about}} to print entire json...DEBUG ONLY
+ * ==========
+ */
+--}}
+
+<section class="cmap">
+	<section class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 description">
+					<p class="lead">
+						<span class="inline-header">The MA in Civic Media, Art &amp; Practice Alumni</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="row filters">
+		{{#each filters}}
+			{{#each this}}
+				<div class="btn-group clearfix">
+				<button id="button-group-{{combine @key}}" class="filter-options btn btn-default dropdown-toggle" type="button" data-filter-group="{{combine @key}}" data-toggle="dropdown">
+				<div class="button-text">{{@key}} <span class="{{combine @key}}-number filter-counter"> </span><span class="bigCaret"></span></div>
+				</button>
+				<ul class="dropdown-menu scrollable" role="menu">
+					<li><a id="{{combine @key}}:all" data-filter=""  href="#" data-filter-value="" data-filter-group="{{combine @key}}" class="all-options option-authors">All {{@key}}</a></li>
+					{{#each this}}
+					<li><a id="{{combine category}}:{{combine key}}" value="#" href="#" data-filter-value=".{{key}}" data-filter-group="{{combine category}}" class="option-{{combine category}}">{{name}}</a></li>
+					{{/each}}
+				</ul>
+			</div>
+			{{/each}}
+		{{/each}}
+		<div class="btn-group clearfix">
+			<button class="filter-options clear-all btn btn-default dropdown-toggle" type="button" data-filter-value="">Reset</button>
+		</div>
+	</div>
+
+	<section class="section">
+		<div class="container">
+			
+				<div class="row" id="alumni-isotope">
+					{{#each alumni}}
+					<div id="{{{combine @key}}}">
+						<a name="{{@key}}">&nbsp;</a>
+						<div class="row">
+							<div class="col-md-12">
+								<h3>{{{@key}}}</h3>
+								<div class="separator-5"></div>
+							</div>
+						</div>
+					</div>
+						{{#each this}}
+							{{> people/CMAPperson person=this}}
+						{{/each}}
+					{{/each}}
+				</div>
+			
+		</div>
+	</section>
+
+</section>

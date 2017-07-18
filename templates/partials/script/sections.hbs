@@ -213,9 +213,137 @@
 		{{/ifeq}}
 
 		{{!-- SYLLABI Template Script --}}
-		{{#ifeq section 'syllabi'}}
+		{{#ifeq section_type 'filter'}}
+
+			{{#ifeq section 'publications'}}
+
+			var filterContainer = [$('#books-content'), $('#guides-content'), $('#articles-and-chapters-content')];
+			var filterElem = '.publication-item';
+
+			{{/ifeq}}
+
+			{{#ifeq section 'projects'}}
+
+			var filterContainer = [$('#projects-isotope')];
+			var filterElem = '.project-item';
+
+			{{/ifeq}}
+
+			{{#ifeq section 'alumni'}}
+
+			var filterContainer = [$('#alumni-isotope')];
+			var filterElem = '.alumni-item';
+
+			{{/ifeq}}
+
+			var filtered = 0;
+			var filters = {};
+
+			var formats = $('.dropdown-menu li .option-format').size();
+			var people = $('.dropdown-menu li .option-person').size();
+			var keywords = $('.dropdown-menu li .option-keyword').size();
+
+			$('span.format-number').html("(" + formats + ")");
+			$('span.person-number').text("(" + people + ")");
+			$('span.keyword-number').text("(" + keywords + ")");
+
+
+			$('.dropdown-menu li').delegate('a','click', function() {
+				
+				$('.is-checked').removeClass('is-checked');
+				$(this).addClass('is-checked');
+
+				applyFilter(this);
+				displayChecked(this);
+			});
+
+			_.each(filterContainer, function(container){
+
+				var $filtered = container.isotope({
+			    itemSelector: filterElem,
+			    isFitHeight: true,
+			    layoutMode: 'masonry', 
+			    filter: '*'
+				});
+
+				var num = $filtered.isotope('getFilteredItemElements').length;
+				checkFiltered(num, container); 
+
+			});
 			
 
+			function displayChecked (elem) {
+
+				var selector = $(elem);
+				var label = selector.attr('id');
+				var option = selector.html();
+				$('#' + label).html (option + '<span class="bigCaret"></span>');
+
+			}
+
+			function checkFiltered (num, container) {
+
+				if (num === 0) {
+					container = container.attr('id').replace('-content', '');
+					$('#' + container).hide();
+				} else {
+					container = container.attr('id').replace('-content', '');
+					$('#' + container).show();
+				}
+
+				filtered += num;
+				
+				if ( filtered === 0 ) {
+				  $('.no-filtered-visible').show();
+				} else {
+					$('.no-filtered-visible').hide();
+				}
+
+			}
+		    
+	    function applyFilter(elem) {
+
+	    	filtered = 0;
+				
+		    var selector = $(elem);
+		    
+		    // store filter value in object
+		    var group = selector.attr('data-filter-group');
+		    filters[group] = selector.attr('data-filter-value');
+		    
+		    // convert object into array
+		    var isoFilters = [];
+		    for ( var prop in filters ) {
+		      isoFilters.push( filters[ prop ] );
+		    }
+		    			    
+		    var filterStr = isoFilters.join('');
+		    
+		    _.each(filterContainer, function(container){
+					var $filtered = container.isotope({ filter: filterStr });
+					var num = $filtered.isotope('getFilteredItemElements').length;
+					checkFiltered(num, container);   
+				});
+
+		  }
+
+			$(".clear-all").on('click', function(){
+				
+				filters = {};
+		    _.each(filterContainer, function(container){
+					container.isotope({
+			        filter: '*'
+			    });
+				});
+					
+				$('.is-checked').removeClass('is-checked');
+				$('.all-options').addClass('is-checked');
+				$('.all-options').each(function(i, obj){
+					applyFilter(this);
+					displayChecked(this);
+				});
+
+			});
 		
 		{{/ifeq}}
 

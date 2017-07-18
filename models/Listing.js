@@ -12,7 +12,6 @@
  */
 var keystone = require('keystone');
 var Types = keystone.Field.Types;
-var slack = keystone.get('slack');
 
 /**
  * @module listing
@@ -22,7 +21,6 @@ var slack = keystone.get('slack');
 var Listing = new keystone.List('Listing', {
     hidden: true,
     sortable: true,
-    track: true,
     autokey: {
         path: 'key',
         from: 'name',
@@ -61,14 +59,8 @@ Listing.add({
         type: Types.CloudinaryImage,
         label: 'Thumbnail Image',
         folder: 'site/listings',
-        autoCleanup: true
-    },
-
-    createdAt: {
-        type: Date,
-        default: Date.now,
-        noedit: true,
-        hidden: true
+        autoCleanup: true, 
+        note: 'This displays as the grid listing image/thumbnail on its respective page.'
     }
 });
 
@@ -97,7 +89,7 @@ Listing.schema.pre('save', function(next) {
 Listing.schema.post('save', function(next) {
 
     // Make a post to slack when this Listing is updated
-    slack.Post(Listing.schema, this, true);
+    keystone.get('slack').Post(Listing.schema, this, true);
 
 });
 

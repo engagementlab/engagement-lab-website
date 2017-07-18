@@ -115,6 +115,14 @@ exports = module.exports = function(req, res) {
 
             }
 
+            console.log(result.overview)
+
+            locals.projectMeta = {
+                title: result.name, 
+                description: String(result.overview.md).substr(0, 120), 
+                image: result.image
+            }
+
             // Project data not re-formatted above
             locals.project = result;
 

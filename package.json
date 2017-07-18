@@ -12,7 +12,8 @@
     "app-root-path": "^1.0.0",
     "connect-mongostore": "^0.1.4",
     "express": "^4.13.3",
-    "keystone": "0.3.15",
+    "keystone": "git://github.com/engagementgamelab/keystone.git",
+    "keystone-storage-adapter-azure": "^1.1.0",
     "node-sass-middleware": "^0.10.1"
   }
 }
