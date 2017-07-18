@@ -11,7 +11,7 @@
  * ==========
  */
 --}}
-<div class="col-sm-6 col-md-4 team-member team-cmap">
+<div class="col-sm-6 col-md-4 team-member alumni-item {{person.cohortYear.key}} {{#each person.keywords}}{{this.key}} {{/each}}">
 	
 	<a href="/people/{{person.key}}">
 	<div class="image-box style-2 mb-20 text-center">

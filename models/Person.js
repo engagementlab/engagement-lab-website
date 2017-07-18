@@ -54,6 +54,9 @@ Person.add({
 		label: 'Keywords and Other Filters',
 		dependsOn: { category: 'CMAP' },
 		ref: 'Filter',
+		filters: {
+      category: 'Keyword'
+    }, 
     many: true,
     note: 'This field will allow for CMAP filtering by project theme/format/etc on the CMAP alumni page.'
   },
