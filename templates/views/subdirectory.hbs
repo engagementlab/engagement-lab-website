@@ -31,7 +31,7 @@
 				<div class="button-text">{{@key}} <span class="{{combine @key}}-number filter-counter"> </span><span class="bigCaret"></span></div>
 				</button>
 				<ul class="dropdown-menu scrollable" role="menu">
-					<li><a id="{{combine @key}}:all" data-filter=""  href="#" data-filter-value="" data-filter-group="{{combine @key}}" class="all-options option-authors">All {{@key}}</a></li>
+					<li><a id="{{combine @key}}:all" data-filter=""  href="#" data-filter-value="" data-filter-group="{{combine @key}}" class="all-options option-{{combine @key}}">All {{@key}}</a></li>
 					{{#each this}}
 					<li><a id="{{combine category}}:{{combine key}}" value="#" href="#" data-filter-value=".{{key}}" data-filter-group="{{combine category}}" class="option-{{combine category}}">{{name}}</a></li>
 					{{/each}}

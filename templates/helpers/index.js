@@ -3,9 +3,9 @@ module.exports = function() {
     var _helpers = {};
 
     _helpers.combine = function(str) {
-    	var s = str.replace(/\s+/g, '-');
+    	var s = str.replace(/\s+/g, '-').replace('/', '-');
     	return s.toLowerCase();
-    }
+    };
 
     _helpers.ifeqor = function(a, arr, options) {
         var or = false;
@@ -21,6 +21,10 @@ module.exports = function() {
             return options.inverse(this);
         }
         
+    };
+
+    _helpers.removeSlash = function(str) {
+        return str.replace('/', '-');
     };
 
 

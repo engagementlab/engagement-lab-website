@@ -61,12 +61,6 @@ router.get('/jobs', routes.views.jobs);
 router.get('/people', routes.views.people);
 router.get('/people/:person', routes.views.person);
 
-router.get('/project-slider/:key', routes.views.projects.projectslider);
-// Redirect project-slider to /all
-// router.get('/project-slider/', function(req, res, next) {
-//     res.redirect('/project-slider/');
-// });
-
 router.get('/publications', routes.views.projects.publications);
 router.get('/publications/:publication_key', routes.views.projects.publication);
 router.get('/projects/:subdirectory/:project_key', routes.views.projects.project);
@@ -89,7 +83,6 @@ router.all('/api/cpi/register', keystone.middleware.api, routes.api.communitypla
 router.all('/pokemon', function(req, res, next) {
     res.redirect('https://elab.us.launchpad6.com/');
 });
-
 
 // Redirect projects to /all
 router.get('/projects/', function(req, res, next) {

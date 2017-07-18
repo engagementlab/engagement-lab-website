@@ -78,15 +78,6 @@ Filters.schema.pre('remove', function(next) {
 
 });
 
-Filters.schema.pre('save', function(next) {
-		// Save state for post hook
-    this.name.replace('/','-');
-
-    this.save();
-
-    next();
-});
-
 Filters.schema.statics.findFilter = function(resourceId, callback) {
 
 	Filters.model.findById(resourceId, function(err, result) {
