@@ -39,9 +39,7 @@ exports = module.exports = function(req, res) {
         // Setup the locals to be used inside view
         NewsBox.model.find({}).exec(function(err, result) {
             locals.featured_content = result;
-
-            // locals.twitter = {};
-
+            
             // This query gets all featured projects
             var projectQuery = Project.model.find({
                 'enabled': true,
@@ -56,6 +54,8 @@ exports = module.exports = function(req, res) {
                 next(err);
             });
 
+            // Commented out for later implementation/release
+            // locals.twitter = {};
 
             // twitter.get('statuses/user_timeline.json?count=3', function(err, tweets, response) {
                 
