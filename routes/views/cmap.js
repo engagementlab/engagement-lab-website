@@ -30,12 +30,9 @@ exports = module.exports = function(req, res) {
     // CMAP query
     view.on('init', function(next) {
 
-        
-
         var cmapQuery = Cmap.model.findOne({}, {}, {
             sort: { 'createdAt': -1 }
         });
-
 
         cmapQuery.exec(function(err, result) {
 

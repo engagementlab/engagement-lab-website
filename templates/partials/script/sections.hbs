@@ -231,7 +231,7 @@
 
 			{{#ifeq section 'alumni'}}
 
-			var filterContainer = [$('#alumni-isotope')];
+			var filterContainer = $('#alumni-isotope .isotopeContent');
 			var filterElem = '.alumni-item';
 
 			{{/ifeq}}
@@ -242,11 +242,13 @@
 			var formats = $('.dropdown-menu li .option-format').size();
 			var people = $('.dropdown-menu li .option-person').size();
 			var keywords = $('.dropdown-menu li .option-keyword').size();
+			var cohorts = $('.dropdown-menu li .option-cohort').size();
+
 
 			$('span.format-number').html("(" + formats + ")");
 			$('span.person-number').text("(" + people + ")");
 			$('span.keyword-number').text("(" + keywords + ")");
-
+			$('span.cohort-number').text("(" + cohorts + ")");
 
 			$('.dropdown-menu li').delegate('a','click', function() {
 				
@@ -258,6 +260,8 @@
 			});
 
 			_.each(filterContainer, function(container){
+
+				container = $(container);
 
 				var $filtered = container.isotope({
 			    itemSelector: filterElem,
@@ -320,6 +324,7 @@
 		    var filterStr = isoFilters.join('');
 		    
 		    _.each(filterContainer, function(container){
+		    	container = $(container);
 					var $filtered = container.isotope({ filter: filterStr });
 					var num = $filtered.isotope('getFilteredItemElements').length;
 					checkFiltered(num, container);   
@@ -331,6 +336,8 @@
 				
 				filters = {};
 		    _.each(filterContainer, function(container){
+		    	container = $(container);
+
 					container.isotope({
 			        filter: '*'
 			    });
