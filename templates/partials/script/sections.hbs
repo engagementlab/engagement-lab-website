@@ -230,25 +230,48 @@
 			{{/ifeq}}
 
 			{{#ifeq section 'alumni'}}
-
-			var filterContainer = $('#alumni-isotope .isotopeContent');
+			var filterContainer = [{{#each alumni}}$('{{selector @key}}-content'){{#unless @last}}, {{/unless}}{{/each}} ];
 			var filterElem = '.alumni-item';
+
+      columnResize(filterElem);
+
+			$(window).resize(function() {
+        columnResize(filterElem);
+	    });
+
+			function columnResize(element) {
+				var elementHeights = $(element).map(function() {
+					$(this).height('100%');
+			    return $(this).height();
+			  }).get();
+
+			  var maxHeight = Math.max.apply(null, elementHeights);
+
+			  $(element).height(maxHeight);
+			}
 
 			{{/ifeq}}
 
 			var filtered = 0;
 			var filters = {};
 
-			var formats = $('.dropdown-menu li .option-format').size();
-			var people = $('.dropdown-menu li .option-person').size();
-			var keywords = $('.dropdown-menu li .option-keyword').size();
-			var cohorts = $('.dropdown-menu li .option-cohort').size();
-
+			var formats = $('.dropdown-menu li .option-format').size() - 1;
+			var people = $('.dropdown-menu li .option-person').size() - 1;
+			var keywords = $('.dropdown-menu li .option-keyword').size() - 1;
+			var cohorts = $('.dropdown-menu li .option-cohort').size() - 1;
 
 			$('span.format-number').html("(" + formats + ")");
 			$('span.person-number').text("(" + people + ")");
 			$('span.keyword-number').text("(" + keywords + ")");
 			$('span.cohort-number').text("(" + cohorts + ")");
+
+			var maxHeight = function(selector) {
+				var heights = $(selector).map(function(){
+					return $(this).height();
+				}).get();
+
+				return Math.max.apply(null, heights);
+			}	
 
 			$('.dropdown-menu li').delegate('a','click', function() {
 				
@@ -261,20 +284,22 @@
 
 			_.each(filterContainer, function(container){
 
-				container = $(container);
+				filters = {};
 
-				var $filtered = container.isotope({
-			    itemSelector: filterElem,
-			    isFitHeight: true,
-			    layoutMode: 'masonry', 
-			    filter: '*'
+				$(container).imagesLoaded( function() {
+					
+					var $filtered = $(container).isotope({
+				    itemSelector: filterElem,
+				    filter: '*'
+					});
+
+					$('.clear-all').trigger('click');
+
+					var num = $filtered.isotope('getFilteredItemElements').length;
+					checkFiltered(num, container);
 				});
 
-				var num = $filtered.isotope('getFilteredItemElements').length;
-				checkFiltered(num, container); 
-
 			});
-			
 
 			function displayChecked (elem) {
 
@@ -324,8 +349,7 @@
 		    var filterStr = isoFilters.join('');
 		    
 		    _.each(filterContainer, function(container){
-		    	container = $(container);
-					var $filtered = container.isotope({ filter: filterStr });
+					var $filtered = $(container).isotope({ filter: filterStr });
 					var num = $filtered.isotope('getFilteredItemElements').length;
 					checkFiltered(num, container);   
 				});
@@ -336,9 +360,7 @@
 				
 				filters = {};
 		    _.each(filterContainer, function(container){
-		    	container = $(container);
-
-					container.isotope({
+					$(container).isotope({
 			        filter: '*'
 			    });
 				});
