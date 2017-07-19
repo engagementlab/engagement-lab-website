@@ -10,9 +10,7 @@
 	*/
 --}}
 
-<!-- DOCS START -->
-
-<!-- Favicons -->
+<!-- {{environment}} -->
 <link rel="shortcut icon" href="/images/favicons/favicon.ico">
 <!-- For third-generation iPad with high-resolution Retina display: -->
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/favicons/favicon_144.png">
@@ -26,8 +24,9 @@
 {{#ifeq environment "production"}}
 
 	{{!-- PRODUCTION --}}
-	<link href="/release/core.css" rel="stylesheet">
-	<link href="/release/production.css" rel="stylesheet">
+	<link href="https://res.cloudinary.com/engagement-lab-home/raw/upload/v1459273046/site/styles/core.css" rel="stylesheet">
+	{{!-- <link href="/release/core.css" rel="stylesheet"> --}}
+	<link href="{{cdnAsset product='engagement-lab-website' env=environment type='css'}}" rel="stylesheet">
 
 {{else}}
 
