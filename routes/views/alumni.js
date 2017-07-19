@@ -26,7 +26,6 @@ exports = module.exports = function(req, res) {
     locals.section = 'alumni';
     locals.section_type = 'filter';
 
-
     // CMAP query
     view.on('init', function(next) {
 
@@ -51,7 +50,9 @@ exports = module.exports = function(req, res) {
 
             };
 
-            locals.filters = _.groupBy(filters, 'category');
+            locals.filters = _.groupBy(_.uniq(filters), 'category');
+
+            // locals.filters = _.uniq(locals.filters);
 
             locals.filters =  _.map(locals.filters, function(group, filter) {
                                     group = _.uniq(group);

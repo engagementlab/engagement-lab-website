@@ -601,10 +601,6 @@ ul.resources {
     &:hover {
         @include scaleXY(1.04, 1.04);
         @include transition(all 0.5s ease);
-        // img {
-        //   @include scaleXY(1.00, 1.00);
-        //   @include transition(all 0.5s ease);
-        // }
       }
       a:hover {
         color: $gray-dark;
@@ -619,15 +615,15 @@ ul.resources {
     .image-box {
       padding: 5px;
       
-      // img {
-      //   @include scaleXY(1.00, 1.00);
-      //   @include transition(all 0.5s ease);
-      // }
-
-      
     }
   }
 }
+.alumni-item {
+  padding: 5px;
+
+}
+
+
 .team-member:not(.team-cmap) img {
   @include transition(all 0.33s ease);
   @include center-block;
@@ -691,6 +687,8 @@ section.publications .subSection {
 .listing {
   float: left;
 }
+
+
 
 /* NEWS */
 .news-container {

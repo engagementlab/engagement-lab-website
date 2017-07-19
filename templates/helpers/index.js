@@ -27,6 +27,10 @@ module.exports = function() {
         return str.replace('/', '-');
     };
 
+    _helpers.selector = function(str) {
+        return '#' + str.replace(/\s+/g, '-').replace('/', '-').toLowerCase();
+    };
+
 
     return _helpers;
 };
