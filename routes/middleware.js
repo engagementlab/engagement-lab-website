@@ -35,6 +35,7 @@ var publicationsCats = ['Books', 'Guides', 'Articles and Chapters'];
 exports.initLocals = function(req, res, next) {
 
     var locals = res.locals;
+    locals.env = process.env.NODE_ENV; 
 
     // Caches query into redis
     querySub.lean();
