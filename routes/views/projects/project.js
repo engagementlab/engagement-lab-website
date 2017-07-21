@@ -26,23 +26,17 @@ exports = module.exports = function(req, res) {
 
     // Init locals
     locals.section = 'research';
-    locals.sub_section = req.params.subdirectory;
     locals.key = 'project';
-
-    locals.filters = {
-        _key: req.params.project_key
-    };
 
     // Load the current project
     view.on('init', function(next) {
-
         /* 
             This query gets a project by the key in the
             URL and populates resources from its model 
         */
         var projectQuery = Project.model.findOne({
             'enabled': true,
-            key: locals.filters._key
+            key: req.params.project_key
         })
         .populate('videos articles blogs files');
 

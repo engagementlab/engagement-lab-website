@@ -63,7 +63,14 @@ router.get('/people/:person', routes.views.person);
 
 router.get('/publications', routes.views.projects.publications);
 router.get('/publications/:publication_key', routes.views.projects.publication);
-router.get('/projects/:subdirectory/:project_key', routes.views.projects.project);
+
+// Redirect projects to /all
+router.all('/projects/', routes.views.projects.projectsAll);
+router.get('/projects/:project_key', routes.views.projects.project);
+router.get('/projects/:subdirectory*?/:project_key', function(req, res, next) {
+	res.redirect('/projects/' + req.params.project_key);
+	next();
+});
 
 router.get('/cmap', routes.views.cmap);
 router.get('/cmap/alumni', routes.views.alumni);
@@ -84,13 +91,8 @@ router.all('/pokemon', function(req, res, next) {
     res.redirect('https://elab.us.launchpad6.com/');
 });
 
-// Redirect projects to /all
-router.get('/projects/', function(req, res, next) {
-    res.redirect('/projects/all');
-});
-
-// Dynamic directory routes
-router.get('/:directory', routes.views.directory);
-router.get('/:directory/:subdirectory', routes.views.subdirectory);
+// // Dynamic directory routes
+// router.get('/:directory', routes.views.directory);
+// router.get('/:directory/:subdirectory', routes.views.subdirectory);
 
 module.exports = router;
