@@ -68,13 +68,11 @@ exports.initLocals = function(req, res, next) {
         }, {
             label: 'Projects',
             key: 'projects',
-            href: '/projects',
-            subLinks: projectsSub
+            href: '/projects'
         }, {
             label: 'Publications',
             key: 'publications',
-            href: '/publications',
-            subLinks: publicationsSub
+            href: '/publications'
         }, {
             label: 'People',
             key: 'people',

@@ -63,7 +63,8 @@ Project.add({
             category: 'Format',
             appears: 'Project'
         },
-        label: 'Type/Format of Project', 
+        label: 'Type/Format of Project',
+        many: true, 
         note: 'What kind of project is this? Choose from below or add a Format Filter and choose \'Project\' as its destination.'
     },
     keyword: {
