@@ -3,6 +3,10 @@ module.exports = function() {
     var _helpers = {};
 
     _helpers.combine = function(str) {
+
+        if(str === undefined)
+            return;
+        
     	var s = str.replace(/\s+/g, '-').replace('/', '-');
     	return s.toLowerCase();
     };
