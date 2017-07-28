@@ -36,8 +36,7 @@ exports = module.exports = function(req, res) {
         };
         var cohort = function(val, cat) {
             return val.filter(function(item) {
-                console.log(item.cohortYear[cat])
-                if (!item.cohortYear[cat])
+                if (!item || !item.cohortYear[cat])
                     return;
                 else 
                     return item.cohortYear[cat] == true;
@@ -58,10 +57,10 @@ exports = module.exports = function(req, res) {
             locals.prevCohort = cohort(locals.cmap, 'previous');
 
             if (locals.currentCohort.length > 0)
-                locals.currentYear = locals.currentCohort[1].cohortYear.name;
+                locals.currentYear = locals.currentCohort[0].cohortYear.name;
 
             if (locals.prevCohort.length > 0)
-                locals.prevYear = locals.prevCohort[1].cohortYear.name;
+                locals.prevYear = locals.prevCohort[0].cohortYear.name;
 
             next(err);
         });
