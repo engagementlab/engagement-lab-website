@@ -76,7 +76,7 @@ Program.schema.pre('save', function(next) {
 Program.schema.post('save', function(next) {
 
     // Make a post to slack when this Program is updated
-    keystone.get('slack').Post(Program.schema, this, true);
+    // keystone.get('slack').Post(Program.schema, this, true);
 
 });
 

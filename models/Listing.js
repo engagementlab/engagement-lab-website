@@ -89,7 +89,7 @@ Listing.schema.pre('save', function(next) {
 Listing.schema.post('save', function(next) {
 
     // Make a post to slack when this Listing is updated
-    keystone.get('slack').Post(Listing.schema, this, true);
+    // keystone.get('slack').Post(Listing.schema, this, true);
 
 });
 
