@@ -120,7 +120,7 @@ Resource.schema.pre('save', function(next) {
 Resource.schema.post('save', function(next) {
 
   // Make a post to slack when this Resource is updated
-  keystone.get('slack').Post(Resource.model, this, true);
+  // keystone.get('slack').Post(Resource.model, this, true);
 
 });
 

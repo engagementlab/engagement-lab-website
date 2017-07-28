@@ -334,7 +334,7 @@ Project.schema.pre('save', function(next) {
 
 Project.schema.post('save', function(next) {
     // Make a post to slack when this Project is updated
-    keystone.get('slack').Post(Project.model, this, true);
+    // keystone.get('slack').Post(Project.model, this, true);
 
 });
 

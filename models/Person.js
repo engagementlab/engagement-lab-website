@@ -98,10 +98,10 @@ Person.schema.post('save', function(next) {
     // Make a post to slack when this Person is updated
     var person = this;
     
-    keystone.get('slack').Post(
-    	Person.model, this, true, 
-    	function() { return person.name.first + ' ' + person.name.last; }
-    );
+    // keystone.get('slack').Post(
+    // 	Person.model, this, true, 
+    // 	function() { return person.name.first + ' ' + person.name.last; }
+    // );
 
 });
 
