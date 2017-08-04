@@ -11,7 +11,7 @@
 * ==========
 */
 --}}
-<div class="col-sm-6 col-md-4 project-item {{#each listing.person}}{{this.key}} {{/each}}{{#each listing.keyword}}{{this.key}} {{/each}} {{#each listing.form.key}} {{listing.form.key}} {{/each}} {{#each listing.format.key}} {{listing.format.key}} {{/each}}">
+<div class="col-sm-6 col-md-4 project-item {{#each listing.person}}{{this.key}} {{/each}}{{#each listing.keyword}}{{this.key}} {{/each}}{{#each listing.form}}{{this.key}} {{/each}}{{#each listing.format}}{{this.key}} {{/each}}">
 	<a href="{{listing.href}}">
 		<div class="image-box style-2 mb-20 project-box">
 			<div class="overlay-container overlay-visible">
