@@ -43,7 +43,9 @@ exports = module.exports = function(req, res) {
             var filters = [];
             for(var i = 0; i < resultProject.length; i++) {
                 if (resultProject[i].format !== null && resultProject[i].format !== undefined){
-                    filters.push(resultProject[i].format);
+                    _.each(resultProject[i].format, function(format) {
+                        filters.push(format);
+                    });
                 }
 
                 if (resultProject[i].keyword !== null && resultProject[i].keyword !== undefined){
