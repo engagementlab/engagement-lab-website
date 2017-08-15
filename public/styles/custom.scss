@@ -44,8 +44,7 @@ button.filter-options {
 }
 
 body .filters {
-  padding: 0px 120px;
-
+  margin-left: 10%;
 
   .btn-group {
     margin-right: .5%;
@@ -91,6 +90,10 @@ body .filters {
   }
 
 }
+
+  .dropdown-backdrop {
+    display: none;
+  }
 
 .no-filtered-visible {
   display: none;
