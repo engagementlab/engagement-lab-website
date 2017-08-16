@@ -56,8 +56,49 @@ button.filter-options {
 
 }
 
+.filters-chosen {
+  margin-left: 10%;
+
+  @media(max-width: 1024px) {
+    margin-left: 4%;
+  }
+
+  h3 {
+    display: inline-block;
+    font-size: 18px;
+  }
+
+  div {
+    border: 3px solid #85bbb2;
+    color: #85bbb2;
+    padding: 4px;
+    margin: 4px;
+    width: auto;
+    height: 40px;
+    line-height: 32px;
+    display: inline-block;
+    border-radius: 4px;
+
+    span {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      border-radius: 10px;
+      color: #85bbb2;
+      padding: 0px;
+      text-align: center;
+      line-height: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
 body .filters {
   margin-left: 10%;
+
+  @media(max-width: 1024px) {
+    margin-left: 4%;
+  }
 
   .btn-group {
     margin-right: .5%;
@@ -75,6 +116,7 @@ body .filters {
     color: $gray-dark;
     font-weight: bold;
     border: 3px solid #85bbb2;
+    border-radius: 4px;
   }
 
   .btn.filter-options:hover,

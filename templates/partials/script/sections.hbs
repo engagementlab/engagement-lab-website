@@ -265,6 +265,16 @@
 			$('span.keyword-number').text("(" + keywords + ")");
 			$('span.cohort-number').text("(" + cohorts + ")");
 
+			if ($('.filters-chosen').find('div').length > 0) {
+				$('.filters-chosen').css('display', 'inline-block');
+				$('.filters-chosen div').find('span').unbind('click').on('click', function(){
+					$('.dropdown-menu li a:contains("' + $(this).closest('div').attr('id').replace('-select', '') + '")').trigger('click');
+				});
+			}
+			else
+				$('.filters-chosen').hide();
+
+
 			var maxHeight = function(selector) {
 				var heights = $(selector).map(function(){
 					return $(this).height();
@@ -277,8 +287,8 @@
 				
 				$(this).toggleClass('is-checked');
 
-				applyFilter(this);
-				displayChecked(this);
+				applyFilter(this, $(this).hasClass('is-checked'));
+				displayChecked(this, $(this).hasClass('is-checked'));
 			});
 
 			_.each(filterContainer, function(container){
@@ -300,13 +310,26 @@
 
 			});
 
-			function displayChecked (elem) {
+			function displayChecked (elem, selected) {
 
 				var selector = $(elem);
 				var label = selector.data('filter-group');                                                                                                       
 				var option = selector.html();
-				$('#' + label).html (option + '<span class="bigCaret"></span>');
 
+				if (selected)
+					$('.filters-chosen').append('<div class="selection" id="' + option +'-select">' + option + '<span>x</span></div>');
+				else 
+					$('.filters-chosen').find('div:contains("' + option + '")').remove();
+
+				if ($('.filters-chosen').find('div').length > 0) {
+					$('.filters-chosen').css('display', 'inline-block');
+
+					$('.filters-chosen div').find('span').on('click', function(){
+						$('.dropdown-menu li a:contains("' + $(this).closest('div').attr('id').replace('-select', '') + '")').trigger('click');
+					});
+				}
+				else
+					$('.filters-chosen').hide();
 			}
 
 			function checkFiltered (num, container) {
@@ -329,7 +352,7 @@
 
 			}
 		    
-	    function applyFilter(elem) {
+	    function applyFilter(elem, selected) {
 
 	    	filtered = 0;
 				
@@ -342,8 +365,15 @@
 					filters[group] = [];
 				}
 
-				if (selector.data('filter-value').length > 1)
-			    filters[group].push(selector.data('filter-value').toString());
+				if (selected) {
+					if (selector.data('filter-value').length >= 1)
+				    filters[group].push(selector.data('filter-value').toString());
+				} else {
+					var index = filters[group].indexOf(selector.data('filter-value').toString());
+					if (index > -1) {
+						filters[group].splice(index, 1);
+					}
+				}
 		    
 		    // convert object into array
 		    var isoFilters = [];
