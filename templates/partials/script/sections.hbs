@@ -266,11 +266,13 @@
 			$('span.cohort-number').text("(" + cohorts + ")");
 
 			var maxHeight = function(selector) {
+
 				var heights = $(selector).map(function(){
 					return $(this).height();
 				}).get();
 
 				return Math.max.apply(null, heights);
+
 			}	
 
 			$('.dropdown-menu li').delegate('a','click', function() {
@@ -280,9 +282,10 @@
 
 				applyFilter(this);
 				displayChecked(this);
+				
 			});
 
-			_.each(filterContainer, function(container){
+			_.each(filterContainer, function(container) {
 
 				filters = {};
 
@@ -303,10 +306,10 @@
 
 			function displayChecked (elem) {
 
-				var selector = $(elem);
-				var label = selector.attr('id');
-				var option = selector.html();
-				$('#' + label).html (option + '<span class="bigCaret"></span>');
+				// var selector = $(elem);
+				// var label = selector.attr('id');
+				// var option = selector.html();
+				// $('#' + label).html (option + '<span class="bigCaret"></span>');
 
 			}
 

@@ -107,11 +107,16 @@ body .dropdown-menu {
 
   li a {
     color: $gray-dark;
-    background-color: #85bbb2;
+    background-color: white;  
+    &.is-checked {
+      color: white;
+      background-color: #85bbb2;
+    }
   }
+  
   li a:hover {
     color: $gray-dark;
-    background-color: white;
+    background-color: #85bbb2;
   }
 }
 
