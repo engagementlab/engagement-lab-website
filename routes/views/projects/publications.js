@@ -67,7 +67,7 @@ exports = module.exports = function(req, res) {
             
             var books = categorize(publications, ['book']);
             var guides = categorize(publications, ['guide']);
-            var articles = categorize(publications, ['article', 'chapter']);
+            var articles = categorize(publications, ['article-chapter']);
 
             locals.publications = {};
             locals.publications['Books'] = books;

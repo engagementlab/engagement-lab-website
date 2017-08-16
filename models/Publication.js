@@ -139,7 +139,7 @@ Publication.schema.pre('save', function(next) {
   var pub = this;
   filter.model.findFilter(this.form, function(err, result) {
 
-    if (result.name == 'Article')
+    if (result.key == 'article-chapter')
       pub.isArticle = true;
     else 
       pub.isArticle = false;
