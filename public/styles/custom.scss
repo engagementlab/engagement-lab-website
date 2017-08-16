@@ -25,6 +25,7 @@ body .scrollable {
 
 .dropdown-backdrop {
   z-index: 0;
+  display:none;
 }
 
 .filter-counter {
@@ -43,7 +44,8 @@ button.filter-options {
 }
 
 body .filters {
-  padding: 0px 60px;
+  margin-left: 10%;
+
   .btn-group {
     margin-right: .5%;
   }
@@ -83,12 +85,20 @@ body .filters {
     color: $gray-light;
   }
 
+  .dropdown-backdrop {
+    display: none;
+  }
+
 }
+
+  .dropdown-backdrop {
+    display: none;
+  }
 
 .no-filtered-visible {
   display: none;
   min-height: 500px;
-  
+  margin-left: 100px;
 }
 
 
