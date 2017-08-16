@@ -275,8 +275,7 @@
 
 			$('.dropdown-menu li').delegate('a','click', function() {
 				
-				$('.is-checked').removeClass('is-checked');
-				$(this).addClass('is-checked');
+				$(this).toggleClass('is-checked');
 
 				applyFilter(this);
 				displayChecked(this);
@@ -304,7 +303,7 @@
 			function displayChecked (elem) {
 
 				var selector = $(elem);
-				var label = selector.attr('id');
+				var label = selector.data('filter-group');                                                                                                       
 				var option = selector.html();
 				$('#' + label).html (option + '<span class="bigCaret"></span>');
 
@@ -337,8 +336,14 @@
 		    var selector = $(elem);
 		    
 		    // store filter value in object
-		    var group = selector.attr('data-filter-group');
-		    filters[group] = selector.attr('data-filter-value');
+		    var group = selector.data('filter-group');
+
+		    if (!filters[group]) { 
+					filters[group] = [];
+				}
+
+				if (selector.data('filter-value').length > 1)
+			    filters[group].push(selector.data('filter-value').toString());
 		    
 		    // convert object into array
 		    var isoFilters = [];

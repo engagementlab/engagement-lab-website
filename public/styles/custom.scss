@@ -32,6 +32,19 @@ body .scrollable {
   font-weight: bold;
 }
 
+.bigCaret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-top: 8px solid #85bbb2;
+  border-right: 8px solid transparent;
+  border-bottom: 0 dotted;
+  border-left: 8px solid transparent;
+  content: "";
+}
+
+
 button.filter-options {
   width: auto;
 
