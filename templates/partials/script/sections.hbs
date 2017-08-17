@@ -316,16 +316,12 @@
 				var label = selector.data('filter-group');                                                                                                       
 				var option = selector.html();
 
-				if (selected)
-					$('.filters-chosen').append('<div class="selection" id="' + $(selector).attr('id') + '-select">' + option + '<span>x</span></div>');
-				else 
-					$('.filters-chosen').find('div:contains("' + option + '")').remove();
+				if (selected) {
 
-				if ($('.filters-chosen').find('div').length > 0) {
+					var newSelection = $('<div class="selection" id="' + $(selector).attr('id') + '-select">' + option + '<span>x</span></div>');
+					$('.filters-chosen').append(newSelection);
 
-					$('.filters-chosen').css('display', 'inline-block');
-
-					$('.filters-chosen div span').on('click', function() {
+					newSelection.click(function() {
 
 						var originalId = $(this).closest('div').attr('id').replace('-select', '');
 						var ddItem = $('.dropdown-menu li a[id="' + originalId + '"]');
@@ -334,12 +330,18 @@
 
 						applyFilter(ddItem, $(ddItem).hasClass('is-checked'));
 						displayChecked(ddItem, $(ddItem).hasClass('is-checked'));
-						
+
 					});
 
 				}
+				else 
+					$('.filters-chosen').find('div:contains("' + option + '")').remove();
+
+				if ($('.filters-chosen').find('div').length > 0)
+					$('.filters-chosen').css('display', 'inline-block');
 				else
 					$('.filters-chosen').hide();
+
 			}
 
 			function checkFiltered (num, container) {
