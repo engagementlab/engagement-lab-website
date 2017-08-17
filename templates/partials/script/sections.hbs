@@ -316,20 +316,32 @@
 				var label = selector.data('filter-group');                                                                                                       
 				var option = selector.html();
 
-				if (selected)
-					$('.filters-chosen').append('<div class="selection" id="' + option +'-select">' + option + '<span>x</span></div>');
+				if (selected) {
+
+					var newSelection = $('<div class="selection" id="' + $(selector).attr('id') + '-select">' + option + '<span>x</span></div>');
+					$('.filters-chosen').append(newSelection);
+
+					newSelection.click(function() {
+
+						var originalId = $(this).closest('div').attr('id').replace('-select', '');
+						var ddItem = $('.dropdown-menu li a[id="' + originalId + '"]');
+
+						$(ddItem).toggleClass('is-checked');
+
+						applyFilter(ddItem, $(ddItem).hasClass('is-checked'));
+						displayChecked(ddItem, $(ddItem).hasClass('is-checked'));
+
+					});
+
+				}
 				else 
 					$('.filters-chosen').find('div:contains("' + option + '")').remove();
 
-				if ($('.filters-chosen').find('div').length > 0) {
+				if ($('.filters-chosen').find('div').length > 0)
 					$('.filters-chosen').css('display', 'inline-block');
-
-					$('.filters-chosen div').find('span').on('click', function(){
-						$('.dropdown-menu li a:contains("' + $(this).closest('div').attr('id').replace('-select', '') + '")').trigger('click');
-					});
-				}
 				else
 					$('.filters-chosen').hide();
+
 			}
 
 			function checkFiltered (num, container) {
@@ -391,7 +403,7 @@
 
 		  }
 
-			$(".clear-all").on('click', function(){
+			$(".clear-all").on('click', function() {
 				
 				filters = {};
 		    _.each(filterContainer, function(container){
@@ -399,6 +411,7 @@
 			        filter: '*'
 			    });
 				});
+				$('.filters-chosen').hide().find('.selection').remove();
 					
 				$('.is-checked').removeClass('is-checked');
 				$('.all-options').addClass('is-checked');
