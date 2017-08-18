@@ -55,6 +55,7 @@ router.get('/', routes.views.index);
 
 router.get('/unlockinghealth', routes.views.html.unlockinghealth);
 router.get('/riskhorizon', routes.views.html.riskhorizon);
+router.get('/cmp', routes.views.html.cmp);
 
 router.get('/about', routes.views.about);
 router.get('/jobs', routes.views.jobs);
