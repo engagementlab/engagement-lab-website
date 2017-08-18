@@ -57,9 +57,10 @@
 		{{{person.bio.html}}}
 
 		{{#ifeq person.category 'CMAP'}}
-		<h2>Project Description</h2>
-		{{{person.project.html}}}
-
+			{{#if person.project.html}}
+			<h2>Project Description</h2>
+			{{{person.project.html}}}
+			{{/if}}
 		{{/ifeq}}
 	</div>
 </div>
