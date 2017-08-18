@@ -197,7 +197,7 @@
 			    return $(this).height();
 			  }).get();
 
-			  var maxHeight = Math.max.apply(null, elementHeights);
+			  var maxHeight = Math.max.apply(null, elementHeights) + 40;
 
 			  $(element).height(maxHeight);
 			}
