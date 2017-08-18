@@ -87,8 +87,12 @@ exports = module.exports = function(req, res) {
             .sort([
                 ['sortOrder', 'ascending']
             ])
+            .populate('keywords cohortYear')
             .exec(function(err, result) {
-                locals.students = result;
+                locals.students = _.filter(result, function(student) {
+                    if (student.project && student.cmapPerson)
+                        return student;
+                });
 
                 next(err);
             });

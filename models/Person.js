@@ -66,7 +66,7 @@ Person.add({
 	bio: { type: Types.Markdown, label: 'Bio', required: true, initial: true },
 	image: { type: Types.CloudinaryImage, label: 'Image', folder: 'site/team', note: 'Must be in square format. Will display as 192px by 192px.' },
 	
-	cmapPerson: { type: Types.Boolean, label: 'Show on CMAP page', dependsOn: { category: ['faculty leadership', 'faculty fellows'] }, note: 'This field is for faculty leadership and fellows, to display them in the CMAP faculty section.'},
+	cmapPerson: { type: Types.Boolean, label: 'Show on CMAP page', dependsOn: { category: ['faculty leadership', 'faculty fellows', 'CMAP'] }, note: 'This field is for faculty leadership, fellows, and CMAP students to display them in the CMAP page.'},
 	
 	twitterURL: { type: Types.Url, label: 'Twitter', note: 'This will display on the person\'s individual page' },	
 	fbURL: { type: Types.Url, label: 'Facebook', note: 'This will display on the person\'s individual page' },	
