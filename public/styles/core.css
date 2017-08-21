@@ -8024,7 +8024,7 @@ body .dropdown-menu {
       background-color: #78cbd1; } }
   @media (min-width: 767px) {
     .embed-container {
-      background: url(/images/home/el-background.png) center center no-repeat; } }
+      background: url(https://res.cloudinary.com/engagement-lab-home/image/upload/f_auto/v1503333754/site/el-background.jpg) center center no-repeat; } }
   .embed-container iframe, .embed-container object, .embed-container embed {
     position: absolute;
     top: 0;
