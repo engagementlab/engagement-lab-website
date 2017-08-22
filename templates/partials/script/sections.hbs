@@ -392,6 +392,10 @@
 		    for ( var prop in filters ) {
 		      isoFilters.push( filters[ prop ] );
 		    }
+
+		    isoFilters = _.map(isoFilters, function(filterGroup) {
+		    	return filterGroup.join('');
+		    });
 		    			    
 		    var filterStr = isoFilters.join('');
 		    
