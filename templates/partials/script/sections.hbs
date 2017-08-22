@@ -344,7 +344,7 @@
 
 			}
 
-			function checkFiltered (num, container) {
+			function checkFiltered (num, container, filtered) {
 
 				if (num === 0) {
 					container = container.attr('id').replace('-content', '');
@@ -352,6 +352,7 @@
 				} else {
 					container = container.attr('id').replace('-content', '');
 					$('#' + container).show();
+					filtered.isotope('layout');
 				}
 
 				filtered += num;
@@ -400,9 +401,12 @@
 		    var filterStr = isoFilters.join('');
 		    
 		    _.each(filterContainer, function(container){
-					var $filtered = $(container).isotope({ filter: filterStr });
+					var $filtered = $(container).isotope({ 
+						filter: filterStr, 
+						itemSelector: filterElem 
+					});
 					var num = $filtered.isotope('getFilteredItemElements').length;
-					checkFiltered(num, container);   
+					checkFiltered(num, container, $filtered);   
 				});
 
 		  }
