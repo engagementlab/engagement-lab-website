@@ -46,6 +46,15 @@ exports = module.exports = function(req, res) {
 
             var publications = resultPubs;
 
+            _.map(publications, function(pub) {
+
+                // Get publication key for href
+                pub.href = '/publications/' + pub.key;
+                
+                return pub;
+
+            });
+
             var filters = [];
             for(var i = 0; i < publications.length; i++) {
                 if (publications[i].form !== null && publications[i].form !== undefined){

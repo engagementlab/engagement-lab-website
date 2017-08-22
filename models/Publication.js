@@ -89,19 +89,15 @@ Publication.add({
 }, 'Publication Information', {
   author: { type: String, label: 'Author Name(s)', required: true, initial: true, note: 'This appears below the title.' },
 	// This field is required in the save hook below instead of here as keystone dependsOn workaround
-	blurb: { type: Types.Textarea, label: 'Blurb Text', 
-		dependsOn: { category: 'Articles and Chapters' }, note: 'This displays beneath the title, date, and author in the article or chapter listing.' },
+	blurb: { type: Types.Textarea, label: 'Blurb Text', note: 'This displays beneath the title, date, and author in the article or chapter listing.' },
+ 
+	description: { type: Types.Markdown, label: 'Description Text', required: false, initial: true, note: 'This displays on the individual publication page under \'About\''},
 
-	description: { type: Types.Markdown, label: 'Description Text',
-		dependsOn: { category: ['Book', 'Guide'] }, required: false, initial: true, note: 'This displays on the individual publication page under \'About\''},
+	image: { type: Types.CloudinaryImage, label: 'Thumbnail', folder: 'research/publications', autoCleanup: true, note: 'For Books and Guides! This is the image thumbnail that displays on the publication listings page.' },
 
-	image: { type: Types.CloudinaryImage, label: 'Thumbnail',
-		dependsOn: { category: ['Book', 'Guide'] }, folder: 'research/publications', autoCleanup: true, note: 'This is the image thumbnail that displays on the publication listings page.' },
+	bannerImage: { type: Types.CloudinaryImage, label: 'Banner Image', folder: 'research/publications', autoCleanup: true, note: 'For Books and Guides! This is the banner image on the individual publication page, displayed behind the title. If none is uploaded, the title will display with a dark-grey background by default.' },
 
-	bannerImage: { type: Types.CloudinaryImage, label: 'Banner Image',
-		dependsOn: { category: ['Book', 'Guide'] }, folder: 'research/publications', autoCleanup: true, note: 'This is the banner image on the individual publication page, displayed behind the title. If none is uploaded, the title will display with a dark-grey background by default.' },
-
-	date: { type: Date, label: 'Publication Date', initial: true, required: true, note: 'For Books/Guides, this displays on the individual page below the author. For Articles and Chapters, this displays in the listing next to the author.' },
+	date: { type: Date, label: 'Publication Date', initial: true, required: true, note: 'For Books and Guides, this displays on the individual page below the author. For Articles and Chapters, this displays in the listing next to the author.' },
 
 	articleUrl: { type: String, label: 'Article URL', initial: true, note: 'This is the url link to the article or chapter on the publications listing page.' },
 	purchaseUrls: {
@@ -154,5 +150,5 @@ Publication.schema.pre('save', function(next) {
  * Model Registration
  */
 Publication.defaultSort = '-createdAt';
-Publication.defaultColumns = 'title, category';
+Publication.defaultColumns = 'title, form';
 Publication.register();
