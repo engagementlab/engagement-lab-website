@@ -99,18 +99,21 @@ Publication.add({
 
 	date: { type: Date, label: 'Publication Date', initial: true, required: true, note: 'For Books and Guides, this displays on the individual page below the author. For Articles and Chapters, this displays in the listing next to the author.' },
 
-	articleUrl: { type: String, label: 'Article URL', initial: true, note: 'This is the url link to the article or chapter on the publications listing page.' },
+	articleResource: { 
+    type: Types.Relationship, 
+    ref: 'Resource',
+    label: 'Article URL', 
+    note: 'This is the pdf or document link.' 
+  },
 	purchaseUrls: {
 		type: Types.TextArray,
 		label: 'Links to purchase book',
 		note: 'Must be in format "http://www.something.org"'
-		// dependsOn: { category: ['Book', 'Guide'] }
 	},
 	downloadUrls: {
 		type: Types.TextArray,
 		label: 'Link(s) to download book',
 		note: 'Must be in format "http://www.something.org"'
-		// dependsOn: { category: ['Book', 'Guide'] }
 	},
 	file: {
 		type: Types.File,
