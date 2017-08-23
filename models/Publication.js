@@ -105,6 +105,7 @@ Publication.add({
     label: 'Article URL', 
     note: 'This is the pdf or document link.' 
   },
+  
 	purchaseUrls: {
 		type: Types.TextArray,
 		label: 'Links to purchase book',
