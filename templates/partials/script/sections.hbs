@@ -305,7 +305,7 @@
 					$('.clear-all').trigger('click');
 
 					var num = $filtered.isotope('getFilteredItemElements').length;
-					checkFiltered(num, container);
+					checkFiltered(num, container, $filtered);
 				});
 
 			});
@@ -331,6 +331,8 @@
 						applyFilter(ddItem, $(ddItem).hasClass('is-checked'));
 						displayChecked(ddItem, $(ddItem).hasClass('is-checked'));
 
+						$(this).remove();
+
 					});
 
 				}
@@ -344,7 +346,7 @@
 
 			}
 
-			function checkFiltered (num, container) {
+			function checkFiltered (num, container, filtered) {
 
 				if (num === 0) {
 					container = container.attr('id').replace('-content', '');
@@ -352,6 +354,7 @@
 				} else {
 					container = container.attr('id').replace('-content', '');
 					$('#' + container).show();
+					filtered.isotope('layout');
 				}
 
 				filtered += num;
@@ -392,13 +395,20 @@
 		    for ( var prop in filters ) {
 		      isoFilters.push( filters[ prop ] );
 		    }
+
+		    isoFilters = _.map(isoFilters, function(filterGroup) {
+		    	return filterGroup.join('');
+		    });
 		    			    
 		    var filterStr = isoFilters.join('');
 		    
 		    _.each(filterContainer, function(container){
-					var $filtered = $(container).isotope({ filter: filterStr });
+					var $filtered = $(container).isotope({ 
+						filter: filterStr, 
+						itemSelector: filterElem 
+					});
 					var num = $filtered.isotope('getFilteredItemElements').length;
-					checkFiltered(num, container);   
+					checkFiltered(num, container, $filtered);   
 				});
 
 		  }

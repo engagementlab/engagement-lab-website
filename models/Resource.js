@@ -27,7 +27,15 @@ var azureFile = new keystone.Storage({
   adapter: require('keystone-storage-adapter-azure'),
   azure: {
     container: 'resources',
-    generateFilename: keystone.Storage.originalFilename
+    generateFilename: function (file) {
+    	// Cleanup filename
+			return file.originalname.replace(/[\\'\-\[\]\/\{\}\(\)\*\+\?\\\^\$\|]/g, "").replace(/ /g, '_').toLowerCase();
+		}
+  },
+  schema: {
+    path: true,
+    originalname: true,
+    url: true
   }
 });
 
@@ -91,12 +99,12 @@ Resource.schema.pre('save', function(next) {
 		Using filetype as the string to obtain the file extension is not 100% foolproof as it's a MIME type,
 		but it works for most common file formats. 
   */
-  if(this.file !== undefined && this.file.filetype !== undefined && this.file.filename === undefined) {
+  /*if(this.file !== undefined && this.file.filetype !== undefined && this.file.filename === undefined) {
 	
 		this.file.filename = this.key + this.file.filetype.replace('application/', '.');
 		this.file.url = this.file.url.replace('undefined', this.file.filename);
   
-  }
+  }*/
   
   if (this.type === 'article') {
     

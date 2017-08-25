@@ -40,11 +40,20 @@ exports = module.exports = function(req, res) {
             });
         };
 
-        var pubQuery = Publication.model.find({}).sort('-date').populate('form person keyword');
+        var pubQuery = Publication.model.find({}).sort('-date').populate('form person keyword articleResource');
 
         pubQuery.exec(function(err, resultPubs) {
 
             var publications = resultPubs;
+
+            _.map(publications, function(pub) {
+
+                // Get publication key for href
+                pub.href = '/publications/' + pub.key;
+                
+                return pub;
+
+            });
 
             var filters = [];
             for(var i = 0; i < publications.length; i++) {

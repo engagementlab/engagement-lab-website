@@ -46,7 +46,15 @@ var azureFile = new keystone.Storage({
   adapter: require('keystone-storage-adapter-azure'),
   azure: {
     container: 'elabproject',
-    generateFilename: keystone.Storage.originalFilename
+    generateFilename: function (file) {
+        // Cleanup filename
+        return file.originalname.replace(/[\\'\-\[\]\/\{\}\(\)\*\+\?\\\^\$\|]/g, "").replace(/ /g, '_').toLowerCase();
+    }
+  },
+  schema: {
+    path: true,
+    originalname: true,
+    url: true
   }
 });
 
