@@ -57,7 +57,7 @@
       "ref": "origin/master",
       "path": "/srv/engagement-lab-website-2.0",
       "pre-deploy-local" : "echo 'Cloning and running npm install. Be patient.'",
-      "post-deploy" : "cd /srv/engagement-lab-website-2.0/source ; npm i ; cd /srv/framework-4.0/source/ ; npm link /srv/engagement-lab-website-2.0/current ; grunt compile --sites=engagement-lab-website ; source ~/.nvm/nvm.sh ; nvm use ; pm2 restart 'server' --env production",
+      "post-deploy" : "cd /srv/engagement-lab-website-2.0/source ; cd /srv/framework-4.0/source/ ; npm link /srv/engagement-lab-website-2.0/current ; grunt compile --sites=engagement-lab-website ; source ~/.nvm/nvm.sh ; nvm use ; pm2 restart 'server' --env production",
       "env": {
         "NODE_ENV": "staging"
       }
