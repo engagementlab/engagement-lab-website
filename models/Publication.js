@@ -106,13 +106,13 @@ Publication.add({
 	bannerImage: { type: Types.CloudinaryImage, label: 'Banner Image', folder: 'research/publications', autoCleanup: true, note: 'For Books and Guides! This is the banner image on the individual publication page, displayed behind the title. If none is uploaded, the title will display with a dark-grey background by default.' },
 
 	date: { type: Date, label: 'Publication Date', initial: true, required: true, note: 'For Books and Guides, this displays on the individual page below the author. For Articles and Chapters, this displays in the listing next to the author.' },
-
 	articleResource: { 
     type: Types.Relationship, 
     ref: 'Resource',
-    label: 'Article URL', 
+    label: 'Article Resource', 
     note: 'This is the pdf or document link.' 
   },
+  resourceUrl: { type: String, label: 'URL for Articles/Chapters without resources.', note: 'Will be overridden by resource attachment'},
   
 	purchaseUrls: {
 		type: Types.TextArray,
