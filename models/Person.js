@@ -46,7 +46,6 @@ Person.add({
       category: 'Cohort'
     }, 
     initial: true, 
-    required: true,
     note: 'This field is for students and board members, and will display below the title.'
   },
   keywords: { 
