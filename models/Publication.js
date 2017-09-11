@@ -110,10 +110,8 @@ Publication.add({
     type: Types.Relationship, 
     ref: 'Resource',
     label: 'Article Resource', 
-    note: 'This is the pdf or document link.' 
-  },
-  resourceUrl: { type: String, label: 'URL for Articles/Chapters without resources.', note: 'Will be overridden by resource attachment'},
-  
+    note: 'This is a link or file.' 
+  },  
 	purchaseUrls: {
 		type: Types.TextArray,
 		label: 'Links to purchase book',
