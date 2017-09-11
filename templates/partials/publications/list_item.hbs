@@ -15,8 +15,8 @@
 		{{#if listing.articleResource.file.url}}
 			<a href="{{listing.articleResource.file.url}}" target="_blank">{{listing.title}}</a>
 		{{else}}
-			{{#if listing.resourceUrl}}
-			<a href="{{listing.resourceUrl}}" target="_blank">{{listing.title}}</a>
+			{{#if listing.articleResource.url}}
+			<a href="{{listing.articleResource.url}}" target="_blank">{{listing.title}}</a>
 			{{else}}
 				{{listing.title}}
 			{{/if}}
