@@ -38,7 +38,7 @@ exports = module.exports = function(req, res) {
             'enabled': true,
             key: req.params.project_key
         })
-        .populate('videos articles blogs files');
+        .populate('videos articles blogs files principalInvestigator');
 
         // Setup the locals to be used inside view
         projectQuery.exec(function(err, result) {
@@ -119,6 +119,8 @@ exports = module.exports = function(req, res) {
 
             // Project data not re-formatted above
             locals.project = result;
+
+            console.log(locals.project)
 
             next(err);
         });

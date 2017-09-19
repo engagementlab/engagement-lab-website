@@ -164,7 +164,7 @@
 					{{#if project.githubUrl}}
 						<li><a href="{{project.githubUrl}}">GitHub Repository<i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
 					{{/if}}
-						<li><b>Principal Investigator:</b> {{project.investigatorPerson}}</li>
+						<li><b>Principal Investigator:</b> {{#each project.principalInvestigator}}{{this.name}}{{#unless @last}}, {{/unless}}{{/each}}</li>
 						{{#if project.managerPerson}}<li><b>Project Manager:</b> {{project.managerPerson}}</li>{{/if}}
 						<li><b>Project Dates:</b> {{projectDates}}</li>
 						<li><b>Contact:</b> <i class="text-default fa fa-envelope-o pl-10 pr-5"></i>info at elab.emerson.edu</li>
