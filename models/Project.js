@@ -162,18 +162,17 @@ Project.add({
         type: Types.Relationship,
         ref: 'Filter',
         filters: {
-            type: 'Person'
+            category: 'Person'
         },
-        label: 'Principal Investigator', 
-        note: 'Appears on the individual project page.'
-
+        label: 'Principal Investigator(s)', 
+        note: 'Appears on the individual project page.', 
+        many: true
     },
 
     managerPerson: {
         type: String,
         label: 'Project Manager',
         note: 'Appears on the individual project page.'
-
     },
     
     externalLinkUrl: {
