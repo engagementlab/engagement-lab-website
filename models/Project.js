@@ -164,7 +164,7 @@ Project.add({
         filters: {
             category: 'Person'
         },
-        label: 'Principal Investigator', 
+        label: 'Principal Investigator(s)', 
         note: 'Appears on the individual project page.', 
         many: true
     },
