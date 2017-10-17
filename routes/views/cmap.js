@@ -90,7 +90,7 @@ exports = module.exports = function(req, res) {
             .populate('keywords cohortYear')
             .exec(function(err, result) {
                 locals.students = _.filter(result, function(student) {
-                    if (student.project && student.cmapPerson)
+                    if (student.cohortYear && student.cmapPerson)
                         return student;
                 });
 

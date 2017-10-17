@@ -36,6 +36,8 @@ Cmap.add({
 		
 		logo: { type: Types.CloudinaryImage, label: "CMAP logo", folder: "site/cmap", autoCleanup: true, note: 'This image appears at the top left next to the header text' },
 
+		videoLink: { type: String, label: 'Video Embed Link', note: 'Should be in format "//player.vimeo.com/video/..." skipping the "http:"'}, 
+		
 		programDescription: { type: Types.Markdown, label: "Lead", note: 'This is the header text. Follows \'The MA in Civic Media, Art & Practice\'...'},
 		apply1: { type: Types.Markdown, label: "Is CMAP the right program for you? (First Text)", note: 'This is the first paragraph(s) in the apply section' },
 		apply2: { type: Types.Markdown, label: "Is CMAP the right program for you? (Second Text)", note: 'This is the second paragraph(s) in the apply section'},
