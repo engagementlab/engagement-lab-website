@@ -44,8 +44,8 @@ Cmap.add({
 		
 		curriculum: { type: String, label: "Curriculum", note: 'This is the text in the \'Curriculum\' section' },
 		structure: { type: Types.Markdown, label: "The Structure", note: 'This is the text in the \'The Structure\' section'  },
-		courses: { type: Types.Markdown, label: "Core Courses", note: 'This is the text in the \'Core Courses\' section' }
-		
+		courses: { type: Types.Markdown, label: "Core Courses", note: 'This is the text in the \'Core Courses\' section' },
+		alumni: { type: Types.Markdown, label: "Alumni", note: "This is the text in the \'Alumni\' section" }
 	},
 	
 	'Core Elements of the CMAP Experience', {
