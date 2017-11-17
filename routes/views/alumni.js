@@ -36,14 +36,19 @@ exports = module.exports = function(req, res) {
 
         cmapQuery.exec(function(err, result) {
 
+            var filteredAlumni = _.filter(result, function(alumni) {
+                if (!alumni.cohortYear.current)
+                    return alumni;
+            });
+
             var filters = [];
-            for(var i = 0; i < result.length; i++) {
-                if (result[i].cohortYear !== null && result[i].cohortYear !== undefined){
-                    filters.push(result[i].cohortYear);
+            for(var i = 0; i < filteredAlumni.length; i++) {
+                if (filteredAlumni[i].cohortYear !== null && filteredAlumni[i].cohortYear !== undefined){
+                    filters.push(filteredAlumni[i].cohortYear);
                 }
 
-                if (result[i].keywords !== null && result[i].keywords !== undefined){
-                    _.each(result[i].keywords, function(keyword) {
+                if (filteredAlumni[i].keywords !== null && filteredAlumni[i].keywords !== undefined){
+                    _.each(filteredAlumni[i].keywords, function(keyword) {
                         filters.push(keyword);
                     });
                 }
@@ -63,7 +68,7 @@ exports = module.exports = function(req, res) {
 
             var alumni = {};
 
-            _.each(result, function(alum) {
+            _.each(filteredAlumni, function(alum) {
                 if (alumni[alum.cohortYear.name])
                     alumni[alum.cohortYear.name].push(alum);
                 else {

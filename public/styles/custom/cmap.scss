@@ -1,5 +1,13 @@
 .cmap {
 
+	.filters {
+		margin-left: 4%;
+	}
+
+	.cohort-year {
+		margin-left: 20px;
+	}
+
 	.section {
 		padding: 40px 0;
 	}
@@ -43,20 +51,25 @@
 				height: 100%;
 				margin: 0 auto;
 			}
+			.cmap-proj {
+				text-align: left;
+				width: 90%;
+				margin: 0 auto;
+				padding-top: 15px;
+			}
 		}
-		.cmap-proj {
-			text-align: left;
-			width: 90%;
-			margin: 0 auto;
-			padding-top: 15px;
+		&.alumni-item {
+			.cmap-proj {
+				padding: 0px 20px;
+			}
 		}
-
 	}
 
 	#apply { background-color: #f2f2f2; }
 	#curriculum { background-color: #17839c; }
 	#structure { background-color: #2898b3; }
 	#courses { background-color: #38b1ce; }
+	#alumni { background-color: lighten(#38b1ce, 10%); }
 	#elements {
 		background-color: #fff;
 		#element-0 { background-color: #ff6352; }

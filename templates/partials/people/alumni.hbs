@@ -14,7 +14,7 @@
 <div class="col-sm-6 col-md-4 team-member alumni-item {{person.cohortYear.key}} {{#each person.keywords}}{{this.key}} {{/each}}">
 	
 	<a href="/people/{{person.key}}">
-	<div class="image-box style-2 mb-20 text-center">
+	<div class="image-box style-2 text-center">
 			
 			<img id="{{cleanString person.name.first}}-{{cleanString person.name.last}}" src="{{{cloudinaryUrl person.image width=192 height=192}}}" alt="{{person.name.first}} {{person.name.last}}" class="photo">
 			
