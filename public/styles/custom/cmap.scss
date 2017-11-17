@@ -69,7 +69,14 @@
 	#curriculum { background-color: #17839c; }
 	#structure { background-color: #2898b3; }
 	#courses { background-color: #38b1ce; }
-	#alumni { background-color: lighten(#38b1ce, 10%); }
+	#alumni { 
+		background-color: #f2f2f2; 
+		color: #7d7d7d;
+
+		h3 {
+			color: #7d7d7d;
+		}
+	}
 	#elements {
 		background-color: #fff;
 		#element-0 { background-color: #ff6352; }

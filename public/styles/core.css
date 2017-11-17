@@ -8752,7 +8752,10 @@ body {
 .cmap #courses {
   background-color: #38b1ce; }
 .cmap #alumni {
-  background-color: #61c1d8; }
+  background-color: #f2f2f2;
+  color: #7d7d7d; }
+  .cmap #alumni h3 {
+    color: #7d7d7d; }
 .cmap #elements {
   background-color: #fff; }
   .cmap #elements #element-0 {
