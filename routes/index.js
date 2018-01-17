@@ -60,6 +60,7 @@ router.get('/cmp', routes.views.html.cmp);
 router.get('/about', routes.views.about);
 router.get('/jobs', routes.views.jobs);
 router.get('/people', routes.views.people);
+router.get('/privacy', routes.views.privacy);
 router.get('/people/:person', routes.views.person);
 
 router.get('/publications', routes.views.projects.publications);
