@@ -175,6 +175,12 @@ Project.add({
         note: 'Appears on the individual project page.'
     },
     
+    managerTitle: {
+        type: String,
+        label: 'PM Custom Title',
+        note: 'Optional - Title for Project Manager.'
+    },
+
     externalLinkUrl: {
         type: Types.Url,
         label: 'Project Website URL',
