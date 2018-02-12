@@ -109,8 +109,6 @@ exports = module.exports = function(req, res) {
 
             }
 
-            console.log(result.overview)
-
             locals.projectMeta = {
                 title: result.name, 
                 description: String(result.overview.md).substr(0, 120), 
@@ -119,9 +117,6 @@ exports = module.exports = function(req, res) {
 
             // Project data not re-formatted above
             locals.project = result;
-
-            console.log(locals.project)
-
             next(err);
         });
     });
