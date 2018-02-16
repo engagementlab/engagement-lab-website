@@ -31,12 +31,12 @@ exports = module.exports = function(req, res) {
     // Load the current project
     view.on('init', function(next) {
         /* 
-            This query gets a project by the key in the
+            This query gets a project by the key or custom url (if defined) in the
             URL and populates resources from its model 
         */
         var projectQuery = Project.model.findOne({
             'enabled': true,
-            key: req.params.project_key
+            $or:[ {'key': req.params.project_key}, {'customUrl': req.params.project_key} ]
         })
         .populate('videos articles blogs files principalInvestigator');
 
