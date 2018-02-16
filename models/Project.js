@@ -64,6 +64,11 @@ var azureFile = new keystone.Storage({
  */
 Project.add({
 
+    customUrl: {
+        type: String,
+        label: 'Custom URL',
+        note: 'Must be format of "projecturl". Overrides default "/projects/projectname".'
+    },
     format: {
         type: Types.Relationship,
         ref: 'Filter',

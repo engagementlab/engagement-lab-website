@@ -73,7 +73,7 @@ exports = module.exports = function(req, res) {
             _.map(resultProject, function(proj) {
 
                 // Get image code
-                proj.href = '/projects/' + proj.key;
+                proj.href = '/projects/' + ((proj.customUrl!==undefined && proj.customUrl.length>0) ? proj.customUrl : proj.key);
                 proj.description = proj.description;
 
                 return proj;
