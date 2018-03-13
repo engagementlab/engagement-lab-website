@@ -77,7 +77,6 @@ router.get('/projects/:subdirectory*?/:project_key', function(req, res, next) {
 router.get('/cmap', routes.views.cmap);
 router.get('/cmap/alumni', routes.views.alumni);
 
-router.get('/news', routes.views.news);
 router.get('/press', routes.views.press);
 
 router.all('/tamagagement', routes.views.tamagagement);

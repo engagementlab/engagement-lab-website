@@ -39,9 +39,8 @@ exports = module.exports = function(req, res) {
         // Setup the locals to be used inside view
         publicationQuery.exec(function(err, result) {
             
-            if (result === null) {
-                return res.notfound('Cannot find publication', 'Sorry, but it looks like the publication you were looking for does not exist! Try <a href="http://elab.emerson.edu/research/publications">going back</a> to the directory.');
-            }
+            if (result === null)
+                return res.status(404).send(keystone.wrapHTMLError('Cannot find publication', 'Sorry, but it looks like the publication you were looking for does not exist! Try <a href="http://elab.emerson.edu/publications">going back</a> to the directory.'));
 
             locals.date = result._.date.format('MMMM Do YYYY');
             locals.publication = result;
