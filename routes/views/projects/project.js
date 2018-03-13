@@ -43,9 +43,8 @@ exports = module.exports = function(req, res) {
         // Setup the locals to be used inside view
         projectQuery.exec(function(err, result) {
             
-            if (result === null) {
-                return res.notfound('Cannot find project', 'Sorry, but it looks like the research project you were looking for does not exist! Try <a href="http://elab.emerson.edu/research">going back</a> to research.');
-            }
+            if (result === null)
+                 res.status(404).send(keystone.wrapHTMLError('Cannot find project', 'Sorry, but it looks like the project you were looking for does not exist! Try <a href="http://elab.emerson.edu/projects">going back</a> to the directory.'));
 
             // "Articles" are both external articles and blogs, because why the fuck not?
             var projectArticles = result.articles.concat(result.blogs);
