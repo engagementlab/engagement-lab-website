@@ -38,6 +38,8 @@ exports = module.exports = function(req, res) {
 
         // Setup the locals to be used inside view
         publicationQuery.exec(function(err, result) {
+
+            console.log('result', result);
             
             if (result === null)
                 return res.status(404).send(keystone.wrapHTMLError('Cannot find publication', 'Sorry, but it looks like the publication you were looking for does not exist! Try <a href="http://elab.emerson.edu/publications">going back</a> to the directory.'));
