@@ -8782,6 +8782,22 @@ body {
     opacity: 0.5;
     margin-bottom: 1em; }
 
+#mc-embedded-subscribe {
+  color: #ffffff;
+  font-size: 15px;
+  background: #bebebe;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: none; }
+  #mc-embedded-subscribe:hover {
+    background: #bebebe;
+    background-image: -webkit-linear-gradient(top, #bebebe, #9c9c9c);
+    background-image: -moz-linear-gradient(top, #bebebe, #9c9c9c);
+    background-image: -ms-linear-gradient(top, #bebebe, #9c9c9c);
+    background-image: -o-linear-gradient(top, #bebebe, #9c9c9c);
+    background-image: linear-gradient(to bottom, #bebebe, #9c9c9c);
+    text-decoration: none; }
+
 @media (max-width: 768px) {
   .logos-footer #logo-emerson {
     max-width: 240px; } }
