@@ -52,25 +52,6 @@
 		</div>
 	</section>
 
-	<section class="section" id="elements">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h3 class="section-header mb-40">Core Elements of the CMAP Experience</h3>
-				</div>
-			</div>
-			<div class="row dark" id="columns">
-				{{#each elements}}
-					<div class="col-sm-6 col-md-3 text-center column pv-20" id="element-{{@index}}">
-						<h3 class="ph-20">{{header}}</h3>
-						<h4 class="pv-20">{{subheader}}</h4>
-						<p>{{element}}</p>
-					</div>
-				{{/each}}
-			</div>
-		</div>
-	</section>
-
 {{!-- Quotes Section -- To Add In Later --}}
 {{#if cmapQuotes}}
 	<section class="section" id="student-quotes">
@@ -97,37 +78,6 @@
 
 {{/if}}
 
-	<section class="section dark" id="curriculum">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h3 class="section-header">Curriculum</h3>
-					<div class="lead">{{cmap.curriculum}}</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="section dark" id="structure">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h3 class="section-header">The Structure</h3>
-					<div class="lead">{{{cmap.structure.html}}}</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="section dark" id="courses">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h3 class="section-header">Core Courses</h3>
-					<div class="lead">{{{cmap.courses.html}}}</div>
-				</div>
-			</div>
-		</div>
-	</section>
 	<section class="section dark" id="alumni">
 		<div class="container">
 			<div class="row">
