@@ -19,7 +19,8 @@ module.exports = function(frameworkDir, shared) {
 	require('app-module-path').addPath(frameworkDir + '/node_modules');
 
 	// lolz
-	keystoneInst.set('tamabehavior', tamabehavior);	
+	keystoneInst.set('tamabehavior', tamabehavior);
+	keystoneInst.set('signin logo', 'https://res.cloudinary.com/engagement-lab-home/image/upload/v1465236713/site/logos/v95bphfhqogwqnp2gofp.png');
 
 	return { 
 
