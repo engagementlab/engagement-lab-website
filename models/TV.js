@@ -35,8 +35,9 @@ TV.add({
         default: 'Lab TV Content'
     },
     currentBlurb: {
-        type: String,
-        label: 'Current Blurb',
+        type: Types.TextArray,
+        label: 'Current Chyron Text',
+        note: 'Text blurbs shown on chyron.'
     },
     slideshowImages: {
         type: Types.CloudinaryImages,
@@ -44,8 +45,32 @@ TV.add({
         autoCleanup: true,
         required: true,
         initial: true,
-        note: 'Dimensions should be 4032 × 3024.'
+        note: 'Dimensions should be 4032 × 3024. To re-order, remove and upload again.'
+    },
+    displayVideo: {
+        type: Boolean,
+        note: 'Show a video instead of image slideshow?'
+    },
+    videoId: {
+        type: Number,
+        dependsOn: { displayVideo: true },
+        note: 'Vimeo video ID from its URL (e.g. 286424105). Video will autoplay and loop, and replaces slideshow.'
     }
+});
+
+/**
+ * Hooks
+ * =============
+ */
+TV.schema.pre('save', function(next) {
+
+   if (this.displayVideo === true && (this.videoId === undefined || this.videoId.length < 1)) {
+        var err = new Error('You cannot have display video enabled without video ID specified.');
+        next(err);
+    }
+
+    next();
+
 });
 
 /**

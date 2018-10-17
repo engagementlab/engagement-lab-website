@@ -3,7 +3,7 @@
 	"directory": "elab",
 	"subdomain": "elab",
 	"database": "engagement-lab",
-	"allowed_domains": ["www.riskhorizon.org", "boston.communityplanit.org", "www.civicmediaproject.com", "civicmediaproject.com", "www.civicmediaproject.net", "civicmediaproject.net"],
+	"allowed_domains": ["www.riskhorizon.org", "boston.communityplanit.org", "www.civicmediaproject.com", "civicmediaproject.com", "www.civicmediaproject.net", "civicmediaproject.net", "catan.dev.emerson.edu:8081"],
 	"admin_nav": { 
 									"projects": ["projects", "publications"],
 									"programs": ["programs", "Cmap"],

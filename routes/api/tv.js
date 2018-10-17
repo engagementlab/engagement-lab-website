@@ -21,7 +21,7 @@ var TV = keystone.list('TV');
  */
 exports.get = function(req, res) {
 
-    let tvQuery = TV.model.find({}, 'customUrl slideshowImages.secure_url');
+    let tvQuery = TV.model.find({}, 'currentBlurb slideshowImages.secure_url displayVideo videoId');
 
     tvQuery.exec((err, result) => {
 
