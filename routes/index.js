@@ -86,7 +86,7 @@ router.all('/climatesmartboston', function(req, res, next) {
     res.redirect('https://www.communityplanit.org/bostonclimate/');
 });
 router.all('/api/cpi/register', keystone.middleware.api, routes.api.communityplanit.create);
-router.all('/api/tv/get', keystone.middleware.api, routes.api.tv.get);
+router.all('/api/tv/get', [keystone.middleware.api, keystone.middleware.cors], routes.api.tv.get);
 
 // Participatory Pokémon Go redirect
 router.all('/pokemon', function(req, res, next) {
