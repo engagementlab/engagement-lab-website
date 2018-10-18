@@ -28,7 +28,7 @@ exports.get = function(req, res) {
     	if (err) return res.apiError('database error', err);
 			
 			// Set CORS
-			res.header("Access-Control-Allow-Origin", "http://catan.dev.emerson.edu:8081 http://localhost:8081");
+			res.header("Access-Control-Allow-Origin", "*");
 			res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		
 			res.apiResponse(result);
