@@ -29,19 +29,6 @@ keystone.pre('routes', middleware.initErrorHandlers);
 keystone.pre('render', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
-keystone.pre('routes', function(req, res, next) {
-
-    // Allow certain domains to frame site
-    res.setHeader('X-Frame-Options', 'ALLOW-FROM www.riskhorizon.org catan.dev.emerson.edu:8081');
-
-    // Allow certain domains to frame site
-    res.setHeader('Content-Security-Policy', 'frame-ancestors ' + domains.join(' '));
-    res.setHeader('Access-Control-Allow-Origin', 'ALLOW-FROM www.riskhorizon.org catan.dev.emerson.edu:8081');
-
-    next();
-    
-}); 
-
 // Import Route Controllers
 var routes = {
     api: importRoutes('./api'),
