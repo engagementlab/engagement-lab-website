@@ -26,6 +26,10 @@ exports.get = function(req, res) {
     tvQuery.exec((err, result) => {
 
     	if (err) return res.apiError('database error', err);
+			
+			// Set CORS
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		
 			res.apiResponse(result);
 
