@@ -73,6 +73,15 @@ TV.schema.pre('save', function(next) {
 
 });
 
+// Tell client of new data
+TV.schema.post('save', function() {
+
+    require('request').post('http://catan.dev.emerson.edu:8081/', (error, response, body) => {
+        console.log('done');
+    });
+
+});
+
 /**
  * Model Registration
  */
